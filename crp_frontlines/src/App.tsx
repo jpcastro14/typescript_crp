@@ -5,11 +5,14 @@ type Task = {
   id: number;
   text: string;
 };
+
 type Action = { type: "add"; text: string } | { type: "remove"; id: number };
 
 const initializeState: Task[] = [];
 
-function transpasser(state: Task[], action: Action) {
+const secondaryState: TaskShit[] = [];
+
+function transpasser(state: TaskShit[], action: Action) {
   switch (action.type) {
     case "add":
       console.log(state);
@@ -22,7 +25,7 @@ function transpasser(state: Task[], action: Action) {
 function App() {
   const [input, setInput] = useState("");
 
-  const [state, dispatch] = useReducer(transpasser, initializeState);
+  const [state, dispatch] = useReducer(transpasser, secondaryState);
 
   function addTask() {
     dispatch({ type: "add", text: input });
