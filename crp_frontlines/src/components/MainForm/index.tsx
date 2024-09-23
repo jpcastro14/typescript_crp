@@ -1,12 +1,31 @@
 import { useRef, FunctionComponent } from "react";
 
-const TextField: FunctionComponent<TextFieldProps> = ({ onChange }) => {
+interface TextFieldProps {
+  onChange: React.ChangeEventHandler<HTMLInputElement>;
+  props: {
+    title: string;
+    age: number;
+  };
+}
+const TextField: FunctionComponent<TextFieldProps> = ({ onChange, props }) => {
   const inputRef = useRef<HTMLInputElement>(null);
 
   return (
     <div>
-      <input ref={inputRef} onChange={onChange} />
-      <ul></ul>
+      <label>Nome</label>
+      <input
+        ref={inputRef}
+        onChange={onChange}
+        defaultValue={props.title}
+        title="title"
+      />
+      <label>Idade</label>
+      <input
+        ref={inputRef}
+        onChange={onChange}
+        defaultValue={props.age}
+        title="age"
+      />
     </div>
   );
 };

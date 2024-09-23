@@ -1,61 +1,34 @@
+import { useState } from "react";
 import "./App.css";
+import TextField from "./components/MainForm";
 
-import { useReducer, useState } from "react";
-
-type User = {
-  age: number;
-  text: string;
+const Deafultform = {
+  title: "",
+  age: 0,
 };
-
-type Action = { type: "add"; age: number; text: string };
-
-const initialState: User[] = [];
-
-function reducer(state: User[], action: Action) {
-  switch (action.type) {
-    case "add":
-      console.log(state);
-      return [...state, { age: action.age, text: action.text }];
-  }
-}
-
 function App() {
-  const [input, setInput] = useState("");
-  const [age, setAge] = useState(0);
+  const [ageForm, setAgeForm] = useState(Deafultform);
 
-  const [state, dispatch] = useReducer(reducer, initialState);
+  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setAgeForm((prevState) => ({
+      ...prevState,
+      [e.target.title]: e.target.value,
+    }));
+  };
 
-  function addTask() {
-    dispatch({ type: "add", text: input, age: age });
-    setInput("");
-    setAge(0);
-  }
+  const handleShow = () => {
+    console.log(ageForm);
+    setAgeForm(Deafultform);
+  };
 
   return (
     <>
       <div>
-        <input
-          type="text"
-          value={input}
-          onChange={(event) => setInput(event.target.value)}
-        />
+        <h4>Test List</h4>
         <br />
-        <input
-          type="text"
-          value={age}
-          onChange={(e) => setAge(e.target.value)}
-        />
-        <br />
-        <button onClick={addTask}>Add</button>
-      </div>
-      <div>
-        {state.map((item) => (
-          <p>
-            {item.text}
-            {"  "}
-            {item.age}
-          </p>
-        ))}
+        <TextField onChange={onChange} props={Deafultform} />
+
+        <button onClick={handleShow}>Mostrar</button>
       </div>
     </>
   );
