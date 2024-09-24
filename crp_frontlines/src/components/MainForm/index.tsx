@@ -6,8 +6,12 @@ interface TextFieldProps {
     title: string;
     age: number;
   };
+  configProps:{
+    title:string;
+    age:string;
+  }
 }
-const TextField: FunctionComponent<TextFieldProps> = ({ onChange, props }) => {
+const TextField: FunctionComponent<TextFieldProps> = ({ onChange, configProps, props }) => {
   const inputRef = useRef<HTMLInputElement>(null);
 
   return (
@@ -17,14 +21,14 @@ const TextField: FunctionComponent<TextFieldProps> = ({ onChange, props }) => {
         ref={inputRef}
         onChange={onChange}
         defaultValue={props.title}
-        title="title"
+        title={configProps.title}
       />
       <label>Idade</label>
       <input
         ref={inputRef}
         onChange={onChange}
         defaultValue={props.age}
-        title="age"
+        title={configProps.age}
       />
     </div>
   );
