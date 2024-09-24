@@ -1,4 +1,4 @@
-import { useRef, FunctionComponent } from "react";
+import { FunctionComponent } from "react";
 
 interface TextFieldProps {
   onChange: React.ChangeEventHandler<HTMLInputElement>;
@@ -6,26 +6,26 @@ interface TextFieldProps {
     title: string;
     age: number;
   };
-  configProps:{
-    title:string;
-    age:string;
-  }
+  configProps: {
+    title: string;
+    age: string;
+  };
 }
-const TextField: FunctionComponent<TextFieldProps> = ({ onChange, configProps, props }) => {
-  const inputRef = useRef<HTMLInputElement>(null);
-
+const TextField: FunctionComponent<TextFieldProps> = ({
+  onChange,
+  configProps,
+  props,
+}) => {
   return (
     <div>
       <label>Nome</label>
       <input
-        ref={inputRef}
         onChange={onChange}
         defaultValue={props.title}
         title={configProps.title}
       />
       <label>Idade</label>
       <input
-        ref={inputRef}
         onChange={onChange}
         defaultValue={props.age}
         title={configProps.age}
