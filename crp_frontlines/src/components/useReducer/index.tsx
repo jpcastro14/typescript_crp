@@ -1,6 +1,6 @@
 import { useReducer, useState } from "react";
 
-import { FormContainer } from "./styles";
+import { ButtonDiv, FormContainer, Header } from "./styles";
 
 type User = {
   id: number;
@@ -71,8 +71,10 @@ function TaskList() {
 
   return (
     <>
+      <Header>
+        <h3>Tasklist - useReducer Hook</h3>
+      </Header>
       <FormContainer>
-        <h3>Tasklist</h3>
         <label>Name</label>
         <input
           type="text"
@@ -96,18 +98,22 @@ function TaskList() {
           value={userState.age}
           onChange={handleType}
         />
-        <button onClick={addTask}>Add Task</button>
-        <button onClick={() => dispatch({ type: "filter", text: "joao" })}>
-          Create spare filter
-        </button>
-        <button onClick={() => dispatch({ type: "resetFilter" })}>
-          Reset Filters
-        </button>
+        <ButtonDiv>
+          <button onClick={addTask}>Add Task</button>
+          <button onClick={() => dispatch({ type: "filter", text: "joao" })}>
+            Create spare filter
+          </button>
+          <button onClick={() => dispatch({ type: "resetFilter" })}>
+            Reset Filters
+          </button>
+        </ButtonDiv>
         <div>
           <ul>
             {state.map((item) => (
               <li key={item.id}>
-                {item.userName} {item.age}{" "}
+                <span>
+                  {item.userName} {item.age}
+                </span>
                 <button
                   onClick={() => dispatch({ type: "remove", id: item.id })}
                 >
