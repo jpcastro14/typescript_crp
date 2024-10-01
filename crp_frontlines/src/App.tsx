@@ -1,12 +1,10 @@
 import "./App.css";
-import UiCarousel from "./components/UiCarousel";
-import TaskList from "./components/useReducer";
-import RefComponent from "./components/useRef";
+import EventDash from "./components/EventDash";
 
 function App() {
   return (
     <>
-      <UiCarousel />
+      <EventDash />
     </>
   );
 }
