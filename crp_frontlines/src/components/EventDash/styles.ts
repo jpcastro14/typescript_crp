@@ -2,7 +2,6 @@ import styled from "styled-components";
 
 export const Container = styled.div`
     min-width: 1200px;
-     // tirar depois que criar os elementos internos
     border: 2px solid #e4e4e4;
     border-radius: 6px;
     display: flex;
@@ -20,22 +19,22 @@ export const HeaderInfo = styled.div` // Div mais superior do card
     .EventCategory{ // Barra azul a esquerda do card
         background-color: #006fe6;
         height: 100%;
-        width: 35px;
+        width: 25px;
         border-radius: 5px 0 0 5px ;
     }
     .EventType{ //  Ícone no quadrado cinza ao lado direito do quadrado azul acima
         background-color: #e4e4e4;
-        min-width: 112px;
+        min-width: 80px;
         height: 100%;
     }
 
 `
-export const EventTitle = styled.div` //Contem o titulo e os action buttons
+export const EventTitle = styled.div` //Contém o titulo e os action buttons
     width: 100%;
     background-color: #f9f9f9;
     padding: 20px 0 0 30px;
     display: flex;
-    color: gray;
+    color: black;
     flex-direction: column;
     align-items: start;
     justify-content: flex-start;
@@ -71,5 +70,13 @@ export const EventAction = styled.div` // Div dos botões de ação
 
 export const PointerField = styled.div`
     display: flex;
-    height: 40px;
+    height: 80px;
+    gap: 20px;
+    padding:50px 0 0 100px;
+    button{
+        height: 40px;
+        width: 230px;
+        border: 1px solid #a4a4a4;
+    }
+
 `;

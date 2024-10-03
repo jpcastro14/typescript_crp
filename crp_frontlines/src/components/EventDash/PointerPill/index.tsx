@@ -1,12 +1,15 @@
-import { FunctionComponent } from "react";
-import { PillContainer } from "./styles";
+//import { FunctionComponent } from "react";
+import { PillContainer, Layout } from "./styles";
 
-type PointerPillProps = {
-  text: string;
-};
-
-const PointerPill: FunctionComponent<PointerPillProps> = ({ text }) => {
-  return <PillContainer>{text}</PillContainer>;
+const PointerPill = () => {
+  return (
+    <>
+      <Layout>
+        <label></label>
+        <PillContainer></PillContainer>
+      </Layout>
+    </>
+  );
 };
 
 export default PointerPill;
