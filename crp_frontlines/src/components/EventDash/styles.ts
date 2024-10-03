@@ -35,8 +35,7 @@ export const EventTitle = styled.div` //Contem o titulo e os action buttons
     background-color: #f9f9f9;
     padding: 20px 0 0 30px;
     display: flex;
-    
-    
+    color: gray;
     flex-direction: column;
     align-items: start;
     justify-content: flex-start;
