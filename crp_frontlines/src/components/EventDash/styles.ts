@@ -1,4 +1,13 @@
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
+
+
+type ButtonProps ={
+    levelColor?: string
+}
+
+type DisplayProps = {
+    open:boolean;
+}
 
 export const Container = styled.div`
     min-width: 1200px;
@@ -6,7 +15,8 @@ export const Container = styled.div`
     border-radius: 6px;
     display: flex;
     flex-direction: column;
-    flex-shrink: 1;
+    margin: 0 0 50px;
+    transition: 3000ms;
 `;
 
 export const HeaderInfo = styled.div` // Div mais superior do card
@@ -64,19 +74,72 @@ export const EventAction = styled.div` // Div dos botões de ação
         height: 40px;
         border-radius: 4px;
         border: 2px solid #006fe6;
+        img{
+            height: 35px;
+            width: 35px;
+        }
     }
     
 `
 
-export const PointerField = styled.div`
+export const PointerField = styled.div` // Div que organizaos buttons e o description
     display: flex;
     height: 80px;
     gap: 20px;
-    padding:50px 0 0 100px;
-    button{
-        height: 40px;
-        width: 230px;
-        border: 1px solid #a4a4a4;
-    }
-
+    padding:50px 0 50px 100px;
 `;
+
+export const PointerContainer = styled.div` // Div que organiza cad button
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    font-family: "Assistant", sans-serif;
+    font-weight: 600;
+`;
+
+export const SectorButton = styled.button<ButtonProps>`
+    background-color: white; 
+    border: 1px solid #eee;
+    height: 40px;
+    width: 200px;
+`;
+
+export const AreaButton = styled.button`
+   // background-color: white; 
+    border: 1px solid #eee;
+    height: 40px;
+    width: 200px;
+    background-color: #006fe6;
+    color: white;
+`; 
+
+export const CriticButton = styled.button<ButtonProps>`
+    border: 1px solid #eee;
+    height: 40px;
+    width: 200px;
+    background-color: ${(props)=> props.levelColor ? props.levelColor : 'white'};
+    color: ${(props)=> props.levelColor ? 'white' : 'white' };
+   
+`;
+
+export const PriorityButton = styled.button<ButtonProps>`
+    border: 1px solid #eee;
+    height: 40px;
+    width: 200px;
+    background-color: ${(props)=> props.levelColor ? props.levelColor : "white"};
+`;
+
+export const DescriptionField = styled.div`
+    border: 1px solid #eee;
+    height: 200px;
+    margin: -40px 150px 20px 100px ;
+    padding: 20px 20px 0 20px;
+    text-align: justify;
+    border-radius: 8px;
+`;
+
+export const BodyInfo = styled.div<DisplayProps>`
+    width: 100%;
+    display:${(props)=> (props.open ? `none` : `auto` )};
+    transition:height 0px;
+`
