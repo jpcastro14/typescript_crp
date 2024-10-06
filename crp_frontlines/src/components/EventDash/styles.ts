@@ -9,7 +9,7 @@ type DisplayProps = {
     open:boolean;
 }
 
-export const Container = styled.div`
+export const Container = styled.div` //Container que abriga todas as divs
     min-width: 1200px;
     border: 2px solid #e4e4e4;
     border-radius: 6px;
@@ -19,7 +19,7 @@ export const Container = styled.div`
     transition: 3000ms;
 `;
 
-export const HeaderInfo = styled.div` // Div mais superior do card
+export const HeaderInfo = styled.div` // Div mais superior do card, com informações sobre titulo e hora do chamado
     width: 100%;
     height:130px;
     background-color: #f9f9f9;
@@ -32,7 +32,7 @@ export const HeaderInfo = styled.div` // Div mais superior do card
         width: 25px;
         border-radius: 5px 0 0 5px ;
     }
-    .EventType{ //  Ícone no quadrado cinza ao lado direito do quadrado azul acima
+    .EventType{ //  Quadrado cinza ao lado direito do quadrado azul acima
         background-color: #e4e4e4;
         min-width: 80px;
         height: 100%;
@@ -74,6 +74,7 @@ export const EventAction = styled.div` // Div dos botões de ação
         height: 40px;
         border-radius: 4px;
         border: 2px solid #006fe6;
+        background-color: white;
         img{
             height: 35px;
             width: 35px;
@@ -89,23 +90,26 @@ export const PointerField = styled.div` // Div que organizaos buttons e o descri
     padding:50px 0 50px 100px;
 `;
 
-export const PointerContainer = styled.div` // Div que organiza cad button
+export const PointerContainer = styled.div` // Div que organiza cada action button
     display: flex;
     flex-direction: column;
     align-items: start;
     font-family: "Assistant", sans-serif;
     font-weight: 600;
+    label{
+        color: black;
+    }
 `;
 
-export const SectorButton = styled.button<ButtonProps>`
+export const SectorButton = styled.button<ButtonProps>` //Componente do botão de Setor
     background-color: white; 
     border: 1px solid #eee;
     height: 40px;
     width: 200px;
+    color: black;
 `;
 
-export const AreaButton = styled.button`
-   // background-color: white; 
+export const AreaButton = styled.button` // Componente do botão de Area afetada
     border: 1px solid #eee;
     height: 40px;
     width: 200px;
@@ -113,7 +117,7 @@ export const AreaButton = styled.button`
     color: white;
 `; 
 
-export const CriticButton = styled.button<ButtonProps>`
+export const CriticButton = styled.button<ButtonProps>` // Componente do botão de criticalidade
     border: 1px solid #eee;
     height: 40px;
     width: 200px;
@@ -122,23 +126,25 @@ export const CriticButton = styled.button<ButtonProps>`
    
 `;
 
-export const PriorityButton = styled.button<ButtonProps>`
+export const PriorityButton = styled.button<ButtonProps>` // Componente do botão de prioridade
     border: 1px solid #eee;
     height: 40px;
     width: 200px;
     background-color: ${(props)=> props.levelColor ? props.levelColor : "white"};
+    color: black;
 `;
 
-export const DescriptionField = styled.div`
+export const DescriptionField = styled.div` // Campo de texto para mostrar a descrição do chamado
     border: 1px solid #eee;
     height: 200px;
     margin: -40px 150px 20px 100px ;
     padding: 20px 20px 0 20px;
     text-align: justify;
     border-radius: 8px;
+    color: black;
 `;
 
-export const BodyInfo = styled.div<DisplayProps>`
+export const BodyInfo = styled.div<DisplayProps>` // Div Spare criada para setar o display do DescriptionField
     width: 100%;
     display:${(props)=> (props.open ? `none` : `auto` )};
     transition:height 0px;
