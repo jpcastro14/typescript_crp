@@ -1,4 +1,4 @@
-import { FunctionComponent, useEffect, useState} from "react";
+import { FunctionComponent, useState} from "react";
 import {
   Container,
   HeaderInfo,
@@ -15,36 +15,22 @@ import {
 } from "./styles";
 import expand from "../assets/expand.svg";
 
-type Event = {
-  id:number;
-  title:string;
-  eventSector:string;
-  eventArea:string;
-  eventCriticality: string;
-  eventPriority:string;
-  eventDescription: string;
+type EventDashProps = {
+  data:{
+  id?:number;
+  eventTitle?:string;
+  eventSector?:string;
+  eventArea?:string;
+  eventCriticality?: string;
+  eventPriority?:string;
+  eventDescription?: string;
+}
+sparedata:string
 }
 
-const EventDash:FunctionComponent =() => {
-  const [posts, setPosts] = useState<Event | undefined>()
+
+const EventDash:FunctionComponent<EventDashProps> =({data}) => {
   const [open, setOpen] = useState<boolean>(false);
-
-  useEffect(()=> {
-    
-    const getPosts = async () =>{
-      const response = await fetch(`http://localhost:4000/posts/1/`);
-      const data = await response.json()
-      console.log(data);
-      
-      setPosts(data)
-    }
-
-    getPosts();
-  },[])
-
-
-
-
   return (
     <>
       <Container>
@@ -52,7 +38,7 @@ const EventDash:FunctionComponent =() => {
           <span className="EventCategory"></span>
           <div className="EventType"></div>
           <EventTitle>
-            <span>{posts?.title}</span>
+            <span>{data.eventTitle}</span>
             <p>Ocorrido: Segunda Feira, 30 de setembro as 19:51</p>
           </EventTitle>
           <EventAction>
@@ -69,26 +55,26 @@ const EventDash:FunctionComponent =() => {
             {/* ------------------Setor----------------------Ele [e teu p--*/}
             <PointerContainer>
               <label>Setor</label>
-              <SectorButton>{posts?.eventSector}</SectorButton>
+              <SectorButton>{data.eventSector}</SectorButton>
             </PointerContainer>
             {/* ------------------Area--------------------------*/}
             <PointerContainer>
               <label>Area Afetada</label>
-              <AreaButton>{posts?.eventArea}</AreaButton>
+              <AreaButton>{data.eventArea}</AreaButton>
             </PointerContainer>
             {/* ------------------Criticality------------------ */}
             <PointerContainer>
               <label>Criticalidade</label>
-              <CriticButton levelColor={"#157145"}>{posts?.eventCriticality}</CriticButton>
+              <CriticButton levelColor={"#157145"}>{data.eventCriticality}</CriticButton>
             </PointerContainer>
             {/* ------------------Priority--------------------- */}
             <PointerContainer>
               <label>Prioridade</label>
-              <PriorityButton levelColor={"#fed766"}>{posts?.eventPriority}</PriorityButton>
+              <PriorityButton levelColor={"#fed766"}>{data.eventPriority}</PriorityButton>
             </PointerContainer>
           </PointerField>
           <DescriptionField>
-            {posts?.eventDescription}
+            {data.eventDescription}
           </DescriptionField>
         </BodyInfo>
       </Container>
