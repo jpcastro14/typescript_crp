@@ -26,12 +26,6 @@ export const HeaderInfo = styled.div` // Div mais superior do card, com informa√
     display: flex;
     flex-shrink: 1;
     border-radius: 6px 6px 0 0;
-    .EventCategory{ // Barra azul a esquerda do card
-        background-color: #006fe6;
-        height: 100%;
-        width: 25px;
-        border-radius: 5px 0 0 5px ;
-    }
     .EventType{ //  Quadrado cinza ao lado direito do quadrado azul acima
         background-color: #e4e4e4;
         min-width: 80px;
@@ -39,6 +33,14 @@ export const HeaderInfo = styled.div` // Div mais superior do card, com informa√
     }
 
 `
+
+export const EventCategory = styled.span<ButtonProps>`
+        background-color: ${(props)=> (props.levelColor ? props.levelColor : 'white' )};
+        height: 100%;
+        width: 25px;
+        border-radius: 5px 0 0 5px ;
+`;
+
 export const EventTitle = styled.div` //Cont√©m o titulo e os action buttons
     width: 100%;
     background-color: #f9f9f9;
