@@ -124,7 +124,7 @@ export const CriticButton = styled.button<ButtonProps>` // Componente do botão 
     height: 40px;
     width: 200px;
     background-color: ${(props)=> props.levelColor ? props.levelColor : 'white'};
-    color: ${(props)=> props.levelColor ? 'white' : 'white' };
+    color: ${(props) => props.levelColor ? "black" : "white" };
    
 `;
 

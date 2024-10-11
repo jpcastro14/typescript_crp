@@ -49,8 +49,8 @@ function App() {
 
   return (
     <>
-      {event.map((el) => (
-        <EventDash data={el} />
+      {event.map((item) => (
+        <EventDash data={item} />
       ))}
     </>
   );
