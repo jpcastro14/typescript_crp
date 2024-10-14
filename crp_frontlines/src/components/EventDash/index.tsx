@@ -13,8 +13,11 @@ import {
   DescriptionField,
   BodyInfo,
   EventCategory,
+  EventType,
 } from "./styles";
 import expand from "../assets/expand.svg";
+import editevent from "../assets/pen.svg";
+import headset from "../assets/headset.svg";
 
 type EventDashProps = {
   data: {
@@ -32,24 +35,27 @@ type EventDashProps = {
 };
 
 function EventDash({ data }: EventDashProps) {
-  const [open, setOpen] = useState<boolean>(false);
+  const [open, setOpen] = useState<boolean>(true);
 
   return (
     <>
       <Container>
         <HeaderInfo>
-          <EventCategory levelColor={data.eventCriticality?.criticalityColor} />
-          <div className="EventType"></div>
+          <EventCategory levelcolor={data.eventCriticality?.criticalityColor} />
+          <EventType>
+            <img src={headset} />
+          </EventType>
           <EventTitle>
             <span>{data.eventTitle}</span>
             <p>Ocorrido: Segunda Feira, 30 de setembro as 19:51</p>
           </EventTitle>
           <EventAction>
-            <button></button>
             <button onClick={() => setOpen(!open)}>
               <img src={expand} />
             </button>
-            <button>c</button>
+            <button>
+              <img src={editevent} />
+            </button>
           </EventAction>
         </HeaderInfo>
         <BodyInfo open={open}>
@@ -69,7 +75,7 @@ function EventDash({ data }: EventDashProps) {
             <PointerContainer>
               <label>Criticalidade</label>
               <CriticButton
-                levelColor={data.eventCriticality?.criticalityColor}
+                levelcolor={data.eventCriticality?.criticalityColor}
               >
                 {data.eventCriticality?.criticality}
               </CriticButton>
@@ -78,7 +84,7 @@ function EventDash({ data }: EventDashProps) {
             <PointerContainer>
               <label>Prioridade</label>
               <PriorityButton
-                levelColor={data.eventCriticality?.criticalityColor}
+                levelcolor={data.eventCriticality?.criticalityColor}
               >
                 {data.eventPriority}
               </PriorityButton>
