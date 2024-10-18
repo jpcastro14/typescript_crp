@@ -40,7 +40,7 @@ function App() {
       eventArea: "Infraestrutura",
       eventCriticality: {
         criticality: "Alta",
-        criticalityColor: "#f62447",
+        criticalityColor: "var(--primary-red)",
       },
 
       eventPriority: "Alta",
