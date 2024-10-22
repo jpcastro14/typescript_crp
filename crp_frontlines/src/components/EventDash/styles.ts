@@ -3,6 +3,7 @@ import styled from "styled-components";
 
 type ButtonProps ={
     levelcolor?: string
+    exp?:boolean;
 }
 
 type DisplayProps = {
@@ -140,7 +141,7 @@ export const CriticButton = styled.button<ButtonProps>` // Componente do botão 
    
 `;
 
-export const PriorityButton = styled.button<ButtonProps>` // Componente do botão de prioridade
+export const PriorityButton = styled.div<ButtonProps>` // Componente do botão de prioridade
     border: 1px solid #eee;
     height: 40px;
     width: 200px;

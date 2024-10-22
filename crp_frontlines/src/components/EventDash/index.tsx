@@ -36,17 +36,32 @@ type EventDashProps = {
 
 function EventDash({ data }: EventDashProps) {
   const [open, setOpen] = useState<boolean>(true);
+  const [expanded, setExpanded] = useState<boolean>(false);
+
+  const {
+    eventCriticality,
+    eventTitle,
+    eventSector,
+    eventPriority,
+    eventDescription,
+    eventArea,
+  } = data;
+
+  function handleExpanded() {
+    console.log("clicked");
+    setExpanded(!expanded);
+  }
 
   return (
     <>
-      <Container>
+      <Container key={data.id}>
         <HeaderInfo>
-          <EventCategory levelcolor={data.eventCriticality?.criticalityColor} />
+          <EventCategory levelcolor={eventCriticality?.criticalityColor} />
           <EventType>
             <img src={headset} />
           </EventType>
           <EventTitle>
-            <span>{data.eventTitle}</span>
+            <span>{eventTitle}</span>
             <p>Ocorrido: Segunda Feira, 30 de setembro as 19:51</p>
           </EventTitle>
           <EventAction>
@@ -64,33 +79,33 @@ function EventDash({ data }: EventDashProps) {
             {/* ------------------Setor----------------------Ele [e teu p--*/}
             <PointerContainer>
               <label>Setor</label>
-              <SectorButton>{data.eventSector}</SectorButton>
+              <SectorButton>{eventSector}</SectorButton>
             </PointerContainer>
             {/* ------------------Area--------------------------*/}
             <PointerContainer>
               <label>Area Afetada</label>
-              <AreaButton>{data.eventArea}</AreaButton>
+              <AreaButton>{eventArea}</AreaButton>
             </PointerContainer>
             {/* ------------------Criticality------------------ */}
             <PointerContainer>
               <label>Criticalidade</label>
-              <CriticButton
-                levelcolor={data.eventCriticality?.criticalityColor}
-              >
-                {data.eventCriticality?.criticality}
+              <CriticButton levelcolor={eventCriticality?.criticalityColor}>
+                {eventCriticality?.criticality}
               </CriticButton>
             </PointerContainer>
             {/* ------------------Priority--------------------- */}
             <PointerContainer>
               <label>Prioridade</label>
               <PriorityButton
-                levelcolor={data.eventCriticality?.criticalityColor}
+                exp={expanded}
+                onClick={handleExpanded}
+                levelcolor={eventCriticality?.criticalityColor}
               >
-                {data.eventPriority}
+                {eventPriority}
               </PriorityButton>
             </PointerContainer>
           </PointerField>
-          <DescriptionField>{data.eventDescription}</DescriptionField>
+          <DescriptionField>{eventDescription}</DescriptionField>
         </BodyInfo>
       </Container>
     </>
