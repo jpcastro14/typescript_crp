@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { SetStateAction, useState } from "react";
 import {
   Container,
   HeaderInfo,
@@ -16,7 +16,6 @@ import {
   BodyInfo,
   EventCategory,
   EventType,
-
 } from "./styles";
 import expand from "../assets/expand.svg";
 import editevent from "../assets/pen.svg";
@@ -38,17 +37,26 @@ type EventDashProps = {
 };
 
 function EventDash({ data }: EventDashProps) {
+  const [tData, setTdata] = useState({ data });
   const [open, setOpen] = useState<boolean>(false);
-  const [expanded, setExpanded] = useState<boolean>(false)
-  const { eventTitle, eventSector, eventArea, eventCriticality, eventDescription, eventPriority } = data
-
+  const [expanded, setExpanded] = useState<boolean>(false);
+  const {
+    eventTitle,
+    eventSector,
+    eventArea,
+    eventCriticality,
+    eventDescription,
+    eventPriority,
+  } = tData.data;
 
   function toggleExpansion() {
-    setExpanded(!expanded)
+    setExpanded(!expanded);
     console.log(expanded);
-
   }
 
+  function setPriority() {
+    console.log(tData);
+  }
 
   return (
     <>
@@ -59,7 +67,6 @@ function EventDash({ data }: EventDashProps) {
             <img src={headset} />
           </EventType>
           <EventTitle>
-            <span>{eventTitle}</span>
             <span>{eventTitle}</span>
             <p>Ocorrido: Segunda Feira, 30 de setembro as 19:51</p>
           </EventTitle>
@@ -73,27 +80,22 @@ function EventDash({ data }: EventDashProps) {
           </EventAction>
         </HeaderInfo>
         <BodyInfo open={open}>
-
           <PointerField>
             {/* Div que organiza os botões indicadores */}
             {/* ------------------Setor----------------------Ele [e teu p--*/}
             <PointerContainer>
               <label>Setor</label>
               <SectorButton>{eventSector}</SectorButton>
-              <SectorButton>{eventSector}</SectorButton>
             </PointerContainer>
             {/* ------------------Area--------------------------*/}
             <PointerContainer>
               <label>Area Afetada</label>
               <AreaButton>{eventArea}</AreaButton>
-              <AreaButton>{eventArea}</AreaButton>
             </PointerContainer>
             {/* ------------------Criticality------------------ */}
             <PointerContainer>
               <label>Criticalidade</label>
-              <CriticButton
-                $levelcolor={eventCriticality?.criticalityColor}
-              >
+              <CriticButton $levelcolor={eventCriticality?.criticalityColor}>
                 {eventCriticality?.criticality}
               </CriticButton>
             </PointerContainer>
@@ -111,10 +113,22 @@ function EventDash({ data }: EventDashProps) {
           </PointerField>
 
           <PriorityContainer $expanded={expanded}>
-            <PriorityBox $expanded={expanded} />
+            <PriorityBox
+              $expanded={expanded}
+              $priorityColor={"var(--primary-blue)"}
+            />
+            <PriorityBox
+              $expanded={expanded}
+              $priorityColor="var(--primary-yellow)"
+            />
+            <PriorityBox
+              onClick={setPriority}
+              $expanded={expanded}
+              $priorityColor="var(--primary-red)"
+            />
           </PriorityContainer>
 
-          <DescriptionField value={eventDescription} />
+          <DescriptionField defaultValue={eventDescription} />
         </BodyInfo>
       </Container>
     </>

@@ -1,18 +1,14 @@
 import styled from "styled-components";
 
 
-type ButtonProps ={
-<<<<<<< HEAD
+type ButtonProps = {
     $levelcolor?: string;
-    $expanded?:boolean;
-=======
-    levelcolor?: string
-    exp?:boolean;
->>>>>>> 250e6ae86a48dec95980f135b1cd7d8c9847c137
+    $expanded?: boolean;
+    $priorityColor?: string;
 }
 
 type DisplayProps = {
-    open:boolean;
+    open: boolean;
 }
 
 export const Container = styled.div` //Container que abriga todas as divs
@@ -34,7 +30,7 @@ export const HeaderInfo = styled.div` // Div mais superior do card, com informa�
     flex-shrink: 1;
     border-radius: 6px 6px 0 0;
 `
-export const EventType=styled.span`
+export const EventType = styled.span`
          //  Quadrado cinza ao lado direito do quadrado azul acima
         background-color: #e4e4e4;
         min-width: 80px;
@@ -49,7 +45,7 @@ export const EventType=styled.span`
 `;
 
 export const EventCategory = styled.span<ButtonProps>`
-        background-color: ${(props)=> (props.$levelcolor ? props.$levelcolor : 'white' )};
+        background-color: ${(props) => (props.$levelcolor ? props.$levelcolor : 'white')};
         height: 100%;
         width: 25px;
         border-radius: 5px 0 0 5px ;
@@ -131,47 +127,45 @@ export const AreaButton = styled.button` // Componente do botão de Area afetada
     border: 1px solid #eee;
     height: 40px;
     width: 200px;
-    background-color: #006fe6;
-    color: white;
+    background-color: white;
+    color: black;
     
-`; 
+`;
 
 export const CriticButton = styled.button<ButtonProps>` // Componente do botão de criticalidade
     border: 1px solid #eee;
     height: 40px;
     width: 200px;
-    background-color: ${(props)=> props.$levelcolor ? props.$levelcolor : 'white'};
-    color: ${(props) => props.$levelcolor ? "black" : "white" };
+    background-color: ${(props) => props.$levelcolor ? props.$levelcolor : 'white'};
+    color: ${(props) => props.$levelcolor ? "black" : "white"};
    
 `;
 
-<<<<<<< HEAD
 export const PrioritySelect = styled.button<ButtonProps>` // Componente do botão de prioridade
-=======
-export const PriorityButton = styled.div<ButtonProps>` // Componente do botão de prioridade
->>>>>>> 250e6ae86a48dec95980f135b1cd7d8c9847c137
     border: 1px solid #eee;
     height: 40px;
     width: 200px;
     border-radius: 8px;
-    background-color: ${(props)=> props.$levelcolor ? props.$levelcolor : "white"};
+    background-color: ${(props) => props.$levelcolor ? props.$levelcolor : "white"};
     color: black;
 `;
 
 export const PriorityContainer = styled.div<ButtonProps>`
-    background-color: red;
+    background-color: white;
     height: 50px;
-    padding: 0 0 0 100px;
-    display: ${(props)=> props.$expanded ? `auto` : `none`};
+    padding: 20px 0 0 100px;
+    display: ${(props) => props.$expanded ? `flex` : `none`};
+    gap: 18px;
+    border-top:1px solid #eee
 `;
 
 export const PriorityBox = styled.div<ButtonProps>`
     width: 200px;
     height: 40px;
-    background-color: White;
-    border: 1px solid black;
+    background-color: ${(props) => props.$priorityColor};
+    border: 1px solid #eee;
     border-radius: 8px;
-    display: ${(props)=> props.$expanded ? `auto` : `none`};
+    display: ${(props) => props.$expanded ? `flex` : `none`};
     z-index: 1;
     right:20%;
 `;
@@ -194,6 +188,6 @@ export const DescriptionField = styled.textarea` // Campo de texto para mostrar 
 
 export const BodyInfo = styled.div<DisplayProps>` // Div Spare criada para setar o display do DescriptionField
     width: 100%;
-    display:${(props)=> (props.open ? `none` : `auto` )};
+    display:${(props) => (props.open ? `none` : `auto`)};
     transition:height 0px;
 `

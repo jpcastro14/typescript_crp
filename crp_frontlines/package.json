@@ -9,11 +9,7 @@
     "lint": "eslint .",
     "preview": "vite preview",
     "host": "vite --host",
-<<<<<<< HEAD
     "db": "json-server --watch db.json --port 4000"
-=======
-    "db" :"json-server --watch db.json --port 4000"
->>>>>>> 250e6ae86a48dec95980f135b1cd7d8c9847c137
   },
   "dependencies": {
     "json-server": "^1.0.0-beta.3",

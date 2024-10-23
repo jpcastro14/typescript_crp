@@ -5,7 +5,7 @@ import CreateEvent from "./components/EventCreator";
 // import EventDash from "./components/EventDash";
 // import EventDash from "./components/EventDash";
 
-interface FetchProps {
+/* interface FetchProps {
   id?: number;
   eventTitle?: string;
   eventSector?: string;
@@ -16,7 +16,7 @@ interface FetchProps {
     criticality?: string;
     criticalityColor?: string;
   };
-}
+} */
 
 function App() {
   /*   const [evData, setEvData] = useState<FetchProps[]>([]);
@@ -27,11 +27,8 @@ function App() {
       const response = await fetch(`${BASE_URL}`);
       const posts = (await response.json()) as FetchProps[];
       setEvData(posts);
-<<<<<<< HEAD
       console.log(posts);
       
-=======
->>>>>>> 250e6ae86a48dec95980f135b1cd7d8c9847c137
     };
     fetchPosts();
   }, []); */
@@ -43,11 +40,11 @@ function App() {
       eventSector: "Searp - TELARUS",
       eventArea: "Infraestrutura",
       eventCriticality: {
-        criticality: "Alta",
-        criticalityColor: "var(--primary-red)",
+        criticality: "Baixa",
+        criticalityColor: "var(--primary-blue)",
       },
 
-      eventPriority: "Alta",
+      eventPriority: "Baixa",
       eventDescription:
         "There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable. The generated Lorem Ipsum is therefore always free from repetition, injected humour, or non-characteristic words etc.",
     },
