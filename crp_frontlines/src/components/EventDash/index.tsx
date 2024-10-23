@@ -52,13 +52,14 @@ function EventDash({ data }: EventDashProps) {
 
   return (
     <>
-      <Container>
+      <Container key={data.id}>
         <HeaderInfo>
           <EventCategory $levelcolor={eventCriticality?.criticalityColor} />
           <EventType>
             <img src={headset} />
           </EventType>
           <EventTitle>
+            <span>{eventTitle}</span>
             <span>{eventTitle}</span>
             <p>Ocorrido: Segunda Feira, 30 de setembro as 19:51</p>
           </EventTitle>
@@ -79,10 +80,12 @@ function EventDash({ data }: EventDashProps) {
             <PointerContainer>
               <label>Setor</label>
               <SectorButton>{eventSector}</SectorButton>
+              <SectorButton>{eventSector}</SectorButton>
             </PointerContainer>
             {/* ------------------Area--------------------------*/}
             <PointerContainer>
               <label>Area Afetada</label>
+              <AreaButton>{eventArea}</AreaButton>
               <AreaButton>{eventArea}</AreaButton>
             </PointerContainer>
             {/* ------------------Criticality------------------ */}

@@ -2,8 +2,13 @@ import styled from "styled-components";
 
 
 type ButtonProps ={
+<<<<<<< HEAD
     $levelcolor?: string;
     $expanded?:boolean;
+=======
+    levelcolor?: string
+    exp?:boolean;
+>>>>>>> 250e6ae86a48dec95980f135b1cd7d8c9847c137
 }
 
 type DisplayProps = {
@@ -140,7 +145,11 @@ export const CriticButton = styled.button<ButtonProps>` // Componente do botão 
    
 `;
 
+<<<<<<< HEAD
 export const PrioritySelect = styled.button<ButtonProps>` // Componente do botão de prioridade
+=======
+export const PriorityButton = styled.div<ButtonProps>` // Componente do botão de prioridade
+>>>>>>> 250e6ae86a48dec95980f135b1cd7d8c9847c137
     border: 1px solid #eee;
     height: 40px;
     width: 200px;
