@@ -26,7 +26,8 @@ function App() {
       const response = await fetch(`${BASE_URL}`);
       const posts = (await response.json()) as FetchProps[];
       setEvData(posts);
-      console.log(evData);
+      console.log(posts);
+      
     };
     fetchPosts();
     // eslint-disable-next-line react-hooks/exhaustive-deps

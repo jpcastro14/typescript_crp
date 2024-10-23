@@ -2,7 +2,8 @@ import styled from "styled-components";
 
 
 type ButtonProps ={
-    levelcolor?: string
+    $levelcolor?: string;
+    $expanded?:boolean;
 }
 
 type DisplayProps = {
@@ -43,7 +44,7 @@ export const EventType=styled.span`
 `;
 
 export const EventCategory = styled.span<ButtonProps>`
-        background-color: ${(props)=> (props.levelcolor ? props.levelcolor : 'white' )};
+        background-color: ${(props)=> (props.$levelcolor ? props.$levelcolor : 'white' )};
         height: 100%;
         width: 25px;
         border-radius: 5px 0 0 5px ;
@@ -95,7 +96,8 @@ export const EventAction = styled.div` // Div dos botões de ação
 
 export const PointerField = styled.div` // Div que organizaos buttons e o description
     display: flex;
-    height: 80px;
+    height: 40px;
+    min-width: 720px;
     gap: 20px;
     padding:50px 0 50px 100px;
     flex-shrink: 1;
@@ -118,7 +120,6 @@ export const SectorButton = styled.button<ButtonProps>` //Componente do botão d
     height: 40px;
     width: 200px;
     color: black;
-    flex-shrink: 1;
 `;
 
 export const AreaButton = styled.button` // Componente do botão de Area afetada
@@ -127,37 +128,59 @@ export const AreaButton = styled.button` // Componente do botão de Area afetada
     width: 200px;
     background-color: #006fe6;
     color: white;
-    flex-shrink: 1;
+    
 `; 
 
 export const CriticButton = styled.button<ButtonProps>` // Componente do botão de criticalidade
     border: 1px solid #eee;
     height: 40px;
     width: 200px;
-    background-color: ${(props)=> props.levelcolor ? props.levelcolor : 'white'};
-    color: ${(props) => props.levelcolor ? "black" : "white" };
-    flex-shrink: 1;
+    background-color: ${(props)=> props.$levelcolor ? props.$levelcolor : 'white'};
+    color: ${(props) => props.$levelcolor ? "black" : "white" };
    
 `;
 
-export const PriorityButton = styled.button<ButtonProps>` // Componente do botão de prioridade
+export const PrioritySelect = styled.button<ButtonProps>` // Componente do botão de prioridade
     border: 1px solid #eee;
     height: 40px;
     width: 200px;
-    background-color: ${(props)=> props.levelcolor ? props.levelcolor : "white"};
+    border-radius: 8px;
+    background-color: ${(props)=> props.$levelcolor ? props.$levelcolor : "white"};
     color: black;
-    flex-shrink: 1;
 `;
 
-export const DescriptionField = styled.div` // Campo de texto para mostrar a descrição do chamado
+export const PriorityContainer = styled.div<ButtonProps>`
+    background-color: red;
+    height: 50px;
+    padding: 0 0 0 100px;
+    display: ${(props)=> props.$expanded ? `auto` : `none`};
+`;
+
+export const PriorityBox = styled.div<ButtonProps>`
+    width: 200px;
+    height: 40px;
+    background-color: White;
+    border: 1px solid black;
+    border-radius: 8px;
+    display: ${(props)=> props.$expanded ? `auto` : `none`};
+    z-index: 1;
+    right:20%;
+`;
+
+export const DescriptionField = styled.textarea` // Campo de texto para mostrar a descrição do chamado
     border: 1px solid #eee;
-    height: 200px;
-    margin: -40px 150px 20px 100px ;
+    height: 180px;
+    font-family: Assistant, sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+    margin: 40px 150px 20px 100px ;
     padding: 20px 20px 0 20px;
     text-align: justify;
     border-radius: 8px;
-    color: black;
     min-width: 820px;
+    max-width: 820px;
+    color: black;
+    background-color: white;
 `;
 
 export const BodyInfo = styled.div<DisplayProps>` // Div Spare criada para setar o display do DescriptionField

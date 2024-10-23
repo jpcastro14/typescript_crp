@@ -9,11 +9,14 @@ import {
   PointerContainer,
   CriticButton,
   AreaButton,
-  PriorityButton,
+  PrioritySelect,
+  PriorityBox,
+  PriorityContainer,
   DescriptionField,
   BodyInfo,
   EventCategory,
   EventType,
+
 } from "./styles";
 import expand from "../assets/expand.svg";
 import editevent from "../assets/pen.svg";
@@ -35,18 +38,28 @@ type EventDashProps = {
 };
 
 function EventDash({ data }: EventDashProps) {
-  const [open, setOpen] = useState<boolean>(true);
+  const [open, setOpen] = useState<boolean>(false);
+  const [expanded, setExpanded] = useState<boolean>(false)
+  const { eventTitle, eventSector, eventArea, eventCriticality, eventDescription, eventPriority } = data
+
+
+  function toggleExpansion() {
+    setExpanded(!expanded)
+    console.log(expanded);
+
+  }
+
 
   return (
     <>
       <Container>
         <HeaderInfo>
-          <EventCategory levelcolor={data.eventCriticality?.criticalityColor} />
+          <EventCategory $levelcolor={eventCriticality?.criticalityColor} />
           <EventType>
             <img src={headset} />
           </EventType>
           <EventTitle>
-            <span>{data.eventTitle}</span>
+            <span>{eventTitle}</span>
             <p>Ocorrido: Segunda Feira, 30 de setembro as 19:51</p>
           </EventTitle>
           <EventAction>
@@ -59,38 +72,46 @@ function EventDash({ data }: EventDashProps) {
           </EventAction>
         </HeaderInfo>
         <BodyInfo open={open}>
+
           <PointerField>
             {/* Div que organiza os botões indicadores */}
             {/* ------------------Setor----------------------Ele [e teu p--*/}
             <PointerContainer>
               <label>Setor</label>
-              <SectorButton>{data.eventSector}</SectorButton>
+              <SectorButton>{eventSector}</SectorButton>
             </PointerContainer>
             {/* ------------------Area--------------------------*/}
             <PointerContainer>
               <label>Area Afetada</label>
-              <AreaButton>{data.eventArea}</AreaButton>
+              <AreaButton>{eventArea}</AreaButton>
             </PointerContainer>
             {/* ------------------Criticality------------------ */}
             <PointerContainer>
               <label>Criticalidade</label>
               <CriticButton
-                levelcolor={data.eventCriticality?.criticalityColor}
+                $levelcolor={eventCriticality?.criticalityColor}
               >
-                {data.eventCriticality?.criticality}
+                {eventCriticality?.criticality}
               </CriticButton>
             </PointerContainer>
             {/* ------------------Priority--------------------- */}
             <PointerContainer>
               <label>Prioridade</label>
-              <PriorityButton
-                levelcolor={data.eventCriticality?.criticalityColor}
+              <PrioritySelect
+                onClick={toggleExpansion}
+                $expanded={expanded}
+                $levelcolor={eventCriticality?.criticalityColor}
               >
-                {data.eventPriority}
-              </PriorityButton>
+                {eventPriority}
+              </PrioritySelect>
             </PointerContainer>
           </PointerField>
-          <DescriptionField>{data.eventDescription}</DescriptionField>
+
+          <PriorityContainer $expanded={expanded}>
+            <PriorityBox $expanded={expanded} />
+          </PriorityContainer>
+
+          <DescriptionField value={eventDescription} />
         </BodyInfo>
       </Container>
     </>
