@@ -37,7 +37,7 @@ type EventDashProps = {
 };
 
 function EventDash({ data }: EventDashProps) {
-  const [tData, setTdata] = useState({ data });
+  const [tData, setTdata] = useState(data);
   const [open, setOpen] = useState<boolean>(false);
   const [expanded, setExpanded] = useState<boolean>(false);
   const {
@@ -47,7 +47,7 @@ function EventDash({ data }: EventDashProps) {
     eventCriticality,
     eventDescription,
     eventPriority,
-  } = tData.data;
+  } = tData;
 
   function toggleExpansion() {
     setExpanded(!expanded);
@@ -55,6 +55,13 @@ function EventDash({ data }: EventDashProps) {
   }
 
   function setPriority() {
+    setTdata({
+      ...tData,
+      eventCriticality: {
+        criticality: "Alta",
+        criticalityColor: "var(--primary-red)",
+      },
+    });
     console.log(tData);
   }
 
