@@ -1,4 +1,4 @@
-import { SetStateAction, useState } from "react";
+import { useState } from "react";
 import {
   Container,
   HeaderInfo,
@@ -36,6 +36,19 @@ type EventDashProps = {
   };
 };
 
+/* type Data = {
+  id: number;
+  eventTitle: string;
+  eventSector: string;
+  eventArea: string;
+  eventCriticality: {
+    criticality: string;
+    criticalityColor: string;
+  };
+  eventPriority: string;
+  eventDescription: string;
+}; */
+
 function EventDash({ data }: EventDashProps) {
   const [tData, setTdata] = useState(data);
   const [open, setOpen] = useState<boolean>(false);
@@ -54,14 +67,36 @@ function EventDash({ data }: EventDashProps) {
     console.log(expanded);
   }
 
-  function setPriority() {
-    setTdata({
-      ...tData,
-      eventCriticality: {
-        criticality: "Alta",
-        criticalityColor: "var(--primary-red)",
-      },
-    });
+  function setPriority(priority?: number) {
+    if (priority == 1) {
+      setTdata({
+        ...tData,
+        eventPriority: "Alta",
+        eventCriticality: {
+          criticality: "Alta",
+          criticalityColor: "var(--primary-red)",
+        },
+      });
+    } else if (priority == 2) {
+      setTdata({
+        ...tData,
+        eventPriority: "Média",
+        eventCriticality: {
+          criticality: "Média",
+          criticalityColor: "var(--primary-yellow)",
+        },
+      });
+    } else if (!priority) {
+      setTdata({
+        ...tData,
+        eventPriority: "Baixa",
+        eventCriticality: {
+          criticality: "Baixa",
+          criticalityColor: "var(--primary-green)",
+        },
+      });
+    }
+
     console.log(tData);
   }
 
@@ -121,15 +156,17 @@ function EventDash({ data }: EventDashProps) {
 
           <PriorityContainer $expanded={expanded}>
             <PriorityBox
+              onClick={() => setPriority()}
               $expanded={expanded}
               $priorityColor={"var(--primary-blue)"}
             />
             <PriorityBox
+              onClick={() => setPriority(2)}
               $expanded={expanded}
               $priorityColor="var(--primary-yellow)"
             />
             <PriorityBox
-              onClick={setPriority}
+              onClick={() => setPriority(1)}
               $expanded={expanded}
               $priorityColor="var(--primary-red)"
             />
