@@ -2,6 +2,7 @@
 import "./App.css";
 import EventDash from "./components/EventDash";
 import CreateEvent from "./components/EventCreator";
+import TaskList from "./components/useReducer/alternateIndex";
 // import EventDash from "./components/EventDash";
 // import EventDash from "./components/EventDash";
 
@@ -84,6 +85,7 @@ function App() {
         <EventDash key={item.id} data={item} />
       ))}
       <CreateEvent />
+      <TaskList />
     </>
   );
 }
