@@ -4,39 +4,38 @@ import { FormContainer, Header } from "./styles";
 
 type State = {
   counter: number;
+  text?: string;
+  description?: string;
 };
 
 const initializeState = {
   counter: 0,
+  text: "a",
+  description: "teste",
 };
 
-type Action = { type: "increment" } | { type: "decrement" };
+type Action =
+  | { type: "increment"; number: number; text?: string; description?: string }
+  | { type: "decrement" };
 
 function reducer(state: State, action: Action) {
   switch (action.type) {
     case "increment":
+      console.log(state);
       return {
-        counter: state.counter + 1,
+        ...state,
+        counter: action.number,
+        text: action.text,
       };
     case "decrement":
       return {
         counter: state.counter - 1,
       };
-    default:
-      return state;
   }
 }
 
 function TaskList() {
   const [state, dispatch] = useReducer(reducer, initializeState);
-
-  function increment() {
-    dispatch({ type: "increment" });
-  }
-
-  function decrement() {
-    dispatch({ type: "decrement" });
-  }
 
   return (
     <>
@@ -45,8 +44,19 @@ function TaskList() {
       </Header>
       <FormContainer>
         <p>{state.counter}</p>
-        <button onClick={increment}>+</button>
-        <button onClick={decrement}>-</button>
+        <button
+          onClick={() =>
+            dispatch({
+              type: "increment",
+              number: 3,
+              text: "Prioridade baixa",
+              description: "Teste de descrição",
+            })
+          }
+        >
+          +
+        </button>
+        <button onClick={() => dispatch({ type: "decrement" })}>-</button>
       </FormContainer>
     </>
   );
