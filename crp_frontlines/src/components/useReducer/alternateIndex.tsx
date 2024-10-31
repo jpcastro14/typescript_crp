@@ -3,20 +3,19 @@ import { useReducer } from "react";
 import { FormContainer, Header } from "./styles";
 
 type State = {
-  counter: number;
-  text?: string;
-  description?: string;
+  text: string;
+  description: string;
+  subDescription?: string;
 };
 
 const initializeState = {
-  counter: 0,
   text: "a",
   description: "teste",
 };
 
 type Action =
-  | { type: "increment"; number: number; text?: string; description?: string }
-  | { type: "decrement" };
+  | { type: "increment"; text: string; description: string }
+  | { type: "test"; subDescription?: string };
 
 function reducer(state: State, action: Action) {
   switch (action.type) {
@@ -24,12 +23,14 @@ function reducer(state: State, action: Action) {
       console.log(state);
       return {
         ...state,
-        counter: action.number,
         text: action.text,
+        description: action.description,
       };
-    case "decrement":
+    case "test":
+      console.log(state);
       return {
-        counter: state.counter - 1,
+        ...state,
+        subDescription: "test subdescription",
       };
   }
 }
@@ -43,12 +44,10 @@ function TaskList() {
         <h3>Tasklist - useReducer Hook</h3>
       </Header>
       <FormContainer>
-        <p>{state.counter}</p>
         <button
           onClick={() =>
             dispatch({
               type: "increment",
-              number: 3,
               text: "Prioridade baixa",
               description: "Teste de descrição",
             })
@@ -56,7 +55,14 @@ function TaskList() {
         >
           +
         </button>
-        <button onClick={() => dispatch({ type: "decrement" })}>-</button>
+        <button onClick={() => dispatch({ type: "test" })}>Case test</button>
+        <textarea>
+          {state.subDescription ? (
+            <p>{state.subDescription}</p>
+          ) : (
+            <p>Sem dados</p>
+          )}
+        </textarea>
       </FormContainer>
     </>
   );
