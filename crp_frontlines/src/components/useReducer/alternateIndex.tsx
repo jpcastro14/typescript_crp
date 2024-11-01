@@ -1,4 +1,4 @@
-import { useReducer } from "react";
+import { useEffect, useReducer } from "react";
 
 import { FormContainer, Header } from "./styles";
 
@@ -14,8 +14,12 @@ const initializeState = {
 };
 
 type Action =
-  | { type: "increment"; text: string; description: string }
-  | { type: "test"; subDescription?: string };
+  | {
+      type: "increment";
+      text: string;
+      description: string;
+    }
+  | { type: "test"; subDescription: string };
 
 function reducer(state: State, action: Action) {
   switch (action.type) {
@@ -30,6 +34,7 @@ function reducer(state: State, action: Action) {
       console.log(state);
       return {
         ...state,
+        text: "Sem texto",
         subDescription: "test subdescription",
       };
   }
@@ -37,6 +42,10 @@ function reducer(state: State, action: Action) {
 
 function TaskList() {
   const [state, dispatch] = useReducer(reducer, initializeState);
+
+  useEffect(() => {
+    console.log(state);
+  }, [state]);
 
   return (
     <>
@@ -55,14 +64,17 @@ function TaskList() {
         >
           +
         </button>
-        <button onClick={() => dispatch({ type: "test" })}>Case test</button>
-        <textarea>
-          {state.subDescription ? (
-            <p>{state.subDescription}</p>
-          ) : (
-            <p>Sem dados</p>
-          )}
-        </textarea>
+        <button
+          onClick={() =>
+            dispatch({
+              type: "test",
+              subDescription: "Teste de subdescription",
+            })
+          }
+        >
+          Case test
+        </button>
+        <p>{state.subDescription}</p>
       </FormContainer>
     </>
   );

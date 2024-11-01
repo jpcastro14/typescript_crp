@@ -51,7 +51,7 @@ type EventDashProps = {
 
 function EventDash({ data }: EventDashProps) {
   const [tData, setTdata] = useState(data);
-  const [open, setOpen] = useState<boolean>(false);
+  const [open, setOpen] = useState<boolean>(true);
   const [expanded, setExpanded] = useState<boolean>(false);
   const {
     eventTitle,
