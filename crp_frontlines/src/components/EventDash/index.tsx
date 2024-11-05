@@ -36,19 +36,6 @@ type EventDashProps = {
   };
 };
 
-/* type Data = {
-  id: number;
-  eventTitle: string;
-  eventSector: string;
-  eventArea: string;
-  eventCriticality: {
-    criticality: string;
-    criticalityColor: string;
-  };
-  eventPriority: string;
-  eventDescription: string;
-}; */
-
 function EventDash({ data }: EventDashProps) {
   const [tData, setTdata] = useState(data);
   const [open, setOpen] = useState<boolean>(true);

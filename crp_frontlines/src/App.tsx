@@ -3,7 +3,6 @@ import "./App.css";
 import EventDash from "./components/EventDash";
 import CreateEvent from "./components/EventCreator";
 import TaskList from "./components/useReducer/alternateIndex";
-import TestApi from "./components/TestApi";
 // import EventDash from "./components/EventDash";
 // import EventDash from "./components/EventDash";
 
@@ -82,12 +81,11 @@ function App() {
 
   return (
     <>
-      {/* {event.map((item) => (
+      {event.map((item) => (
         <EventDash key={item.id} data={item} />
       ))}
       <CreateEvent />
-      <TaskList /> */}
-      <TestApi />
+      <TaskList />
     </>
   );
 }
