@@ -166,8 +166,9 @@ export const PriorityBox = styled.div<ButtonProps>`
     border: 1px solid #eee;
     border-radius: 8px;
     display: ${(props) => props.$expanded ? `flex` : `none`};
-    z-index: 1;
     right:20%;
+    justify-content:center;
+    align-items:center;
 `;
 
 export const DescriptionField = styled.textarea` // Campo de texto para mostrar a descrição do chamado
