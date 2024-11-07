@@ -1,6 +1,7 @@
-import { useEffect, useReducer } from "react";
+import { useContext, useEffect, useReducer } from "react";
 
 import { FormContainer, Header } from "./styles";
+import { DashContext } from "../Providers/DataProvider";
 
 type State = {
   text: string;
@@ -42,6 +43,7 @@ function reducer(state: State, action: Action) {
 
 function TaskList() {
   const [state, dispatch] = useReducer(reducer, initializeState);
+  const user = useContext(DashContext);
 
   useEffect(() => {
     console.log(state);
@@ -50,7 +52,7 @@ function TaskList() {
   return (
     <>
       <Header>
-        <h3>Tasklist - useReducer Hook</h3>
+        <h3>Tasklist - useReducer Hook{user?.userName}</h3>
       </Header>
       <FormContainer>
         <button
