@@ -1,7 +1,5 @@
 import { createContext } from "react";
 
-type User = {
-    userName: string
-    text?: string
-}
-export const DashContext = createContext<User | undefined>(undefined);
+type OpenType = false | true
+
+export const DashContext = createContext<OpenType | undefined>(undefined);
