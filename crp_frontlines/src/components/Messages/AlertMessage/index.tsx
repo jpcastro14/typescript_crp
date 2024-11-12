@@ -8,11 +8,12 @@ type MessageProps = {
 };
 
 function AlertMessage({ issue, issueCriticality }: MessageProps) {
-  const [variant, setVariant] = useState<string>("primary");
+  const [variant] = useState<string>("warning");
   const [open, setOpen] = useState<boolean>(true);
 
   useEffect(() => {
     setOpen(!open);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [issueCriticality]);
 
   return (
@@ -25,10 +26,8 @@ function AlertMessage({ issue, issueCriticality }: MessageProps) {
     >
       <AlertBody>
         <p>
-          <strong>
-            <u>{issue}</u>
-          </strong>{" "}
-          alterado para criticalidade <strong>{issueCriticality}</strong>
+          <strong>{issue}</strong> alterado para criticalidade{" "}
+          <strong>{issueCriticality}</strong>
         </p>
       </AlertBody>
     </Alert>

@@ -155,11 +155,10 @@ export const PriorityContainer = styled.div<ButtonProps>`
     height: 50px;
     padding: 20px 0 0 100px;
     display: ${(props) => props.$expanded ? `flex` : `none`};
-    gap: 18px;
-    border-top:1px solid #eee
+    gap: 20px;
 `;
 
-export const PriorityBox = styled.div<ButtonProps>`
+export const PriorityBox = styled.button<ButtonProps>`
     width: 200px;
     height: 40px;
     background-color: ${(props) => props.$priorityColor};
