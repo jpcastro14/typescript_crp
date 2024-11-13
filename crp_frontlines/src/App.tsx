@@ -2,6 +2,7 @@
 import "./App.css";
 import EventDash from "./components/EventDash";
 import "bootstrap/dist/css/bootstrap.min.css";
+import ErrorMessage from "./components/Messages/ErrorMessage";
 
 function App() {
   const event = [
@@ -53,6 +54,8 @@ function App() {
       {event.map((item) => (
         <EventDash key={item.id} data={item} />
       ))}
+
+      <ErrorMessage mainmessage="teste" />
     </>
   );
 }
