@@ -3,6 +3,7 @@ import "./App.css";
 import EventDash from "./components/EventDash";
 import "bootstrap/dist/css/bootstrap.min.css";
 import ErrorMessage from "./components/Messages/ErrorMessage";
+import IssueForm from "./components/Forms";
 
 function App() {
   const event = [
@@ -56,6 +57,7 @@ function App() {
       ))}
 
       <ErrorMessage mainmessage="teste" />
+      <IssueForm />
     </>
   );
 }
