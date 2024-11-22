@@ -51,9 +51,9 @@ function App() {
   ];
   return (
     <>
-      {event.map((item) => (
+      {/* {event.map((item) => (
         <EventDash key={item.id} data={item} />
-      ))}
+      ))} */}
 
       <IssueForm />
     </>

@@ -14,24 +14,39 @@ import {
   BodyInfo,
   EventCategory,
   EventType,
+  TitleInput,
 } from "./styles";
 import { useState } from "react";
 import headset from "../assets/headset.svg";
 import expand from "../assets/expand.svg";
 import editevent from "../assets/pen.svg";
 
+type mainIssue = {
+  id?: number;
+  eventTitle: string;
+  eventSector: string;
+  eventArea: string;
+  eventCriticality: {
+    criticality: string;
+    criticalityColor: string;
+  };
+  eventPriority: string;
+  eventDescription: string;
+};
+
 function IssueForm() {
   const [open, setOpen] = useState<boolean>(true);
+  const [fixedState, setFixedState] = useState<mainIssue>();
 
   return (
     <Container>
       <HeaderInfo>
-        <EventCategory $levelcolor="var(--primary-blue)" />
+        <EventCategory $levelcolor="var(--primary-green)" />
         <EventType>
           <img src={headset} />
         </EventType>
         <EventTitle>
-          <span>Criar Ocorrência</span>
+          <span>{fixedState?.eventTitle}</span>
           <p>Ocorrido:</p>
         </EventTitle>
         <EventAction>
@@ -45,7 +60,14 @@ function IssueForm() {
       </HeaderInfo>
       <BodyInfo open={open}>
         <PointerField>
-          {/* Div que organiza os botões indicadores */}
+          <PointerContainer>
+            <label>Título da ocorrência</label>
+            <TitleInput />
+          </PointerContainer>
+        </PointerField>
+
+        <PointerField>
+          {/* Div que organiza os inputs */}
           {/* ------------------Setor----------------------*/}
           <PointerContainer>
             <label>Setor</label>
@@ -64,7 +86,7 @@ function IssueForm() {
           {/* ------------------Priority--------------------- */}
           <PointerContainer>
             <label>Prioridade</label>
-            <PrioritySelect $levelcolor={"white"}>Prioridade</PrioritySelect>
+            <PrioritySelect />
           </PointerContainer>
         </PointerField>
         <DescriptionField defaultValue={"descrição"} />

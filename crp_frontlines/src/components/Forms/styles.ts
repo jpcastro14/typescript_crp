@@ -139,8 +139,15 @@ export const CriticInput = styled.input<ButtonProps>` // Componente do botão de
     color: black;
    
 `;
+export const TitleInput = styled.input`
+    border: 1px solid #eee;
+    height: 40px;
+    width: 420px;
+    background-color: "white";
+    color: black;
+`;
 
-export const PrioritySelect = styled.button<ButtonProps>` // Componente do botão de prioridade
+export const PrioritySelect = styled.input<ButtonProps>` // Componente do botão de prioridade
     border: 1px solid #eee;
     height: 40px;
     width: 200px;
@@ -148,6 +155,7 @@ export const PrioritySelect = styled.button<ButtonProps>` // Componente do botã
     background-color: ${(props) => props.$levelcolor ? props.$levelcolor : "white"};
     color: black;
 `;
+
 
 export const PriorityContainer = styled.div<ButtonProps>`
     background-color: white;
@@ -187,6 +195,6 @@ export const DescriptionField = styled.textarea` // Campo de texto para mostrar 
 
 export const BodyInfo = styled.div<DisplayProps>` // Div Spare criada para setar o display do DescriptionField
     width: 100%;
-    display:${(props) => (props.open ? `none` : `auto`)};
+    display:${(props) => (props.open ? `auto` : `none`)};
     transition:height 0px;
 `
