@@ -2,7 +2,6 @@
 import "./App.css";
 import EventDash from "./components/EventDash";
 import "bootstrap/dist/css/bootstrap.min.css";
-import ErrorMessage from "./components/Messages/ErrorMessage";
 import IssueForm from "./components/Forms";
 
 function App() {
@@ -52,11 +51,10 @@ function App() {
   ];
   return (
     <>
-      {event.map((item) => (
+      {/* {event.map((item) => (
         <EventDash key={item.id} data={item} />
-      ))}
+      ))} */}
 
-      <ErrorMessage mainmessage="teste" />
       <IssueForm />
     </>
   );
