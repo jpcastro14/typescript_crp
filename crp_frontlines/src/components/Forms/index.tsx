@@ -16,38 +16,76 @@ import {
   EventType,
   TitleInput,
 } from "./styles";
-import { useState } from "react";
+import { useEffect, useReducer, useState } from "react";
 import headset from "../assets/headset.svg";
 import expand from "../assets/expand.svg";
 import editevent from "../assets/pen.svg";
 
 type mainIssue = {
   id?: number;
-  eventTitle: string;
-  eventSector: string;
-  eventArea: string;
-  eventCriticality: {
-    criticality: string;
-    criticalityColor: string;
+  eventTitle?: string;
+  eventSector?: string;
+  eventArea?: string;
+  eventCriticality?: {
+    criticality?: string;
+    criticalityColor?: string;
   };
-  eventPriority: string;
-  eventDescription: string;
+  eventPriority?: string;
+  eventDescription?: string;
 };
 
+type Action = { type: "test"; text: string } | { type: "deploy" };
+
+const initialState = {};
+
+function reducer(state: mainIssue, action: Action) {
+  switch (action.type) {
+    case "test":
+      console.log(state);
+      return {
+        ...state,
+        eventTitle: action.text,
+        eventSector: action.text,
+        eventArea: action.text,
+        eventCriticality: {
+          criticality: action.text,
+          criticalityColor: "var(--primary-blue)",
+        },
+        eventPriority: action.text,
+        eventDescription: action.text,
+      };
+
+    default:
+      return state;
+  }
+}
+
 function IssueForm() {
+  const [state, dispatch] = useReducer(reducer, initialState);
   const [open, setOpen] = useState<boolean>(true);
   const [fixedState, setFixedState] = useState<mainIssue>();
+
+  function testTask() {
+    dispatch({ type: "test", text: "Olá Marilene" });
+  }
 
   return (
     <Container>
       <HeaderInfo>
-        <EventCategory $levelcolor="var(--primary-green)" />
+        <EventCategory
+          $levelcolor={
+            state.eventCriticality?.criticalityColor
+              ? state.eventCriticality?.criticalityColor
+              : "var(--primary-green)"
+          }
+        />
         <EventType>
           <img src={headset} />
         </EventType>
         <EventTitle>
           <span>{fixedState?.eventTitle}</span>
           <p>Ocorrido:</p>
+          <button onClick={testTask}>Teste</button>
         </EventTitle>
         <EventAction>
           <button onClick={() => setOpen(!open)}>
