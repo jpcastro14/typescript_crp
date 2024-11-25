@@ -21,6 +21,7 @@ import headset from "../assets/headset.svg";
 import expand from "../assets/expand.svg";
 import editevent from "../assets/pen.svg";
 
+IssueForm
 type mainIssue = {
   id?: number;
   eventTitle?: string;
@@ -129,6 +130,12 @@ function IssueForm() {
         </PointerField>
         <DescriptionField defaultValue={"descrição"} />
       </BodyInfo>
+=======
+function IssueForm() {
+  return (
+    <Container>
+      <Input type="text" placeholder="Escreva aqui" />
+      <Input type="number" placeholder="Teste placeholder" />
     </Container>
   );
 }

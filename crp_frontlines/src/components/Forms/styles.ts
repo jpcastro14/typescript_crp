@@ -198,3 +198,8 @@ export const BodyInfo = styled.div<DisplayProps>` // Div Spare criada para setar
     display:${(props) => (props.open ? `auto` : `none`)};
     transition:height 0px;
 `
+=======
+    height: 200px;
+    width: 100%;
+    background-color: red;
+`;
