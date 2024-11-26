@@ -63,6 +63,7 @@ function reducer(state: mainIssue, action: Action) {
 
 function IssueForm() {
   const [state, dispatch] = useReducer(reducer, initialState);
+
   const [open, setOpen] = useState<boolean>(true);
   const [fixedState, setFixedState] = useState<mainIssue>();
 
@@ -77,7 +78,7 @@ function IssueForm() {
           $levelcolor={
             state.eventCriticality?.criticalityColor
               ? state.eventCriticality?.criticalityColor
-              : "var(--primary-green)"
+              : "var(--primary-black)"
           }
         />
         <EventType>
