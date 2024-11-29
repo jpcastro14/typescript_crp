@@ -79,6 +79,14 @@ function IssueForm() {
     console.log(fixedState);
   }
 
+  function handlePost() {
+    setFixedState((prevState) => ({
+      ...prevState,
+      id: Math.floor((Math.random() * 10)),
+    }));
+    console.log(fixedState);
+  }
+
   return (
     <Container>
       <HeaderInfo>
@@ -95,7 +103,7 @@ function IssueForm() {
         <EventTitle>
           <span>{fixedState?.eventTitle}</span>
           <p>Ocorrido:</p>
-          <button onClick={testTask}>Teste</button>
+          <button onClick={handlePost}>Teste</button>
         </EventTitle>
         <EventAction>
           <button onClick={() => setOpen(!open)}>
