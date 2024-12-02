@@ -11,9 +11,6 @@ type DisplayProps = {
 }
 
 export const Container = styled.div` //Container que abriga todas as divs
-    width: 100%;
-    min-width:800px;
-    flex: 1 1;
     border: 2px solid #e4e4e4;
     border-radius: 6px;
     display: flex;
@@ -139,11 +136,12 @@ export const AreaInput = styled.input` // Componente do botão de Area afetada
     
 `;
 
-export const CriticInput = styled.input<ButtonProps>` // Componente do botão de criticalidade
+export const CriticSelect = styled.select<ButtonProps>` // Componente do botão de criticalidade
     border: 1px solid #eee;
-    height: 40px;
     width: 200px;
-    background-color: ${(props) => props.$levelcolor ? props.$levelcolor : 'white'};
+    padding: 4px;
+    border-radius: 8px;
+    background-color: ${(props) => props.$levelcolor ? props.$levelcolor : "white"};
     color: black;
    
 `;

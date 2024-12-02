@@ -7,7 +7,7 @@ import {
   PointerField,
   SectorInput,
   PointerContainer,
-  CriticInput,
+  CriticSelect,
   AreaInput,
   PrioritySelect,
   DescriptionField,
@@ -20,6 +20,7 @@ import { useReducer, useState } from "react";
 import headset from "../assets/headset.svg";
 import expand from "../assets/expand.svg";
 import editevent from "../assets/pen.svg";
+import moment from "moment";
 
 type mainIssue = {
   id?: number;
@@ -32,6 +33,7 @@ type mainIssue = {
   };
   eventPriority?: string;
   eventDescription?: string;
+  eventMoment?:Date | number;
 };
 
 type Action = { type: "test"; text: string } | { type: "deploy" };
@@ -61,31 +63,34 @@ function reducer(state: mainIssue, action: Action) {
 }
 
 function IssueForm() {
-  const [state, dispatch] = useReducer(reducer, initialState);
+  const [state] = useReducer(reducer, initialState);
   const [open, setOpen] = useState<boolean>(true);
-  const [fixedState, setFixedState] = useState<mainIssue>();
+  const [fixedState, setFixedState] = useState<mainIssue | undefined >(undefined);
 
-  function testTask() {
+  /* function testTask() {
     dispatch({ type: "test", text: "Olá Marilene" });
-  }
+  } */
 
-  function handleType(e: React.ChangeEvent<HTMLInputElement>) {
+  function handleType(e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement >) {
     const { name, value } = e.target;
 
     setFixedState((prevState) => ({
       ...prevState,
       [name]: value,
     }));
-    console.log(fixedState);
   }
 
   function handlePost() {
+
     setFixedState((prevState) => ({
       ...prevState,
       id: Math.floor((Math.random() * 10)),
+      eventMoment:new Date().getUTCDate()
     }));
     console.log(fixedState);
   }
+
+
 
   return (
     <Container>
@@ -103,7 +108,6 @@ function IssueForm() {
         <EventTitle>
           <span>{fixedState?.eventTitle}</span>
           <p>Ocorrido:</p>
-          <button onClick={handlePost}>Teste</button>
         </EventTitle>
         <EventAction>
           <button onClick={() => setOpen(!open)}>
@@ -118,7 +122,11 @@ function IssueForm() {
         <PointerField>
           <PointerContainer>
             <label>Título da ocorrência</label>
-            <TitleInput />
+            <TitleInput
+              onChange={handleType}
+              name="eventTitle"
+              defaultValue={fixedState?.eventTitle}
+            />
           </PointerContainer>
         </PointerField>
 
@@ -130,32 +138,57 @@ function IssueForm() {
             <SectorInput
               onChange={handleType}
               name="eventSector"
-              value={state.eventSector}
+              defaultValue={fixedState?.eventSector}
             />
           </PointerContainer>
           {/* ------------------Area--------------------------*/}
           <PointerContainer>
             <label>Area Afetada</label>
-            <AreaInput />
+            <AreaInput
+            onChange={handleType}
+            name="eventArea"
+            defaultValue={fixedState?.eventArea}
+            />
           </PointerContainer>
           {/* ------------------Criticality------------------ */}
           <PointerContainer>
             <label>Criticalidade</label>
-            <CriticInput />
+            <CriticSelect
+            name='eventCriticality'
+            defaultValue={'...'}
+            value={fixedState?.eventCriticality?.criticality}
+            onChange={handleType}
+            >
+              <option>...</option>
+              <option>1</option>
+              <option>2</option>
+              <option>3</option>
+              <option>5</option>
+            </CriticSelect>
           </PointerContainer>
           {/* ------------------Priority--------------------- */}
           <PointerContainer>
             <label>Prioridade</label>
-            <PrioritySelect>
-              <option>Opção 1</option>
-              <option>Opção 2</option>
-              <option>Opção 3</option>
-              <option>Opção 4</option>
+            <PrioritySelect
+              name="eventPriority"
+              defaultValue={'...'}
+              value={fixedState?.eventPriority}
+            >
+              <option>...</option>
+              <option>1</option>
+              <option>2</option>
+              <option>3</option>
+              <option>4</option>
             </PrioritySelect>
           </PointerContainer>
         </PointerField>
-        <DescriptionField defaultValue={"descrição"} />
+        <DescriptionField 
+          name="eventPiority"
+          onChange={handleType}
+          defaultValue={fixedState?.eventDescription}
+        placeholder="Descrição do evento" />
       </BodyInfo>
+      <button onClick={handlePost}>Teste</button>
     </Container>
   );
 }
