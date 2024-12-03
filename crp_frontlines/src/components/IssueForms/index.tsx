@@ -16,11 +16,13 @@ import {
   EventType,
   TitleInput,
 } from "./styles";
-import { useReducer, useState } from "react";
+import { ReactNode, useReducer, useState } from "react";
 import headset from "../assets/headset.svg";
 import expand from "../assets/expand.svg";
 import editevent from "../assets/pen.svg";
 import moment from "moment";
+
+
 
 type mainIssue = {
   id?: number;
@@ -33,7 +35,7 @@ type mainIssue = {
   };
   eventPriority?: string;
   eventDescription?: string;
-  eventMoment?:Date | number;
+  eventMoment?:string | ReactNode;
 };
 
 type Action = { type: "test"; text: string } | { type: "deploy" };
@@ -62,6 +64,7 @@ function reducer(state: mainIssue, action: Action) {
   }
 }
 
+
 function IssueForm() {
   const [state] = useReducer(reducer, initialState);
   const [open, setOpen] = useState<boolean>(true);
@@ -82,16 +85,17 @@ function IssueForm() {
 
   function handlePost() {
 
+    moment().locale('pt-br')
+
     setFixedState((prevState) => ({
       ...prevState,
       id: Math.floor((Math.random() * 10)),
-      eventMoment:new Date().getUTCDate()
+      eventMoment: moment().locale('pt-br').format('LLL')
     }));
     console.log(fixedState);
   }
 
-
-
+ 
   return (
     <Container>
       <HeaderInfo>
@@ -107,7 +111,7 @@ function IssueForm() {
         </EventType>
         <EventTitle>
           <span>{fixedState?.eventTitle}</span>
-          <p>Ocorrido:</p>
+          <p>Ocorrido:<strong>  {fixedState?.eventMoment}</strong></p>
         </EventTitle>
         <EventAction>
           <button onClick={() => setOpen(!open)}>
