@@ -20,7 +20,7 @@ import { ReactNode, useReducer, useState } from "react";
 import headset from "../assets/headset.svg";
 import expand from "../assets/expand.svg";
 import editevent from "../assets/pen.svg";
-import moment from "moment";
+
 
 
 
@@ -36,6 +36,7 @@ type mainIssue = {
   eventPriority?: string;
   eventDescription?: string;
   eventMoment?:string | ReactNode;
+  eventTime?:Date | undefined;
 };
 
 type Action = { type: "test"; text: string } | { type: "deploy" };
@@ -85,14 +86,32 @@ function IssueForm() {
 
   function handlePost() {
 
-    moment().locale('pt-br')
+    
+
+    const dateString = Intl.DateTimeFormat('pt-br',{
+      dateStyle:'full',
+      timeStyle:'short',
+    }).format(new Date())
 
     setFixedState((prevState) => ({
       ...prevState,
       id: Math.floor((Math.random() * 10)),
-      eventMoment: moment().locale('pt-br').format('LLL')
+      eventMoment:dateString,
+      eventTime:new Date()
     }));
-    console.log(fixedState);
+    console.log(fixedState, fixedState?.eventTime?.getDay());
+  }
+
+  function testDate(){
+
+    const date = new Date();
+
+    console.log(Intl.DateTimeFormat('pt-br',{
+      dateStyle:'full',
+      timeStyle:'long',
+    }).format(date))
+    
+
   }
 
  
@@ -111,7 +130,7 @@ function IssueForm() {
         </EventType>
         <EventTitle>
           <span>{fixedState?.eventTitle}</span>
-          <p>Ocorrido:<strong>  {fixedState?.eventMoment}</strong></p>
+          <p onClick={testDate}>Ocorrido:<strong>  {fixedState?.eventMoment}</strong></p>
         </EventTitle>
         <EventAction>
           <button onClick={() => setOpen(!open)}>
