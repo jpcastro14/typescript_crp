@@ -25,6 +25,8 @@
   --secondary-green: #157145;
   --primary-white: #f6f6f6;
   --secondary-white: white;
+  --primary-gray:#e4e4e4;
+  --secondary-gray:#808080
 }
 
 a {

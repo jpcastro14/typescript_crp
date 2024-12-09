@@ -33,10 +33,10 @@ type mainIssue = {
     criticality?: string;
     criticalityColor?: string;
   };
-  eventPriority?: string;
+  eventPriority?: number;
   eventDescription?: string;
-  eventMoment?:string | ReactNode;
-  eventTime?:Date | undefined;
+  eventMoment?: string | ReactNode;
+  eventTime?: Date | undefined;
 };
 
 type Action = { type: "test"; text: string } | { type: "deploy" };
@@ -56,7 +56,7 @@ function reducer(state: mainIssue, action: Action) {
           criticality: action.text,
           criticalityColor: "var(--primary-blue)",
         },
-        eventPriority: action.text,
+        eventPriority: 1,
         eventDescription: action.text,
       };
 
@@ -69,60 +69,81 @@ function reducer(state: mainIssue, action: Action) {
 function IssueForm() {
   const [state] = useReducer(reducer, initialState);
   const [open, setOpen] = useState<boolean>(true);
-  const [fixedState, setFixedState] = useState<mainIssue | undefined >(undefined);
+  const [fixedState, setFixedState] = useState<mainIssue | undefined>(undefined);
+
 
   /* function testTask() {
     dispatch({ type: "test", text: "Olá Marilene" });
   } */
 
-  function handleType(e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement >) {
+  function handleType(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) {
     const { name, value } = e.target;
-
     setFixedState((prevState) => ({
       ...prevState,
       [name]: value,
     }));
   }
 
+  function handleSelect(e: React.ChangeEvent<HTMLSelectElement>) {
+    const { name, selectedIndex } = e.target;
+
+    switch (selectedIndex) {
+      case 1:
+        setFixedState((prevState) => ({
+          ...prevState,
+          [name]: selectedIndex,
+          eventCriticality: {
+            criticalityColor: "var(--primary-blue)"
+          }
+        }))
+        break
+      case 2:
+        setFixedState((prevState) => ({
+          ...prevState,
+          [name]: selectedIndex,
+          eventCriticality: {
+            criticalityColor: 'var(--primary-yellow)',
+          }
+        }))
+        break
+      default:
+        break;
+    }
+  }
+
+
   function handlePost() {
-
-    
-
-    const dateString = Intl.DateTimeFormat('pt-br',{
-      dateStyle:'full',
-      timeStyle:'short',
+    const dateString = Intl.DateTimeFormat('pt-br', {
+      dateStyle: 'full',
+      timeStyle: 'short',
     }).format(new Date())
 
     setFixedState((prevState) => ({
       ...prevState,
       id: Math.floor((Math.random() * 10)),
-      eventMoment:dateString,
-      eventTime:new Date()
+      eventMoment: dateString,
+      eventTime: new Date()
     }));
     console.log(fixedState, fixedState?.eventTime?.getDay());
   }
 
-  function testDate(){
+  function testDate() {
 
     const date = new Date();
 
-    console.log(Intl.DateTimeFormat('pt-br',{
-      dateStyle:'full',
-      timeStyle:'long',
+    console.log(Intl.DateTimeFormat('pt-br', {
+      dateStyle: 'full',
+      timeStyle: 'long',
     }).format(date))
-    
-
   }
 
- 
+
   return (
     <Container>
       <HeaderInfo>
         <EventCategory
           $levelcolor={
-            state.eventCriticality?.criticalityColor
-              ? state.eventCriticality?.criticalityColor
-              : "var(--primary-green)"
+            fixedState?.eventCriticality?.criticalityColor ? fixedState?.eventCriticality.criticalityColor : "var(--secondary-gray)"
           }
         />
         <EventType>
@@ -168,19 +189,19 @@ function IssueForm() {
           <PointerContainer>
             <label>Area Afetada</label>
             <AreaInput
-            onChange={handleType}
-            name="eventArea"
-            defaultValue={fixedState?.eventArea}
+              onChange={handleType}
+              name="eventArea"
+              defaultValue={fixedState?.eventArea}
             />
           </PointerContainer>
           {/* ------------------Criticality------------------ */}
           <PointerContainer>
             <label>Criticalidade</label>
             <CriticSelect
-            name='eventCriticality'
-            defaultValue={'...'}
-            value={fixedState?.eventCriticality?.criticality}
-            onChange={handleType}
+              name='eventCriticality'
+              defaultValue={'...'}
+              value={fixedState?.eventCriticality?.criticality}
+              onChange={handleSelect}
             >
               <option>...</option>
               <option>1</option>
@@ -205,11 +226,11 @@ function IssueForm() {
             </PrioritySelect>
           </PointerContainer>
         </PointerField>
-        <DescriptionField 
+        <DescriptionField
           name="eventPiority"
           onChange={handleType}
           defaultValue={fixedState?.eventDescription}
-        placeholder="Descrição do evento" />
+          placeholder="Descrição do evento" />
       </BodyInfo>
       <button onClick={handlePost}>Teste</button>
     </Container>
