@@ -106,6 +106,15 @@ function IssueForm() {
           }
         }))
         break
+      case 3:
+        setFixedState((prevState) => ({
+          ...prevState,
+          [name]: selectedIndex,
+          eventCriticality: {
+            criticalityColor: 'var(--primary-red)'
+          }
+        }))
+        break
       default:
         break;
     }
@@ -207,7 +216,6 @@ function IssueForm() {
               <option>1</option>
               <option>2</option>
               <option>3</option>
-              <option>5</option>
             </CriticSelect>
           </PointerContainer>
           {/* ------------------Priority--------------------- */}
@@ -222,7 +230,6 @@ function IssueForm() {
               <option>1</option>
               <option>2</option>
               <option>3</option>
-              <option>4</option>
             </PrioritySelect>
           </PointerContainer>
         </PointerField>
