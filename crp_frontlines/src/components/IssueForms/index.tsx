@@ -20,6 +20,7 @@ import { ReactNode, useReducer, useState } from "react";
 import headset from "../assets/headset.svg";
 import expand from "../assets/expand.svg";
 import editevent from "../assets/pen.svg";
+import AlertMessage from "../Messages/AlertMessage";
 
 
 
@@ -38,6 +39,11 @@ type mainIssue = {
   eventMoment?: string | ReactNode;
   eventTime?: Date | undefined;
 };
+
+type messageProps = {
+  alertText?: string;
+  trigger?: boolean;
+}
 
 type Action = { type: "test"; text: string } | { type: "deploy" };
 
@@ -70,6 +76,7 @@ function IssueForm() {
   const [state] = useReducer(reducer, initialState);
   const [open, setOpen] = useState<boolean>(true);
   const [fixedState, setFixedState] = useState<mainIssue | undefined>(undefined);
+  const [info, setInfo] = useState<messageProps>({ trigger: false, alertText: "" })
 
 
   /* function testTask() {
@@ -96,6 +103,7 @@ function IssueForm() {
             criticalityColor: "var(--primary-blue)"
           }
         }))
+        setInfo({ trigger: true, alertText: "Evento com prioridade 1" })
         break
       case 2:
         setFixedState((prevState) => ({
@@ -149,6 +157,7 @@ function IssueForm() {
 
   return (
     <Container>
+      <AlertMessage alertText={info.alertText} trigger={info.trigger} />
       <HeaderInfo>
         <EventCategory
           $levelcolor={
