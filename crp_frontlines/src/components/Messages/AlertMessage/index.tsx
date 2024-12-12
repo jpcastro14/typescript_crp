@@ -6,12 +6,13 @@ type MessageProps = {
   issue?: string | undefined;
   issueCriticality?: string | undefined;
   alertText: string | undefined;
-  trigger?: boolean
+  trigger: boolean
+  onClose: React.ReactEventHandler;
 };
 
-function AlertMessage({ issue, issueCriticality, alertText, trigger }: MessageProps) {
+function AlertMessage({ issue, issueCriticality, alertText, trigger, onClose }: MessageProps) {
   const [variant] = useState<string>("warning");
-  const [open, setOpen] = useState(trigger)
+  //const [setTrigger] = useState<boolean | React.SetStateAction<boolean>>(trigger)
 
 
   useEffect(() => {
@@ -21,9 +22,8 @@ function AlertMessage({ issue, issueCriticality, alertText, trigger }: MessagePr
 
   return (
     <Alert
-      //onClose={() => setOpen(!open)}
-      onClose={() => setOpen(!trigger)}
-      show={open}
+      onClose={onClose}
+      show={trigger}
       dismissible
       key={variant}
       variant={variant}

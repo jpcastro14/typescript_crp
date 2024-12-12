@@ -1,9 +1,7 @@
-//import { Container } from "./styles";
 import {
   Container,
   HeaderInfo,
   EventTitle,
-  EventAction,
   PointerField,
   SectorInput,
   PointerContainer,
@@ -16,14 +14,9 @@ import {
   EventType,
   TitleInput,
 } from "./styles";
-import { ReactNode, useReducer, useState } from "react";
+import { ReactNode, useState } from "react";
 import headset from "../assets/headset.svg";
-import expand from "../assets/expand.svg";
-import editevent from "../assets/pen.svg";
 import AlertMessage from "../Messages/AlertMessage";
-
-
-
 
 type mainIssue = {
   id?: number;
@@ -31,7 +24,7 @@ type mainIssue = {
   eventSector?: string;
   eventArea?: string;
   eventCriticality?: {
-    criticality?: string;
+    criticality?: number;
     criticalityColor?: string;
   };
   eventPriority?: number;
@@ -41,15 +34,15 @@ type mainIssue = {
 };
 
 type messageProps = {
+  trigger: boolean;
   alertText?: string;
-  trigger?: boolean;
 }
 
-type Action = { type: "test"; text: string } | { type: "deploy" };
+//type Action = { type: "test"; text: string } | { type: "deploy" };
 
-const initialState = {};
+//const initialState = {};
 
-function reducer(state: mainIssue, action: Action) {
+/* function reducer(state: mainIssue, action: Action) {
   switch (action.type) {
     case "test":
       console.log(state);
@@ -69,14 +62,14 @@ function reducer(state: mainIssue, action: Action) {
     default:
       return state;
   }
-}
+} */
 
 
 function IssueForm() {
-  const [state] = useReducer(reducer, initialState);
+  //const [state] = useReducer(reducer, initialState);
   const [open, setOpen] = useState<boolean>(true);
   const [fixedState, setFixedState] = useState<mainIssue | undefined>(undefined);
-  const [info, setInfo] = useState<messageProps>({ trigger: false, alertText: "" })
+  const [messageConfig, setMessageConfig] = useState<messageProps>({ trigger: false, alertText: "" })
 
 
   /* function testTask() {
@@ -100,10 +93,11 @@ function IssueForm() {
           ...prevState,
           [name]: selectedIndex,
           eventCriticality: {
-            criticalityColor: "var(--primary-blue)"
+            criticality: selectedIndex,
+            criticalityColor: "var(--primary-blue)",
           }
         }))
-        setInfo({ trigger: true, alertText: "Evento com prioridade 1" })
+        setMessageConfig({ trigger: true, alertText: `Chamado com criticalidade ${selectedIndex}` })
         break
       case 2:
         setFixedState((prevState) => ({
@@ -113,6 +107,7 @@ function IssueForm() {
             criticalityColor: 'var(--primary-yellow)',
           }
         }))
+        setMessageConfig({ trigger: true, alertText: `Chamado com criticalidade ${selectedIndex}` })
         break
       case 3:
         setFixedState((prevState) => ({
@@ -122,6 +117,7 @@ function IssueForm() {
             criticalityColor: 'var(--primary-red)'
           }
         }))
+        setMessageConfig({ trigger: true, alertText: `Chamado com criticalidade ${selectedIndex}` })
         break
       default:
         break;
@@ -145,111 +141,102 @@ function IssueForm() {
   }
 
   function testDate() {
-
     const date = new Date();
-
     console.log(Intl.DateTimeFormat('pt-br', {
       dateStyle: 'full',
       timeStyle: 'long',
     }).format(date))
   }
 
-
   return (
-    <Container>
-      <AlertMessage alertText={info.alertText} trigger={info.trigger} />
-      <HeaderInfo>
-        <EventCategory
-          $levelcolor={
-            fixedState?.eventCriticality?.criticalityColor ? fixedState?.eventCriticality.criticalityColor : "var(--secondary-gray)"
-          }
-        />
-        <EventType>
-          <img src={headset} />
-        </EventType>
-        <EventTitle>
-          <span>{fixedState?.eventTitle}</span>
-          <p onClick={testDate}>Ocorrido:<strong>  {fixedState?.eventMoment}</strong></p>
-        </EventTitle>
-        <EventAction>
-          <button onClick={() => setOpen(!open)}>
-            <img src={expand} />
-          </button>
-          <button>
-            <img src={editevent} />
-          </button>
-        </EventAction>
-      </HeaderInfo>
-      <BodyInfo open={open}>
-        <PointerField>
-          <PointerContainer>
-            <label>Título da ocorrência</label>
-            <TitleInput
-              onChange={handleType}
-              name="eventTitle"
-              defaultValue={fixedState?.eventTitle}
-            />
-          </PointerContainer>
-        </PointerField>
+    <>
+      <AlertMessage alertText={messageConfig.alertText} trigger={messageConfig.trigger} onClose={() => setMessageConfig({ trigger: false })} />
+      <Container>
+        <HeaderInfo>
+          <EventCategory
+            $levelcolor={
+              fixedState?.eventCriticality?.criticalityColor ? fixedState?.eventCriticality.criticalityColor : "var(--secondary-gray)"
+            }
+          />
+          <EventType>
+            <img src={headset} />
+          </EventType>
+          <EventTitle>
+            <span>{fixedState?.eventTitle}</span>
+            <p onClick={testDate}>Ocorrido:<strong>  {fixedState?.eventMoment}</strong></p>
+          </EventTitle>
+        </HeaderInfo>
+        <BodyInfo open={open}>
+          <PointerField>
+            <PointerContainer>
+              <label>Título da ocorrência</label>
+              <TitleInput
+                onChange={handleType}
+                name="eventTitle"
+                defaultValue={fixedState?.eventTitle}
+              />
+            </PointerContainer>
+          </PointerField>
 
-        <PointerField>
-          {/* Div que organiza os inputs */}
-          {/* ------------------Setor----------------------*/}
-          <PointerContainer>
-            <label>Setor</label>
-            <SectorInput
-              onChange={handleType}
-              name="eventSector"
-              defaultValue={fixedState?.eventSector}
-            />
-          </PointerContainer>
-          {/* ------------------Area--------------------------*/}
-          <PointerContainer>
-            <label>Area Afetada</label>
-            <AreaInput
-              onChange={handleType}
-              name="eventArea"
-              defaultValue={fixedState?.eventArea}
-            />
-          </PointerContainer>
-          {/* ------------------Criticality------------------ */}
-          <PointerContainer>
-            <label>Criticalidade</label>
-            <CriticSelect
-              name='eventCriticality'
-              defaultValue={'...'}
-              value={fixedState?.eventCriticality?.criticality}
-              onChange={handleSelect}
-            >
-              <option>...</option>
-              <option>1</option>
-              <option>2</option>
-              <option>3</option>
-            </CriticSelect>
-          </PointerContainer>
-          {/* ------------------Priority--------------------- */}
-          <PointerContainer>
-            <label>Prioridade</label>
-            <PrioritySelect
-              name="eventPriority"
-              defaultValue={'...'}
-              value={fixedState?.eventPriority}
-            >
-              <option>...</option>
-              <option>1</option>
-              <option>2</option>
-              <option>3</option>
-            </PrioritySelect>
-          </PointerContainer>
-        </PointerField>
-        <DescriptionField
-          name="eventPiority"
-          onChange={handleType}
-          defaultValue={fixedState?.eventDescription}
-          placeholder="Descrição do evento" />
-      </BodyInfo>
-      <button onClick={handlePost}>Teste</button>
-    </Container>
+          <PointerField>
+            {/* Div que organiza os inputs */}
+            {/* ------------------Setor----------------------*/}
+            <PointerContainer>
+              <label>Setor</label>
+              <SectorInput
+                onChange={handleType}
+                name="eventSector"
+                defaultValue={fixedState?.eventSector}
+              />
+            </PointerContainer>
+            {/* ------------------Area--------------------------*/}
+            <PointerContainer>
+              <label>Area Afetada</label>
+              <AreaInput
+                onChange={handleType}
+                name="eventArea"
+                defaultValue={fixedState?.eventArea}
+              />
+            </PointerContainer>
+            {/* ------------------Criticality------------------ */}
+            <PointerContainer>
+              <label>Criticalidade</label>
+              <CriticSelect
+                name='eventCriticality'
+                defaultValue={'...'}
+                value={fixedState?.eventCriticality?.criticality}
+                onChange={handleSelect}
+              >
+                <option>...</option>
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+              </CriticSelect>
+            </PointerContainer>
+            {/* ------------------Priority--------------------- */}
+            <PointerContainer>
+              <label>Prioridade</label>
+              <PrioritySelect
+                name="eventPriority"
+                defaultValue={'...'}
+                value={fixedState?.eventPriority}
+              >
+                <option>...</option>
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+              </PrioritySelect>
+            </PointerContainer>
+          </PointerField>
+          <DescriptionField
+            name="eventPiority"
+            onChange={handleType}
+            defaultValue={fixedState?.eventDescription}
+            placeholder="Descrição do evento" />
+        </BodyInfo>
+        <button onClick={handlePost}>Teste</button>
+      </Container>
+    </>
   );
 }
 
