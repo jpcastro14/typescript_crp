@@ -16,6 +16,11 @@ export const Container = styled.div` //Container que abriga todas as divs
     display: flex;
     flex-direction: column;
     margin: 0 0 20px;
+    button{
+        background-color: var(--secondary-yellow);
+        border: 2px solid var(--secondary-yellow);
+        color: black;
+    }
 `;
 
 export const HeaderInfo = styled.div` // Div mais superior do card, com informações sobre titulo e hora do chamado
@@ -115,7 +120,7 @@ export const TitleInput = styled.input`
     border: 1px solid #eee;
     height: 40px;
     width: 420px;
-    background-color: "white";
+    background-color: white;
     color: black;
 `;
 

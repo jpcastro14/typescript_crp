@@ -24,7 +24,7 @@ type mainIssue = {
   eventSector?: string;
   eventArea?: string;
   eventCriticality?: {
-    criticality?: number;
+    criticality?: number | string;
     criticalityColor?: string;
   };
   eventPriority?: number;
@@ -67,7 +67,7 @@ type messageProps = {
 
 function IssueForm() {
   //const [state] = useReducer(reducer, initialState);
-  const [open, setOpen] = useState<boolean>(true);
+  const [open] = useState<boolean>(true);
   const [fixedState, setFixedState] = useState<mainIssue | undefined>(undefined);
   const [messageConfig, setMessageConfig] = useState<messageProps>({ trigger: false, alertText: "" })
 
@@ -104,6 +104,7 @@ function IssueForm() {
           ...prevState,
           [name]: selectedIndex,
           eventCriticality: {
+            criticality: selectedIndex,
             criticalityColor: 'var(--primary-yellow)',
           }
         }))
@@ -114,6 +115,7 @@ function IssueForm() {
           ...prevState,
           [name]: selectedIndex,
           eventCriticality: {
+            criticality: selectedIndex,
             criticalityColor: 'var(--primary-red)'
           }
         }))
@@ -123,7 +125,6 @@ function IssueForm() {
         break;
     }
   }
-
 
   function handlePost() {
     const dateString = Intl.DateTimeFormat('pt-br', {
@@ -140,7 +141,7 @@ function IssueForm() {
     console.log(fixedState, fixedState?.eventTime?.getDay());
   }
 
-  function testDate() {
+  function sampleDate() {
     const date = new Date();
     console.log(Intl.DateTimeFormat('pt-br', {
       dateStyle: 'full',
@@ -163,7 +164,7 @@ function IssueForm() {
           </EventType>
           <EventTitle>
             <span>{fixedState?.eventTitle}</span>
-            <p onClick={testDate}>Ocorrido:<strong>  {fixedState?.eventMoment}</strong></p>
+            <p onClick={sampleDate}>Ocorrido:<strong>  {fixedState?.eventMoment}</strong></p>
           </EventTitle>
         </HeaderInfo>
         <BodyInfo open={open}>
