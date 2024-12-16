@@ -14,7 +14,7 @@ import {
   EventType,
   TitleInput,
 } from "./styles";
-import { ReactNode, useState } from "react";
+import { ReactNode, useReducer, useState } from "react";
 import headset from "../assets/headset.svg";
 import AlertMessage from "../Messages/AlertMessage";
 
@@ -38,43 +38,31 @@ type messageProps = {
   alertText?: string;
 }
 
-//type Action = { type: "test"; text: string } | { type: "deploy" };
+type Action =
+  { type: 'create', mainObject?: mainIssue }
 
-//const initialState = {};
+const initialState: mainIssue = {};
 
-/* function reducer(state: mainIssue, action: Action) {
+function reducer(state: mainIssue, action: Action) {
   switch (action.type) {
-    case "test":
-      console.log(state);
-      return {
-        ...state,
-        eventTitle: action.text,
-        eventSector: action.text,
-        eventArea: action.text,
-        eventCriticality: {
-          criticality: action.text,
-          criticalityColor: "var(--primary-blue)",
-        },
-        eventPriority: 1,
-        eventDescription: action.text,
-      };
-
+    case "create":
+      console.log(action.type, state);
+      return { ...state, eventTitle: action.mainObject?.eventTitle }
+    // deve sempre existir um retorno quando estiver usando o reducer
     default:
       return state;
+      break;
   }
-} */
+
+}
+
 
 
 function IssueForm() {
-  //const [state] = useReducer(reducer, initialState);
   const [open] = useState<boolean>(true);
   const [fixedState, setFixedState] = useState<mainIssue | undefined>(undefined);
   const [messageConfig, setMessageConfig] = useState<messageProps>({ trigger: false, alertText: "" })
-
-
-  /* function testTask() {
-    dispatch({ type: "test", text: "Olá Marilene" });
-  } */
+  const [state, dispatch] = useReducer(reducer, initialState);
 
   function handleType(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) {
     const { name, value } = e.target;
@@ -160,6 +148,7 @@ function IssueForm() {
             }
           />
           <EventType>
+            <p></p>
             <img src={headset} />
           </EventType>
           <EventTitle>
@@ -236,6 +225,7 @@ function IssueForm() {
             placeholder="Descrição do evento" />
         </BodyInfo>
         <button onClick={handlePost}>Teste</button>
+        <button onClick={() => dispatch({ type: 'create', mainObject: fixedState })}>Teste</button>
       </Container>
     </>
   );

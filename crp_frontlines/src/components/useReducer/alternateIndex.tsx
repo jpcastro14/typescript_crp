@@ -16,10 +16,10 @@ const initializeState = {
 
 type Action =
   | {
-      type: "increment";
-      text: string;
-      description: string;
-    }
+    type: "increment";
+    text: string;
+    description: string;
+  }
   | { type: "test"; subDescription: string };
 
 function reducer(state: State, action: Action) {
