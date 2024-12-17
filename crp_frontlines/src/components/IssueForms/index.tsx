@@ -14,7 +14,7 @@ import {
   EventType,
   TitleInput,
 } from "./styles";
-import { ReactNode, useReducer, useState } from "react";
+import { ReactNode, useState } from "react";
 import headset from "../assets/headset.svg";
 import AlertMessage from "../Messages/AlertMessage";
 
@@ -38,31 +38,10 @@ type messageProps = {
   alertText?: string;
 }
 
-type Action =
-  { type: 'create', mainObject?: mainIssue }
-
-const initialState: mainIssue = {};
-
-function reducer(state: mainIssue, action: Action) {
-  switch (action.type) {
-    case "create":
-      console.log(action.type, state);
-      return { ...state, eventTitle: action.mainObject?.eventTitle }
-    // deve sempre existir um retorno quando estiver usando o reducer
-    default:
-      return state;
-      break;
-  }
-
-}
-
-
-
 function IssueForm() {
   const [open] = useState<boolean>(true);
   const [fixedState, setFixedState] = useState<mainIssue | undefined>(undefined);
   const [messageConfig, setMessageConfig] = useState<messageProps>({ trigger: false, alertText: "" })
-  const [state, dispatch] = useReducer(reducer, initialState);
 
   function handleType(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) {
     const { name, value } = e.target;
@@ -114,6 +93,34 @@ function IssueForm() {
     }
   }
 
+  function handlePriority(e: React.ChangeEvent<HTMLSelectElement>) {
+    const { selectedIndex } = e.target;
+
+    switch (selectedIndex) {
+      case 1:
+        setFixedState((prevState) => ({
+          ...prevState,
+          eventPriority: selectedIndex
+        }))
+        setMessageConfig({ trigger: true, alertText: `Chamado com prioridade ${selectedIndex}` })
+        break;
+      case 2:
+        setFixedState((prevState) => ({
+          ...prevState,
+          eventPriority: selectedIndex
+        }))
+        setMessageConfig({ trigger: true, alertText: `Chamado com prioridade ${selectedIndex}` })
+        break;
+      case 3:
+        setFixedState((prevState) => ({
+          ...prevState,
+          eventPriority: selectedIndex
+        }))
+        setMessageConfig({ trigger: true, alertText: `Chamado com prioridade >${selectedIndex}<, deve ser encaminhado imediatamente para o setor responsável! ` })
+    }
+
+  }
+
   function handlePost() {
     const dateString = Intl.DateTimeFormat('pt-br', {
       dateStyle: 'full',
@@ -126,7 +133,7 @@ function IssueForm() {
       eventMoment: dateString,
       eventTime: new Date()
     }));
-    console.log(fixedState, fixedState?.eventTime?.getDay());
+    console.log(fixedState);
   }
 
   function sampleDate() {
@@ -210,6 +217,7 @@ function IssueForm() {
                 name="eventPriority"
                 defaultValue={'...'}
                 value={fixedState?.eventPriority}
+                onChange={handlePriority}
               >
                 <option>...</option>
                 <option>1</option>
@@ -225,8 +233,8 @@ function IssueForm() {
             placeholder="Descrição do evento" />
         </BodyInfo>
         <button onClick={handlePost}>Teste</button>
-        <button onClick={() => dispatch({ type: 'create', mainObject: fixedState })}>Teste</button>
-      </Container>
+        {/*         <button onClick={() => dispatch({ type: 'create', mainObject: fixedState })}>Teste</button>
+ */}      </Container>
     </>
   );
 }
