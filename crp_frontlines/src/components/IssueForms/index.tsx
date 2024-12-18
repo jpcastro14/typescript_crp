@@ -103,21 +103,21 @@ function IssueForm() {
           ...prevState,
           eventPriority: selectedIndex
         }))
-        setMessageConfig({ trigger: true, alertText: `Chamado com prioridade ${selectedIndex}` })
+        setMessageConfig({ trigger: true, alertText: `Chamado com prioridade ${selectedIndex}`, variant: 'primary' })
         break;
       case 2:
         setFixedState((prevState) => ({
           ...prevState,
           eventPriority: selectedIndex
         }))
-        setMessageConfig({ trigger: true, alertText: `Chamado com prioridade ${selectedIndex}` })
+        setMessageConfig({ trigger: true, alertText: `Chamado com prioridade ${selectedIndex}`, variant: 'warning' })
         break;
       case 3:
         setFixedState((prevState) => ({
           ...prevState,
           eventPriority: selectedIndex
         }))
-        setMessageConfig({ trigger: true, alertText: `Chamado com prioridade >${selectedIndex}<, deve ser encaminhado imediatamente para o setor responsável! ` })
+        setMessageConfig({ trigger: true, alertText: `Chamado com prioridade >${selectedIndex}<, deve ser encaminhado imediatamente para o setor responsável!`, variant: 'danger' })
     }
 
   }
