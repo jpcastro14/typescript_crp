@@ -10,8 +10,6 @@ import {
   CriticButton,
   AreaButton,
   PrioritySelect,
-  PriorityBox,
-  PriorityContainer,
   DescriptionField,
   BodyInfo,
   EventCategory,
@@ -37,20 +35,10 @@ type EventDashProps = {
   };
 };
 
-/* function reducer(state: EventDashProps, action: Action) {
-  switch (action.type) {
-    case "low":
-      console.log(state);
-      return state;
-    default:
-      return state;
-  }
-} */
 
 function EventDash({ data }: EventDashProps) {
   const [tData, setTdata] = useState(data);
   const [open, setOpen] = useState<boolean>(true);
-  const [expanded, setExpanded] = useState<boolean>(false);
   const {
     eventTitle,
     eventSector,
@@ -60,44 +48,6 @@ function EventDash({ data }: EventDashProps) {
     eventPriority,
   } = tData;
 
-  function toggleExpansion() {
-    setExpanded(!expanded);
-    console.log(expanded);
-  }
-
-  function setPriority(priority?: number) {
-    switch (priority) {
-      case 1:
-        setTdata({
-          ...tData,
-          eventPriority: "Baixa",
-          eventCriticality: {
-            criticalityColor: "var(--primary-blue)",
-            criticality: "Baixa",
-          },
-        });
-        break;
-      case 2:
-        setTdata({
-          ...tData,
-          eventPriority: "Média",
-          eventCriticality: {
-            criticalityColor: "var(--primary-yellow)",
-            criticality: "Média",
-          },
-        });
-        break;
-      case 3:
-        setTdata({
-          ...tData,
-          eventPriority: "Alta",
-          eventCriticality: {
-            criticalityColor: "var(--primary-red)",
-            criticality: "Alta",
-          },
-        });
-    }
-  }
 
   return (
     <>
@@ -148,39 +98,12 @@ function EventDash({ data }: EventDashProps) {
             <PointerContainer>
               <label>Prioridade</label>
               <PrioritySelect
-                onClick={toggleExpansion}
-                $expanded={expanded}
                 $levelcolor={eventCriticality?.criticalityColor}
               >
                 {eventPriority}
               </PrioritySelect>
             </PointerContainer>
           </PointerField>
-
-          <PriorityContainer $expanded={expanded}>
-            <PriorityBox
-              onClick={() => setPriority(1)}
-              $expanded={expanded}
-              $priorityColor={"var(--primary-blue)"}
-            >
-              Baixa
-            </PriorityBox>
-            <PriorityBox
-              onClick={() => setPriority(2)}
-              $expanded={expanded}
-              $priorityColor="var(--primary-yellow)"
-            >
-              Média
-            </PriorityBox>
-            <PriorityBox
-              onClick={() => setPriority(3)}
-              $expanded={expanded}
-              $priorityColor="var(--primary-red)"
-            >
-              Alta
-            </PriorityBox>
-          </PriorityContainer>
-
           <DescriptionField defaultValue={eventDescription} />
         </BodyInfo>
       </Container>
