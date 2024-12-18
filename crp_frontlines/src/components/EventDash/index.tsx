@@ -18,7 +18,6 @@ import {
 import expand from "../assets/expand.svg";
 import editevent from "../assets/pen.svg";
 import headset from "../assets/headset.svg";
-//import AlertMessage from "../Messages/AlertMessage";
 
 type EventDashProps = {
   data: {
@@ -71,10 +70,6 @@ function EventDash({ data }: EventDashProps) {
           </EventAction>
         </HeaderInfo>
         <BodyInfo open={open}>
-          {/* <AlertMessage
-            issue={data.eventTitle}
-            issueCriticality={eventCriticality?.criticality}
-          /> */}
           <PointerField>
             {/* Div que organiza os botões indicadores */}
             {/* ------------------Setor----------------------*/}

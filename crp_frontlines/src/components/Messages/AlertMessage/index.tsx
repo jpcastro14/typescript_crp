@@ -1,17 +1,18 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { Alert } from "react-bootstrap";
 import { AlertBody } from "./styles";
 
 type MessageProps = {
   issue?: string | undefined;
   issueCriticality?: string | undefined;
-  alertText: string | undefined;
-  trigger: boolean
-  onClose: React.ReactEventHandler;
+  alertText?: string | undefined;
+  trigger?: boolean
+  onClose?: React.ReactEventHandler;
+  variant?: string;
 };
 
-function AlertMessage({ issue, issueCriticality, alertText, trigger, onClose }: MessageProps) {
-  const [variant] = useState<string>("warning");
+function AlertMessage({ issue, issueCriticality, alertText, trigger, onClose, variant }: MessageProps) {
+  //const [variant] = useState<string>("warning");
   //const [setTrigger] = useState<boolean | React.SetStateAction<boolean>>(trigger)
 
 
@@ -25,7 +26,6 @@ function AlertMessage({ issue, issueCriticality, alertText, trigger, onClose }: 
       onClose={onClose}
       show={trigger}
       dismissible
-      key={variant}
       variant={variant}
     >
       <AlertBody>

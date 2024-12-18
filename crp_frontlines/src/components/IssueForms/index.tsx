@@ -36,12 +36,13 @@ type mainIssue = {
 type messageProps = {
   trigger: boolean;
   alertText?: string;
+  variant?: string;
 }
 
 function IssueForm() {
   const [open] = useState<boolean>(true);
   const [fixedState, setFixedState] = useState<mainIssue | undefined>(undefined);
-  const [messageConfig, setMessageConfig] = useState<messageProps>({ trigger: false, alertText: "" })
+  const [messageConfig, setMessageConfig] = useState<messageProps>({ trigger: false, alertText: "", variant: "" })
 
   function handleType(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) {
     const { name, value } = e.target;
@@ -64,7 +65,7 @@ function IssueForm() {
             criticalityColor: "var(--primary-blue)",
           }
         }))
-        setMessageConfig({ trigger: true, alertText: `Chamado com criticalidade ${selectedIndex}` })
+        setMessageConfig({ trigger: true, alertText: `Chamado com criticalidade ${selectedIndex}`, variant: "primary" })
         break
       case 2:
         setFixedState((prevState) => ({
@@ -75,7 +76,7 @@ function IssueForm() {
             criticalityColor: 'var(--primary-yellow)',
           }
         }))
-        setMessageConfig({ trigger: true, alertText: `Chamado com criticalidade ${selectedIndex}` })
+        setMessageConfig({ trigger: true, alertText: `Chamado com criticalidade ${selectedIndex}`, variant: "warning" })
         break
       case 3:
         setFixedState((prevState) => ({
@@ -86,7 +87,7 @@ function IssueForm() {
             criticalityColor: 'var(--primary-red)'
           }
         }))
-        setMessageConfig({ trigger: true, alertText: `Chamado com criticalidade ${selectedIndex}` })
+        setMessageConfig({ trigger: true, alertText: `Chamado com criticalidade ${selectedIndex}`, variant: "danger" })
         break
       default:
         break;
@@ -146,7 +147,7 @@ function IssueForm() {
 
   return (
     <>
-      <AlertMessage alertText={messageConfig.alertText} trigger={messageConfig.trigger} onClose={() => setMessageConfig({ trigger: false })} />
+      <AlertMessage variant={messageConfig.variant} alertText={messageConfig.alertText} trigger={messageConfig.trigger} onClose={() => setMessageConfig({ trigger: false })} />
       <Container>
         <HeaderInfo>
           <EventCategory
