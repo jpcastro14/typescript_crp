@@ -23,10 +23,8 @@ type mainIssue = {
   eventTitle?: string;
   eventSector?: string;
   eventArea?: string;
-  eventCriticality?: {
-    criticality?: number | string;
-    criticalityColor?: string;
-  };
+  eventCriticality?: number | string;
+  eventCriticalityColor?: string;
   eventPriority?: number;
   eventDescription?: string;
   eventMoment?: string | ReactNode;
@@ -60,10 +58,8 @@ function IssueForm() {
         setFixedState((prevState) => ({
           ...prevState,
           [name]: selectedIndex,
-          eventCriticality: {
-            criticality: selectedIndex,
-            criticalityColor: "var(--primary-blue)",
-          }
+          eventCriticality: selectedIndex,
+          eventCriticalityColor: "var(--primary-blue)",
         }))
         setMessageConfig({ trigger: true, alertText: `Chamado com criticalidade ${selectedIndex}`, variant: "primary" })
         break
@@ -71,10 +67,8 @@ function IssueForm() {
         setFixedState((prevState) => ({
           ...prevState,
           [name]: selectedIndex,
-          eventCriticality: {
-            criticality: selectedIndex,
-            criticalityColor: 'var(--primary-yellow)',
-          }
+          eventCriticality: selectedIndex,
+          eventCriticalityColor: 'var(--primary-yellow)',
         }))
         setMessageConfig({ trigger: true, alertText: `Chamado com criticalidade ${selectedIndex}`, variant: "warning" })
         break
@@ -82,10 +76,8 @@ function IssueForm() {
         setFixedState((prevState) => ({
           ...prevState,
           [name]: selectedIndex,
-          eventCriticality: {
-            criticality: selectedIndex,
-            criticalityColor: 'var(--primary-red)'
-          }
+          eventCriticality: selectedIndex,
+          eventCriticalityColor: 'var(--primary-red)'
         }))
         setMessageConfig({ trigger: true, alertText: `Chamado com criticalidade ${selectedIndex}`, variant: "danger" })
         break
@@ -152,7 +144,7 @@ function IssueForm() {
         <HeaderInfo>
           <EventCategory
             $levelcolor={
-              fixedState?.eventCriticality?.criticalityColor ? fixedState?.eventCriticality.criticalityColor : "var(--secondary-gray)"
+              fixedState?.eventCriticalityColor ? fixedState?.eventCriticalityColor : "var(--secondary-gray)"
             }
           />
           <EventType>
@@ -202,7 +194,7 @@ function IssueForm() {
               <CriticSelect
                 name='eventCriticality'
                 defaultValue={'...'}
-                value={fixedState?.eventCriticality?.criticality}
+                value={fixedState?.eventCriticalityColor}
                 onChange={handleSelect}
               >
                 <option>...</option>
@@ -228,7 +220,7 @@ function IssueForm() {
             </PointerContainer>
           </PointerField>
           <DescriptionField
-            name="eventPiority"
+            name="eventDescription"
             onChange={handleType}
             defaultValue={fixedState?.eventDescription}
             placeholder="Descrição do evento" />
