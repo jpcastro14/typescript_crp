@@ -194,7 +194,7 @@ function IssueForm() {
               <CriticSelect
                 name='eventCriticality'
                 defaultValue={'...'}
-                value={fixedState?.eventCriticalityColor}
+                value={fixedState?.eventCriticality}
                 onChange={handleSelect}
               >
                 <option>...</option>

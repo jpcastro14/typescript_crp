@@ -25,10 +25,8 @@ type EventDashProps = {
     eventTitle?: string;
     eventSector?: string;
     eventArea?: string;
-    eventCriticality?: {
-      criticality?: string;
-      criticalityColor?: string;
-    };
+    eventCriticality?: string;
+    eventCriticalityColor?: string | undefined;
     eventPriority?: string;
     eventDescription?: string;
   };
@@ -43,6 +41,7 @@ function EventDash({ data }: EventDashProps) {
     eventSector,
     eventArea,
     eventCriticality,
+    eventCriticalityColor,
     eventDescription,
     eventPriority,
   } = tData;
@@ -52,7 +51,7 @@ function EventDash({ data }: EventDashProps) {
     <>
       <Container key={data.id}>
         <HeaderInfo>
-          <EventCategory $levelcolor={eventCriticality?.criticalityColor} />
+          <EventCategory $levelcolor={eventCriticalityColor} />
           <EventType>
             <img src={headset} />
           </EventType>
@@ -85,15 +84,15 @@ function EventDash({ data }: EventDashProps) {
             {/* ------------------Criticality------------------ */}
             <PointerContainer>
               <label>Criticalidade</label>
-              <CriticButton $levelcolor={eventCriticality?.criticalityColor}>
-                {eventCriticality?.criticality}
+              <CriticButton $levelcolor={eventCriticalityColor}>
+                {eventCriticalityColor}
               </CriticButton>
             </PointerContainer>
             {/* ------------------Priority--------------------- */}
             <PointerContainer>
               <label>Prioridade</label>
               <PrioritySelect
-                $levelcolor={eventCriticality?.criticalityColor}
+                $levelcolor={eventCriticalityColor}
               >
                 {eventPriority}
               </PrioritySelect>
