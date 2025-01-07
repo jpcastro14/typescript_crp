@@ -50,6 +50,11 @@ function IssueForm() {
     }));
   }
 
+  function handlePost() {
+    console.log(fixedState);
+
+  }
+
   function handleSelect(e: React.ChangeEvent<HTMLSelectElement>) {
     const { name, selectedIndex } = e.target;
 
@@ -112,21 +117,6 @@ function IssueForm() {
         setMessageConfig({ trigger: true, alertText: `Chamado com prioridade >${selectedIndex}<, deve ser encaminhado imediatamente para o setor responsável!`, variant: 'danger' })
     }
 
-  }
-
-  function handlePost() {
-    const dateString = Intl.DateTimeFormat('pt-br', {
-      dateStyle: 'full',
-      timeStyle: 'short',
-    }).format(new Date())
-
-    setFixedState((prevState) => ({
-      ...prevState,
-      id: Math.floor((Math.random() * 10)),
-      eventMoment: dateString,
-      eventTime: new Date()
-    }));
-    console.log(fixedState);
   }
 
   function sampleDate() {
@@ -225,9 +215,8 @@ function IssueForm() {
             defaultValue={fixedState?.eventDescription}
             placeholder="Descrição do evento" />
         </BodyInfo>
-        <button onClick={handlePost}>Teste</button>
-        {/*         <button onClick={() => dispatch({ type: 'create', mainObject: fixedState })}>Teste</button>
- */}      </Container>
+        <button onClick={handlePost} >Teste</button>
+      </Container>
     </>
   );
 }

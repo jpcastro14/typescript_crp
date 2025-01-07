@@ -3,8 +3,29 @@ import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 //import IssueForm from "./components/IssueForms";
 import EventDash from "./components/EventDash";
+import { useEffect, useState } from "react";
 
 function App() {
+  const [gotdata, setGotdata] = useState([])
+
+  useEffect(() => {
+
+    const fetchData = async () => {
+
+      const data = await fetch('http://172.16.239.44:8000/api/v1/chamados');
+
+      const json = await data.json();
+
+      console.log(json);
+      setGotdata(json)
+
+    }
+    fetchData()
+
+
+  }, [])
+
+
   const event = [
     {
       id: 1,
@@ -42,8 +63,8 @@ function App() {
   ];
   return (
     <>
-      {event.map((item) => (
-        <EventDash key={item.id} data={item} />
+      {gotdata.map((item) => (
+        <EventDash key={item} data={item} />
       ))}
 
       {/* <IssueForm /> */}
