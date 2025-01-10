@@ -85,7 +85,7 @@ function EventDash({ data }: EventDashProps) {
             <PointerContainer>
               <label>Criticalidade</label>
               <CriticButton $levelcolor={eventCriticalityColor}>
-                {eventCriticalityColor}
+                {eventCriticality}
               </CriticButton>
             </PointerContainer>
             {/* ------------------Priority--------------------- */}

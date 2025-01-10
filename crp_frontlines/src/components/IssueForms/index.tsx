@@ -53,6 +53,20 @@ function IssueForm() {
   function handlePost() {
     console.log(fixedState);
 
+    fetch('http://172.16.239.44:8000/api/v1/chamados/', {
+      method: "POST",
+      headers: {
+        "Content-type": "application/json",
+      },
+      body: JSON.stringify(fixedState)
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data);
+
+      })
+      .catch((err) => console.log(err)
+      )
   }
 
   function handleSelect(e: React.ChangeEvent<HTMLSelectElement>) {
