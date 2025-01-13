@@ -60,10 +60,13 @@ function IssueForm() {
       },
       body: JSON.stringify(fixedState)
     })
-      .then((response) => response.json())
+      .then((response) => {
+        response.ok ?
+          setMessageConfig({ trigger: true, alertText: 'Chamado criado com sucesso', variant: 'success' }) :
+          setMessageConfig({ trigger: true, alertText: 'Ocorreu um erro em sua solicitação', variant: 'danger' })
+      })
       .then((data) => {
         console.log(data);
-
       })
       .catch((err) => console.log(err)
       )
