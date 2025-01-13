@@ -157,7 +157,7 @@ function IssueForm() {
           </EventType>
           <EventTitle>
             <span>{fixedState?.eventTitle}</span>
-            <p onClick={sampleDate}>Ocorrido:<strong>  {fixedState?.eventMoment}</strong></p>
+            <p onClick={sampleDate}>Ocorrido:<strong>{fixedState?.eventMoment}</strong></p>
           </EventTitle>
         </HeaderInfo>
         <BodyInfo open={open}>

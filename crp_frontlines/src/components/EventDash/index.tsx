@@ -22,10 +22,11 @@ import headset from "../assets/headset.svg";
 type EventDashProps = {
   data: {
     id?: number;
+    created_at: string;
     eventTitle?: string;
     eventSector?: string;
     eventArea?: string;
-    eventCriticality?: string;
+    eventCriticality?: number;
     eventCriticalityColor?: string | undefined;
     eventPriority?: string;
     eventDescription?: string;
@@ -34,22 +35,45 @@ type EventDashProps = {
 
 
 function EventDash({ data }: EventDashProps) {
-  const [tData, setTdata] = useState(data);
   const [open, setOpen] = useState<boolean>(true);
   const {
+    created_at,
     eventTitle,
     eventSector,
     eventArea,
     eventCriticality,
-    eventCriticalityColor,
     eventDescription,
     eventPriority,
-  } = tData;
+  } = data;
+
+  let { eventCriticalityColor } = data
+
+  const created = new Date(created_at)
+  const dateOptions: any = {
+    weekday: 'long',
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric'
+  }
+
+  switch (eventCriticality) {
+    case 1:
+      eventCriticalityColor = 'var(--primary-blue)'
+      break;
+    case 2:
+      eventCriticalityColor = "var(--primary-yellow)"
+      break;
+    case 3:
+      eventCriticalityColor = "var(--primary-red)"
+      break;
+    default:
+      break;
+  }
 
 
   return (
     <>
-      <Container key={data.id}>
+      <Container key={data.eventTitle}>
         <HeaderInfo>
           <EventCategory $levelcolor={eventCriticalityColor} />
           <EventType>
@@ -57,7 +81,7 @@ function EventDash({ data }: EventDashProps) {
           </EventType>
           <EventTitle>
             <span>{eventTitle}</span>
-            <p>Ocorrido: Segunda Feira, 30 de setembro as 19:51</p>
+            <p>{created.toLocaleDateString('pt-BR', dateOptions)}</p>
           </EventTitle>
           <EventAction>
             <button onClick={() => setOpen(!open)}>
@@ -98,7 +122,7 @@ function EventDash({ data }: EventDashProps) {
               </PrioritySelect>
             </PointerContainer>
           </PointerField>
-          <DescriptionField defaultValue={eventDescription} />
+          <DescriptionField defaultValue={eventDescription} disabled />
         </BodyInfo>
       </Container>
     </>
