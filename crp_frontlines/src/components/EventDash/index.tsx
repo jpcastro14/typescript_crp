@@ -14,6 +14,7 @@ import {
   BodyInfo,
   EventCategory,
   EventType,
+  EventActive
 } from "./styles";
 import expand from "../assets/expand.svg";
 import editevent from "../assets/pen.svg";
@@ -22,6 +23,7 @@ import headset from "../assets/headset.svg";
 type EventDashProps = {
   data: {
     id?: number;
+    active: boolean;
     created_at: string;
     eventTitle?: string;
     eventSector?: string;
@@ -37,6 +39,7 @@ type EventDashProps = {
 function EventDash({ data }: EventDashProps) {
   const [open, setOpen] = useState<boolean>(true);
   const {
+    active,
     created_at,
     eventTitle,
     eventSector,
@@ -76,6 +79,7 @@ function EventDash({ data }: EventDashProps) {
       <Container key={data.eventTitle}>
         <HeaderInfo>
           <EventCategory $levelcolor={eventCriticalityColor} />
+          <EventActive $activeIssue={active} />
           <EventType>
             <img src={headset} />
           </EventType>

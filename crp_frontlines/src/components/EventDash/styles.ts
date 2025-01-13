@@ -5,6 +5,7 @@ type ButtonProps = {
     $levelcolor?: string;
     $expanded?: boolean;
     $priorityColor?: string;
+    $activeIssue?: boolean;
 }
 
 type DisplayProps = {
@@ -50,6 +51,13 @@ export const EventCategory = styled.span<ButtonProps>`
         width: 25px;
         border-radius: 5px 0 0 5px ;
 `;
+
+export const EventActive = styled.span<ButtonProps>`
+        background-color: ${(props) => (props.$activeIssue ? 'var(--primary-green)' : 'var(--primary-red)')};
+        height: 100%;
+        width: 10px;
+`;
+
 
 export const EventTitle = styled.div` //Contém o titulo e os action buttons
     width: 100%;
