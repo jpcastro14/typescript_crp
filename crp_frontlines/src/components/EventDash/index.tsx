@@ -79,7 +79,6 @@ function EventDash({ data }: EventDashProps) {
       <Container key={data.eventTitle}>
         <HeaderInfo>
           <EventCategory $levelcolor={eventCriticalityColor} />
-          <EventActive $activeIssue={active} />
           <EventType>
             <img src={headset} />
           </EventType>
@@ -95,6 +94,7 @@ function EventDash({ data }: EventDashProps) {
               <img src={editevent} />
             </button>
           </EventAction>
+          <EventActive $activeIssue={active} />
         </HeaderInfo>
         <BodyInfo open={open}>
           <PointerField>

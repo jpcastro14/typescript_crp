@@ -42,12 +42,16 @@ function IssueForm() {
   const [fixedState, setFixedState] = useState<mainIssue | undefined>(undefined);
   const [messageConfig, setMessageConfig] = useState<messageProps>({ trigger: false, alertText: "", variant: "" })
 
+
   function handleType(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) {
     const { name, value } = e.target;
     setFixedState((prevState) => ({
       ...prevState,
+      active: true,
       [name]: value,
     }));
+
+
   }
 
   function handlePost() {

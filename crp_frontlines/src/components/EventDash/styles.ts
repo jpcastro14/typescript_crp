@@ -24,12 +24,13 @@ export const Container = styled.div` //Container que abriga todas as divs
 `;
 
 export const HeaderInfo = styled.div` // Div mais superior do card, com informações sobre titulo e hora do chamado
-    width: 100%;
+    min-width: 1200px;
     height:130px;
     background-color: #f9f9f9;
     display: flex;
     flex-shrink: 1;
     border-radius: 6px 6px 0 0;
+    
 `
 export const EventType = styled.span`
          //  Quadrado cinza ao lado direito do quadrado azul acima
@@ -55,7 +56,9 @@ export const EventCategory = styled.span<ButtonProps>`
 export const EventActive = styled.span<ButtonProps>`
         background-color: ${(props) => (props.$activeIssue ? 'var(--primary-green)' : 'var(--primary-red)')};
         height: 100%;
-        width: 10px;
+        width: 8px;
+        border-radius: 0 5px 5px 0;
+        border: 1px solid #eee;
 `;
 
 
@@ -184,18 +187,17 @@ export const DescriptionField = styled.textarea` // Campo de texto para mostrar 
     font-family: Assistant, sans-serif;
     font-weight: 400;
     font-size: 16px;
-    margin: 40px 150px 20px 100px ;
+    margin: 40px 180px 20px 0;
     padding: 20px 20px 0 20px;
     text-align: justify;
     border-radius: 8px;
-    min-width: 820px;
-    max-width: 820px;
+    width: 820px;
     color: black;
     background-color: white;
 `;
 
 export const BodyInfo = styled.div<DisplayProps>` // Div Spare criada para setar o display do DescriptionField
     width: 100%;
+    transition: height 1000ms;
     display:${(props) => (props.open ? `none` : `auto`)};
-    transition:height 0px;
 `
