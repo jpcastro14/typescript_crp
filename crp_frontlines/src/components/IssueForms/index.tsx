@@ -13,6 +13,7 @@ import {
   EventCategory,
   EventType,
   TitleInput,
+  ErrorP
 } from "./styles";
 import { ReactNode, useState } from "react";
 import headset from "../assets/headset.svg";
@@ -39,7 +40,7 @@ type messageProps = {
 }
 
 function IssueForm() {
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit, formState: { errors } } = useForm();
   const [open] = useState<boolean>(true);
   const [fixedState, setFixedState] = useState<mainIssue | undefined>(undefined);
   const [messageConfig, setMessageConfig] = useState<messageProps>({ trigger: false, alertText: "", variant: "" })
@@ -50,7 +51,6 @@ function IssueForm() {
   }
 
   function handlePost() {
-    console.log(fixedState);
 
     fetch('http://172.16.239.44:8000/api/v1/chamados/', {
       method: "POST",
@@ -91,8 +91,11 @@ function IssueForm() {
             <PointerContainer>
               <label>Título da ocorrência</label>
               <TitleInput
-                {...register("eventTitle")}
+                {...register("eventTitle", { required: true })}
               />
+              {errors?.eventTitle?.type === 'required' && (
+                <ErrorP>Este campo deve ser preenchido</ErrorP>
+              )}
             </PointerContainer>
           </PointerField>
 
@@ -102,44 +105,59 @@ function IssueForm() {
             <PointerContainer>
               <label>Setor</label>
               <SectorInput
-                {...register("eventSector")}
+                {...register("eventSector", { required: true })}
               />
+              {errors?.eventSector?.type === 'required' && (
+                <ErrorP>Este campo deve ser preenchido</ErrorP>
+              )}
             </PointerContainer>
             {/* ------------------Area--------------------------*/}
             <PointerContainer>
               <label>Area Afetada</label>
               <AreaInput
-                {...register("eventArea")}
+                {...register("eventArea", { required: true })}
               />
+              {errors?.eventArea?.type === 'required' && (
+                <ErrorP>Este campo deve ser preenchido</ErrorP>
+              )}
             </PointerContainer>
             {/* ------------------Criticality------------------ */}
             <PointerContainer>
               <label>Criticalidade</label>
               <CriticSelect
-                {...register("eventCriticality")}
+                {...register("eventCriticality", { required: true })}
               >
-                <option>...</option>
+                <option></option>
                 <option value='1'>1</option>
                 <option value='2'>2</option>
                 <option value='3'>3</option>
               </CriticSelect>
+              {errors?.eventCriticality?.type === 'required' && (
+                <ErrorP>Este campo deve ser preenchido</ErrorP>
+              )}
             </PointerContainer>
             {/* ------------------Prioridade--------------------- */}
             <PointerContainer>
               <label>Prioridade</label>
               <PrioritySelect
-                {...register("eventPriority")}
+                {...register("eventPriority", { required: true })}
               >
-                <option>...</option>
+                <option></option>
                 <option value='1'>1</option>
                 <option value='2'>2</option>
                 <option value='3'>3</option>
               </PrioritySelect>
+              {errors?.eventPriority?.type === 'required' && (
+                <ErrorP>Este campo deve ser preenchido</ErrorP>
+              )}
             </PointerContainer>
           </PointerField>
           <DescriptionField
-            {...register("eventDescription")}
+            {...register("eventDescription", { required: true })}
           />
+          {errors?.eventDescription?.type === 'required' && (
+            <ErrorP>Este campo deve ser preenchido</ErrorP>
+          )}
         </BodyInfo>
         <button onClick={() => handleSubmit(onSubmit)()} >Teste</button>
       </Container>

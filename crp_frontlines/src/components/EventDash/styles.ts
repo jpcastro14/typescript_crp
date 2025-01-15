@@ -201,3 +201,6 @@ export const BodyInfo = styled.div<DisplayProps>` // Div Spare criada para setar
     transition: height 1000ms;
     display:${(props) => (props.open ? `none` : `auto`)};
 `
+export const ErrorP = styled.p`
+    color: var(--primary-red);
+`;

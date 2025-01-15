@@ -203,3 +203,8 @@ export const BodyInfo = styled.div<DisplayProps>` // Div Spare criada para setar
     transition:height 0px;
     width: 100%;
 `;
+
+export const ErrorP = styled.p`
+    color: var(--primary-red);
+    font-size: 12px;
+`;
