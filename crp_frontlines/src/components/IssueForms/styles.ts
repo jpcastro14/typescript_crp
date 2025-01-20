@@ -25,11 +25,12 @@ export const Container = styled.div` //Container que abriga todas as divs
 
 export const HeaderInfo = styled.div` // Div mais superior do card, com informações sobre titulo e hora do chamado
     width: 100%;
-    height:130px;
+    height:10vh;
     background-color: #f9f9f9;
     display: flex;
     flex-shrink: 1;
     border-radius: 6px 6px 0 0;
+
 `
 export const EventType = styled.span`
          //  Quadrado cinza ao lado direito do quadrado azul acima

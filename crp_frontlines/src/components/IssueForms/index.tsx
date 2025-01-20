@@ -91,10 +91,13 @@ function IssueForm() {
             <PointerContainer>
               <label>Título da ocorrência</label>
               <TitleInput
-                {...register("eventTitle", { required: true })}
+                {...register("eventTitle", { required: true, minLength: 5 })}
               />
               {errors?.eventTitle?.type === 'required' && (
                 <ErrorP>Este campo deve ser preenchido</ErrorP>
+              )}
+              {errors?.eventTitle?.type === 'minLength' && (
+                <ErrorP>O título deve ter pelo menos 5 letras</ErrorP>
               )}
             </PointerContainer>
           </PointerField>
