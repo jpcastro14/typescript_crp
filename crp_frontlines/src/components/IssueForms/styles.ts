@@ -182,6 +182,15 @@ export const PriorityBox = styled.button<ButtonProps>`
     align-items:center;
 `;
 
+export const TypeInput = styled.select`
+    border: 1px solid #eee;
+    min-width: 420px;
+    padding: 4px;
+    border-radius: 8px;
+    color: black;
+
+`;
+
 export const DescriptionField = styled.textarea` // Campo de texto para mostrar a descrição do chamado
     border: 1px solid #eee;
     height: 180px;

@@ -12,7 +12,7 @@ function App() {
 
     const fetchData = async () => {
 
-      const data = await fetch('http://127.0.0.1:8000/api/v1/chamados');
+      const data = await fetch('http://172.16.239.44:8000/api/v1/chamados');
 
       const json = await data.json();
 

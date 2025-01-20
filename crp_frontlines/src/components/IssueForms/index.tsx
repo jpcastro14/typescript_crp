@@ -13,7 +13,8 @@ import {
   EventCategory,
   EventType,
   TitleInput,
-  ErrorP
+  ErrorP,
+  TypeInput
 } from "./styles";
 import { ReactNode, useState } from "react";
 import headset from "../assets/headset.svg";
@@ -23,6 +24,7 @@ import { useForm } from "react-hook-form";
 type mainIssue = {
   id?: number;
   eventTitle?: string;
+  eventType?: string;
   eventSector?: string;
   eventArea?: string;
   eventCriticality?: number | string;
@@ -40,35 +42,34 @@ type messageProps = {
 }
 
 function IssueForm() {
-  const { register, handleSubmit, formState: { errors } } = useForm();
+  const { register, reset, handleSubmit, formState: { errors } } = useForm();
   const [open] = useState<boolean>(true);
   const [fixedState, setFixedState] = useState<mainIssue | undefined>(undefined);
   const [messageConfig, setMessageConfig] = useState<messageProps>({ trigger: false, alertText: "", variant: "" })
 
 
-  const onSubmit = (data: mainIssue) => {
-    console.log(data);
-  }
+  /*   const onSubmit = (data: mainIssue) => {
+      console.log(data);
+    } */
 
-  function handlePost() {
+  function handlePost(data: mainIssue) {
 
     fetch('http://172.16.239.44:8000/api/v1/chamados/', {
       method: "POST",
       headers: {
         "Content-type": "application/json",
       },
-      body: JSON.stringify(fixedState)
+      body: JSON.stringify(data)
     })
       .then((response) => {
         response.ok ?
           setMessageConfig({ trigger: true, alertText: 'Chamado criado com sucesso', variant: 'success' }) :
           setMessageConfig({ trigger: true, alertText: 'Ocorreu um erro em sua solicitação', variant: 'danger' })
-      })
-      .then((data) => {
-        console.log(data);
+        reset({ eventTitle: '', EventCategory: '', eventType: '', eventSector: '', eventArea: '', eventCriticality: '', eventDescription: '', eventPriority: '' })
       })
       .catch((err) => console.log(err)
       )
+
   }
 
   return (
@@ -96,12 +97,21 @@ function IssueForm() {
               {errors?.eventTitle?.type === 'required' && (
                 <ErrorP>Este campo deve ser preenchido</ErrorP>
               )}
-              {errors?.eventTitle?.type === 'minLength' && (
-                <ErrorP>O título deve ter pelo menos 5 letras</ErrorP>
+            </PointerContainer>
+            <PointerContainer>
+              <label>Tipo de chamado</label>
+              <TypeInput
+                {...register("eventType", { required: true })}
+              >
+                <option></option>
+                <option value='requisicao'>Requisição</option>
+                <option value='ocorrencia'>Ocorrência</option>
+              </TypeInput>
+              {errors?.eventTitle?.type === 'required' && (
+                <ErrorP>Este campo deve ser preenchido</ErrorP>
               )}
             </PointerContainer>
           </PointerField>
-
           <PointerField>
             {/* Div que organiza os inputs */}
             {/* ------------------Setor----------------------*/}
@@ -124,7 +134,7 @@ function IssueForm() {
                 <ErrorP>Este campo deve ser preenchido</ErrorP>
               )}
             </PointerContainer>
-            {/* ------------------Criticality------------------ */}
+            {/* ------------------Criticalidade------------------ */}
             <PointerContainer>
               <label>Criticalidade</label>
               <CriticSelect
@@ -136,7 +146,7 @@ function IssueForm() {
                 <option value='3'>3</option>
               </CriticSelect>
               {errors?.eventCriticality?.type === 'required' && (
-                <ErrorP>Este campo deve ser preenchido</ErrorP>
+                <ErrorP>Um número deve ser selecionado</ErrorP>
               )}
             </PointerContainer>
             {/* ------------------Prioridade--------------------- */}
@@ -151,7 +161,7 @@ function IssueForm() {
                 <option value='3'>3</option>
               </PrioritySelect>
               {errors?.eventPriority?.type === 'required' && (
-                <ErrorP>Este campo deve ser preenchido</ErrorP>
+                <ErrorP>Um número deve ser selecionado</ErrorP>
               )}
             </PointerContainer>
           </PointerField>
@@ -162,7 +172,7 @@ function IssueForm() {
             <ErrorP>Este campo deve ser preenchido</ErrorP>
           )}
         </BodyInfo>
-        <button onClick={() => handleSubmit(onSubmit)()} >Teste</button>
+        <button onClick={() => handleSubmit(handlePost)()} >Teste</button>
       </Container>
     </>
   );
