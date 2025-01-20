@@ -44,7 +44,6 @@ type messageProps = {
 function IssueForm() {
   const { register, reset, handleSubmit, formState: { errors } } = useForm();
   const [open] = useState<boolean>(true);
-  const [fixedState, setFixedState] = useState<mainIssue | undefined>(undefined);
   const [messageConfig, setMessageConfig] = useState<messageProps>({ trigger: false, alertText: "", variant: "" })
 
 
@@ -92,7 +91,9 @@ function IssueForm() {
             <PointerContainer>
               <label>Título da ocorrência</label>
               <TitleInput
-                {...register("eventTitle", { required: true, minLength: 5 })}
+                {...register("eventTitle", {
+                  required: true
+                })}
               />
               {errors?.eventTitle?.type === 'required' && (
                 <ErrorP>Este campo deve ser preenchido</ErrorP>
@@ -101,14 +102,19 @@ function IssueForm() {
             <PointerContainer>
               <label>Tipo de chamado</label>
               <TypeInput
-                {...register("eventType", { required: true })}
+                {...register("eventType", {
+                  required: true
+                })}
               >
                 <option></option>
                 <option value='requisicao'>Requisição</option>
                 <option value='ocorrencia'>Ocorrência</option>
               </TypeInput>
-              {errors?.eventTitle?.type === 'required' && (
+              {errors?.eventType?.type === 'required' && (
                 <ErrorP>Este campo deve ser preenchido</ErrorP>
+              )}
+              {errors?.eventType?.type === 'validate' && (
+                <ErrorP>Você não pode selecionar esse campo</ErrorP>
               )}
             </PointerContainer>
           </PointerField>
@@ -172,7 +178,7 @@ function IssueForm() {
             <ErrorP>Este campo deve ser preenchido</ErrorP>
           )}
         </BodyInfo>
-        <button onClick={() => handleSubmit(handlePost)()} >Teste</button>
+        <button onClick={() => handleSubmit(handlePost)()} >Criar</button>
       </Container>
     </>
   );

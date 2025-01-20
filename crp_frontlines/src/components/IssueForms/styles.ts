@@ -197,7 +197,7 @@ export const DescriptionField = styled.textarea` // Campo de texto para mostrar 
     font-family: Assistant, sans-serif;
     font-weight: 400;
     font-size: 16px;
-    margin: 40px 150px 20px 100px ;
+    margin: 40px 150px 0 100px ;
     padding: 20px 20px 0 20px;
     text-align: justify;
     border-radius: 8px;
