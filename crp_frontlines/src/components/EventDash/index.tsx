@@ -17,7 +17,6 @@ import {
   EventActive
 } from "./styles";
 import expand from "../assets/expand.svg";
-import editevent from "../assets/pen.svg";
 import headset from "../assets/headset.svg";
 
 type EventDashProps = {
@@ -37,7 +36,6 @@ type EventDashProps = {
 
 
 function EventDash({ data }: EventDashProps) {
-  const [open, setOpen] = useState<boolean>(true);
   const {
     active,
     created_at,
@@ -49,6 +47,7 @@ function EventDash({ data }: EventDashProps) {
     eventPriority,
   } = data;
 
+  const [open, setOpen] = useState<boolean>(true);
   let { eventCriticalityColor } = data
 
   const created = new Date(created_at)
@@ -76,7 +75,7 @@ function EventDash({ data }: EventDashProps) {
 
   return (
     <>
-      <Container key={data.eventTitle}>
+      <Container key={data.id}>
         <HeaderInfo>
           <EventCategory $levelcolor={eventCriticalityColor} />
           <EventType>
@@ -89,9 +88,6 @@ function EventDash({ data }: EventDashProps) {
           <EventAction>
             <button onClick={() => setOpen(!open)}>
               <img src={expand} />
-            </button>
-            <button>
-              <img src={editevent} />
             </button>
           </EventAction>
           <EventActive $activeIssue={active} />

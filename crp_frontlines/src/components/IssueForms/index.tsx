@@ -47,10 +47,6 @@ function IssueForm() {
   const [messageConfig, setMessageConfig] = useState<messageProps>({ trigger: false, alertText: "", variant: "" })
 
 
-  /*   const onSubmit = (data: mainIssue) => {
-      console.log(data);
-    } */
-
   function handlePost(data: mainIssue) {
 
     fetch('http://172.16.239.44:8000/api/v1/chamados/', {
@@ -68,7 +64,6 @@ function IssueForm() {
       })
       .catch((err) => console.log(err)
       )
-
   }
 
   return (
@@ -119,7 +114,8 @@ function IssueForm() {
             </PointerContainer>
           </PointerField>
           <PointerField>
-            {/* Div que organiza os inputs */}
+
+            {/* Div que organiza os inputs exceto tipo e título*/}
             {/* ------------------Setor----------------------*/}
             <PointerContainer>
               <label>Setor</label>
@@ -175,10 +171,10 @@ function IssueForm() {
             {...register("eventDescription", { required: true })}
           />
           {errors?.eventDescription?.type === 'required' && (
-            <ErrorP>Este campo deve ser preenchido</ErrorP>
+            <ErrorP>O chamado precisa conter uma descrição</ErrorP>
           )}
         </BodyInfo>
-        <button onClick={() => handleSubmit(handlePost)()} >Criar</button>
+        <button onClick={() => handleSubmit(handlePost)()} >Criar chamado</button>
       </Container>
     </>
   );

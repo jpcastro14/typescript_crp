@@ -18,8 +18,9 @@ export const Container = styled.div` //Container que abriga todas as divs
     margin: 0 0 20px;
     button{
         background-color: var(--secondary-yellow);
-        border: 2px solid var(--secondary-yellow);
+        border: 1px solid #e4e4e4;
         color: black;
+        border-radius: 0 0 4px 4px;
     }
 `;
 
@@ -166,6 +167,7 @@ export const PriorityContainer = styled.div<ButtonProps>`
     background-color: white;
     height: 50px;
     padding: 20px 0 0 100px;
+    border-radius: 8px;
     display: ${(props) => props.$expanded ? `flex` : `none`};
     gap: 20px;
 `;
@@ -214,7 +216,9 @@ export const BodyInfo = styled.div<DisplayProps>` // Div Spare criada para setar
     width: 100%;
 `;
 
+
 export const ErrorP = styled.p`
     color: var(--primary-red);
     font-size: 12px;
+    margin-bottom: 20px;
 `;
