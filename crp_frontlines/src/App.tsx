@@ -3,22 +3,26 @@ import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 //import IssueForm from "./components/IssueForms";
 import EventDash from "./components/EventDash";
-import { useEffect, useState } from "react";
+import { SetStateAction, useEffect, useState } from "react";
+import { FilterContainer } from "./styles";
 
 type gotData = {
   eventType: string;
+  filtered: string;
 }
 
 function App() {
   const [gotdata, setGotdata] = useState([])
 
-  function setFilter() {
-    const filtered = gotdata.filter((item: gotData) => item.eventType === "requisicao")
+  const [filteredIssues, setFilteredIssues] = useState([])
 
-    setGotdata(filtered)
+  const setFilter = (arg: string) => {
+    const filtered = gotdata.filter((item: gotData) => item.eventType === arg)
+    setFilteredIssues(filtered)
+  }
 
-    console.log(filtered);
-
+  const resetFilter = () => {
+    setFilteredIssues([])
   }
 
   useEffect(() => {
@@ -30,7 +34,7 @@ function App() {
       const json = await data.json();
 
       console.log(typeof (json));
-      setGotdata(json)
+      setGotdata(json);
     }
     fetchData()
   }, [])
@@ -38,10 +42,20 @@ function App() {
 
   return (
     <>
-      <button onClick={setFilter} >teste</button>
-      {gotdata.map((item) => (
+      <FilterContainer>
+        <div><h3>Filtrar</h3></div>
+
+        <div>
+          <button onClick={() => setFilter('requisicao')} >Solicitações</button>
+          <button onClick={() => setFilter('ocorrencia')} >Ocorrência</button>
+          <button onClick={() => resetFilter()} >Apagar filtro</button>
+        </div>
+      </FilterContainer>
+      {filteredIssues.length == 0 ? gotdata.map((item) => (
         <EventDash key={Math.random()} data={item} />
-      ))}
+      ))
+        : filteredIssues.map((item) => <EventDash key={Math.random()} data={item} />)
+      }
     </>
   );
 }
