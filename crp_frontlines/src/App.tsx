@@ -3,7 +3,7 @@ import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 //import IssueForm from "./components/IssueForms";
 import EventDash from "./components/EventDash";
-import { SetStateAction, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { FilterContainer } from "./styles";
 
 type gotData = {
@@ -20,7 +20,6 @@ function App() {
     const filtered = gotdata.filter((item: gotData) => item.eventType === arg)
     setFilteredIssues(filtered)
   }
-
   const resetFilter = () => {
     setFilteredIssues([])
   }
@@ -44,7 +43,6 @@ function App() {
     <>
       <FilterContainer>
         <div><h3>Filtrar</h3></div>
-
         <div>
           <button onClick={() => setFilter('requisicao')} >Solicitações</button>
           <button onClick={() => setFilter('ocorrencia')} >Ocorrência</button>
