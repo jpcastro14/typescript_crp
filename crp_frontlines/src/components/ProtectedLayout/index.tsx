@@ -1,6 +1,7 @@
 import { useAuth } from "../../context/AuthProvider/useAuth"
+import { setUserLocalStorage } from "../../context/AuthProvider/util"
 
-export const ProtectedLayout = ({ children }: { children?: JSX.Element }) => {
+export const ProtectedLayout = ({ children }: { children?: JSX.Element }): JSX.Element => {
 
 
     const auth = useAuth()
@@ -11,6 +12,9 @@ export const ProtectedLayout = ({ children }: { children?: JSX.Element }) => {
         )
     }
 
-    return children;
+    return <>
+        <h1>Logado com sucesso!</h1>
+        <button  >Deslogar</button>
+    </>
 }
 

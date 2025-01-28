@@ -9,15 +9,19 @@ export function getUserLocalStorage() {
     const json = localStorage.getItem('u')
 
     if (!json) {
+
+
         return null
+
     }
 
     const user = JSON.parse(json)
 
-    return user ?? null;
+    return user ?? null
 }
 
 export async function LoginRequest(email: string, password: string) {
+
     try {
         const request = await Api.post('login', { email, password });
         return request.data;

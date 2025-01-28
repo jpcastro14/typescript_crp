@@ -1,7 +1,21 @@
-import { Col, Form, Row, Input, Button } from "antd"
-import { Route } from "react-router"
+import { Col, Form, Row, Input, Button, message } from "antd"
+import { Route, useNavigate } from "react-router"
+import { useAuth } from "../../context/AuthProvider/useAuth"
 
-function Login() {
+export const Login = () => {
+    const auth = useAuth()
+    const navigate = useNavigate();
+
+    async function onFinish(values: { email: string, password: string }) {
+
+        try {
+            await auth.authenticate(values.email, values.password)
+            navigate('/profile')
+        } catch (error) {
+            message.error('Invalid email or password')
+        }
+    }
+
 
     return (
         <Row
@@ -16,6 +30,7 @@ function Login() {
                     name='basic'
                     labelCol={{ span: 8 }}
                     wrapperCol={{ span: 24 }}
+                    onFinish={onFinish}
                 >
                     <Form.Item
                         label="Email"
@@ -25,14 +40,14 @@ function Login() {
                     </Form.Item>
                     <Form.Item
                         label="Password"
-                        name="user"
+                        name="password"
                     >
                         <Input.Password />
                     </Form.Item>
                     <Form.Item
                         wrapperCol={{ offset: 16, span: 20 }}
                     >
-                        <Button type="primary" >Sign in</Button>
+                        <Button type="primary" htmlType="submit" >Sign in</Button>
                     </Form.Item>
                 </Form>
             </Col>

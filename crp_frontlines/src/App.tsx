@@ -62,10 +62,10 @@ function App() {
       <AuthProvider>
         <BrowserRouter>
           <Routes>
-            <Route path="/profile" element={<ProtectedLayout children={<ProtectedLayout />} />} />
+            <Route path="/profile" element={<ProtectedLayout />} />
           </Routes>
           <Routes>
-            <Route path="/login" element={<Login />} />
+            <Route path="/logar" element={<Login />} />
           </Routes>
         </BrowserRouter>
       </AuthProvider>
