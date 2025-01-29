@@ -1,5 +1,5 @@
 import { Col, Form, Row, Input, Button, message } from "antd"
-import { Route, useNavigate } from "react-router"
+import { useNavigate } from "react-router"
 import { useAuth } from "../../context/AuthProvider/useAuth"
 
 export const Login = () => {

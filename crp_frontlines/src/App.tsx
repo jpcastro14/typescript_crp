@@ -9,6 +9,8 @@ import { AuthProvider } from "./context/AuthProvider";
 import { BrowserRouter, Route, Routes } from "react-router";
 import { ProtectedLayout } from "./components/ProtectedLayout";
 import Login from "./components/Login";
+import { message } from "antd";
+import { PrivateComp } from "./components/PrivateComp";
 
 type gotData = {
   eventType: string;
@@ -28,19 +30,30 @@ function App() {
     setFilteredIssues([])
   }
 
-  /*   useEffect(() => {
-  
-      const fetchData = async () => {
-  
-        const data = await fetch('http://172.16.239.44:8000/api/v1/chamados');
-  
+  useEffect(() => {
+
+    const fetchData = async () => {
+
+      const data = await fetch('http://172.16.239.44:8000/api/v1/chamados');
+
+      const json = await data.json();
+
+      console.log(typeof (json));
+      setGotdata(json);
+    }
+    fetchData()
+  }, [])
+  /* 
+    try {
+      const fetchdata = async () => {
+        const data = await fetch('http://172.16.239.44:8000/chamados');
         const json = await data.json();
-  
-        console.log(typeof (json));
         setGotdata(json);
+  
       }
-      fetchData()
-    }, []) */
+    } catch (error) {
+      message.error('Serviço indisponível, tente novamente mais tarde')
+    } */
 
 
   return (
@@ -62,10 +75,10 @@ function App() {
       <AuthProvider>
         <BrowserRouter>
           <Routes>
-            <Route path="/profile" element={<ProtectedLayout />} />
+            <Route path="/profile" element={<ProtectedLayout children={<PrivateComp />} />} />
           </Routes>
           <Routes>
-            <Route path="/logar" element={<Login />} />
+            <Route path="/login" element={<Login />} />
           </Routes>
         </BrowserRouter>
       </AuthProvider>
