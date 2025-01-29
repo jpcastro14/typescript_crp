@@ -58,7 +58,7 @@ function App() {
 
   return (
     <>
-      {/* <FilterContainer>
+      <FilterContainer>
         <div><h3>Filtrar</h3></div>
         <div>
           <button onClick={() => setFilter('requisicao')} >Solicitações</button>
@@ -70,9 +70,9 @@ function App() {
         <EventDash key={Math.random()} data={item} />
       ))
         : filteredIssues.map((item) => <EventDash key={Math.random()} data={item} />)
-      } */}
+      }
 
-      <AuthProvider>
+      {/* <AuthProvider>
         <BrowserRouter>
           <Routes>
             <Route path="/profile" element={<ProtectedLayout children={<PrivateComp />} />} />
@@ -81,7 +81,7 @@ function App() {
             <Route path="/login" element={<Login />} />
           </Routes>
         </BrowserRouter>
-      </AuthProvider>
+      </AuthProvider> */}
     </>
   );
 }

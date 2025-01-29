@@ -18,22 +18,7 @@ import {
 } from "./styles";
 import expand from "../assets/expand.svg";
 import headset from "../assets/headset.svg";
-
-type EventDashProps = {
-  data: {
-    id?: number;
-    active: boolean;
-    created_at: string;
-    eventTitle?: string;
-    eventSector?: string;
-    eventArea?: string;
-    eventCriticality?: number;
-    eventCriticalityColor?: string | undefined;
-    eventPriority?: string;
-    eventDescription?: string;
-  };
-};
-
+import { EventDashProps, dateOptions } from "./types";
 
 function EventDash({ data }: EventDashProps) {
   const {
@@ -51,12 +36,6 @@ function EventDash({ data }: EventDashProps) {
   let { eventCriticalityColor } = data
 
   const created = new Date(created_at)
-  const dateOptions: any = {
-    weekday: 'long',
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric'
-  }
 
   switch (eventCriticality) {
     case 1:
