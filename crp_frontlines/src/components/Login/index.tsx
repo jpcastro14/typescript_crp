@@ -4,8 +4,6 @@ import { useAuth } from "../../context/AuthProvider/useAuth"
 
 export const Login = () => {
     const auth = useAuth()
-    const navigate = useNavigate();
-
     async function onFinish(values: { email: string, password: string }) {
 
         try {
@@ -20,32 +18,25 @@ export const Login = () => {
         <Row
             justify='center'
             align='middle'
-            style={{
-                height: '100vh'
-            }}
-        >
+            style={{ height: '100vh' }}>
             <Col span={24} >
                 <Form
                     name='basic'
                     labelCol={{ span: 8 }}
                     wrapperCol={{ span: 24 }}
-                    onFinish={onFinish}
-                >
+                    onFinish={onFinish}>
                     <Form.Item
                         label="Email"
-                        name="email"
-                    >
+                        name="email">
                         <Input />
                     </Form.Item>
                     <Form.Item
                         label="Password"
-                        name="password"
-                    >
+                        name="password">
                         <Input.Password />
                     </Form.Item>
                     <Form.Item
-                        wrapperCol={{ offset: 16, span: 20 }}
-                    >
+                        wrapperCol={{ offset: 16, span: 20 }}>
                         <Button type="primary" htmlType="submit" >Sign in</Button>
                     </Form.Item>
                 </Form>
