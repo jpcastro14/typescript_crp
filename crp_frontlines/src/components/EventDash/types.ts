@@ -12,7 +12,6 @@ export interface EventDashProps {
         eventPriority: string;
         eventDescription: string;
     }
-
 };
 
 export const dateOptions: any = {

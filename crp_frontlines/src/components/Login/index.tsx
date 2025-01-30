@@ -10,7 +10,6 @@ export const Login = () => {
 
         try {
             await auth.authenticate(values.email, values.password)
-            navigate('/profile')
         } catch (error) {
             message.error('Invalid email or password')
         }
