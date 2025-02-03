@@ -5,17 +5,19 @@ import EventDash from "../EventDash"
 import { Button } from "antd"
 import { TopNav } from "./styles"
 import { useAuth } from "../../context/AuthProvider/useAuth"
+import { baseURL } from "../../services/api"
+import axios from "axios"
 
 
 function EventHub() {
-  const [gotdata, setGotdata] = useState([])
+  const [issueData, seIssueDate] = useState([])
 
   const [filteredIssues, setFilteredIssues] = useState([])
 
   const auth = useAuth()
 
   const setFilter = (arg: string) => {
-    const filtered = gotdata.filter((item: gotData) => item.eventType === arg)
+    const filtered = issueData.filter((item: gotData) => item.eventType === arg)
     setFilteredIssues(filtered)
   }
   const resetFilter = () => {
@@ -24,28 +26,31 @@ function EventHub() {
 
   useEffect(() => {
     const fetchData = async () => {
-      const data = await fetch('http://172.16.239.44:8000/api/v1/chamados');
-      const json = await data.json();
-      console.log(typeof (json));
-      setGotdata(json);
+      await axios.get(baseURL).then((response) => {
+        console.log(response.data);
+        seIssueDate(response.data)
+      })
     }
     fetchData()
   }, [])
 
   return <>
     <TopNav>
-      <h6>Agente:  {auth.email}</h6>
+      <h6>{auth.email?.toLocaleUpperCase().trimStart()}</h6>
       <Button onClick={auth.logout} danger >Deslogar</Button>
     </TopNav>
-    <FilterContainer>
+
+    {issueData.length > 0 && <FilterContainer>
+
       <div><h3>Filtros</h3></div>
       <div>
         <Button onClick={() => setFilter('requisicao')} >Solicitações</Button>
         <Button onClick={() => setFilter('ocorrencia')} >Ocorrência</Button>
         <Button onClick={() => resetFilter()}>Apagar filtro</Button>
       </div>
-    </FilterContainer>
-    {filteredIssues.length == 0 ? gotdata.map((item) => (
+    </FilterContainer>}
+
+    {filteredIssues.length == 0 ? issueData.map((item) => (
       <EventDash key={Math.random()} data={item} />
     ))
       : filteredIssues.map((item) => <EventDash key={Math.random()} data={item} />)

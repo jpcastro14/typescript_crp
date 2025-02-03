@@ -14,21 +14,19 @@ type DisplayProps = {
 
 export const Container = styled.div` //Container que abriga todas as divs
     width: 100%;
-    min-width:800px;
     flex: 1 1;
     border: 2px solid #e4e4e4;
     border-radius: 6px;
     display: flex;
     flex-direction: column;
-    margin: 0 0 20px;
+    margin: 0 0 20px 0;
 `;
 
 export const HeaderInfo = styled.div` // Div mais superior do card, com informações sobre titulo e hora do chamado
-    min-width: 1200px;
-    height:130px;
+    min-width: 50vw;
+    height: 16vh;
     background-color: #f9f9f9;
     display: flex;
-    flex-shrink: 1;
     border-radius: 6px 6px 0 0;
     
 `
@@ -79,6 +77,10 @@ export const EventTitle = styled.div` //Contém o titulo e os action buttons
         margin: 0;
         color: #9e9e9e;
     }
+    p:last-child{
+        color: red;
+    }
+    
 `;
 
 export const EventAction = styled.div` // Div dos botões de ação
@@ -109,18 +111,23 @@ export const EventAction = styled.div` // Div dos botões de ação
 export const PointerField = styled.div` // Div que organizaos buttons e o description
     display: flex;
     height: 40px;
-    min-width: 720px;
-    gap: 20px;
-    padding:50px 0 50px 100px;
-    flex-shrink: 1;
+    padding: 70px;
+    max-width: 50vw;
+`;
+
+export const PointerPill = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: start;
 `;
 
 export const PointerContainer = styled.div` // Div que organiza cada action button
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: start;
     font-family: "Assistant", sans-serif;
     font-weight: 600;
+    width: 12vw;
     label{
         color: black;
     }
@@ -130,14 +137,15 @@ export const SectorButton = styled.button<ButtonProps>` //Componente do botão d
     background-color: white; 
     border: 1px solid #eee;
     height: 40px;
-    width: 200px;
+    width: 10vw;
     color: black;
 `;
 
 export const AreaButton = styled.button` // Componente do botão de Area afetada
     border: 1px solid #eee;
     height: 40px;
-    width: 200px;
+    width: 10vw;
+
     background-color: white;
     color: black;
     
@@ -146,7 +154,7 @@ export const AreaButton = styled.button` // Componente do botão de Area afetada
 export const CriticButton = styled.button<ButtonProps>` // Componente do botão de criticalidade
     border: 1px solid #eee;
     height: 40px;
-    width: 200px;
+    width: 10vw;
     background-color: ${(props) => props.$levelcolor ? props.$levelcolor : 'white'};
     color: black;
    
@@ -155,7 +163,7 @@ export const CriticButton = styled.button<ButtonProps>` // Componente do botão 
 export const PrioritySelect = styled.button<ButtonProps>` // Componente do botão de prioridade
     border: 1px solid #eee;
     height: 40px;
-    width: 200px;
+    width: 10vw;
     border-radius: 8px;
     background-color: ${(props) => props.$levelcolor ? props.$levelcolor : "white"};
     color: black;
@@ -183,15 +191,15 @@ export const PriorityBox = styled.button<ButtonProps>`
 
 export const DescriptionField = styled.textarea` // Campo de texto para mostrar a descrição do chamado
     border: 1px solid #eee;
-    height: 180px;
+    height: 12vh;
     font-family: Assistant, sans-serif;
     font-weight: 400;
     font-size: 16px;
-    margin: 40px 180px 20px 0;
+    margin: 60px;
     padding: 20px 20px 0 20px;
     text-align: justify;
     border-radius: 8px;
-    width: 820px;
+    width: 42vw;
     color: black;
     background-color: white;
 `;

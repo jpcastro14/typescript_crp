@@ -14,7 +14,8 @@ import {
   BodyInfo,
   EventCategory,
   EventType,
-  EventActive
+  EventActive,
+  PointerPill
 } from "./styles";
 import expand from "../assets/expand.svg";
 import headset from "../assets/headset.svg";
@@ -63,6 +64,7 @@ function EventDash({ data }: EventDashProps) {
           <EventTitle>
             <span>{eventTitle}</span>
             <p>{created.toLocaleDateString('pt-BR', dateOptions)}</p>
+            <p>4 Dias</p>
           </EventTitle>
           <EventAction>
             <button onClick={() => setOpen(!open)}>
@@ -76,29 +78,37 @@ function EventDash({ data }: EventDashProps) {
             {/* Div que organiza os botões indicadores */}
             {/* ------------------Setor----------------------*/}
             <PointerContainer>
-              <label>Setor</label>
-              <SectorButton>{eventSector}</SectorButton>
+              <PointerPill>
+                <label>Setor</label>
+                <SectorButton>{eventSector}</SectorButton>
+              </PointerPill>
             </PointerContainer>
             {/* ------------------Area--------------------------*/}
             <PointerContainer>
-              <label>Area Afetada</label>
-              <AreaButton>{eventArea}</AreaButton>
+              <PointerPill>
+                <label>Area Afetada</label>
+                <AreaButton>{eventArea}</AreaButton>
+              </PointerPill>
             </PointerContainer>
             {/* ------------------Criticality------------------ */}
             <PointerContainer>
-              <label>Criticalidade</label>
-              <CriticButton $levelcolor={eventCriticalityColor}>
-                {eventCriticality}
-              </CriticButton>
+              <PointerPill>
+                <label>Criticalidade</label>
+                <CriticButton $levelcolor={eventCriticalityColor}>
+                  {eventCriticality}
+                </CriticButton>
+              </PointerPill>
             </PointerContainer>
             {/* ------------------Priority--------------------- */}
             <PointerContainer>
-              <label>Prioridade</label>
-              <PrioritySelect
-                $levelcolor={eventCriticalityColor}
-              >
-                {eventPriority}
-              </PrioritySelect>
+              <PointerPill>
+                <label>Prioridade</label>
+                <PrioritySelect
+                  $levelcolor={eventCriticalityColor}
+                >
+                  {eventPriority}
+                </PrioritySelect>
+              </PointerPill>
             </PointerContainer>
           </PointerField>
           <DescriptionField defaultValue={eventDescription} disabled />
