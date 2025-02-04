@@ -1,6 +1,9 @@
 import { Col, Form, Row, Input, Button, message } from "antd"
-import { useNavigate } from "react-router"
 import { useAuth } from "../../context/AuthProvider/useAuth"
+import { CreditDiv, NoUserContainer } from "./styles"
+
+
+
 
 export const Login = () => {
     const auth = useAuth()
@@ -13,36 +16,36 @@ export const Login = () => {
         }
     }
 
-
     return (
-        <Row
-            justify='center'
-            align='middle'
-            style={{ height: '100vh' }}>
-            <Col span={24} >
-                <Form
-                    name='basic'
-                    labelCol={{ span: 8 }}
-                    wrapperCol={{ span: 24 }}
-                    onFinish={onFinish}>
-                    <Form.Item
-                        label="Email"
-                        name="email">
-                        <Input />
-                    </Form.Item>
-                    <Form.Item
-                        label="Password"
-                        name="password">
-                        <Input.Password />
-                    </Form.Item>
-                    <Form.Item
-                        wrapperCol={{ offset: 16, span: 20 }}>
-                        <Button type="primary" htmlType="submit" >Sign in</Button>
-                    </Form.Item>
-                </Form>
-            </Col>
-
-        </Row>
+        <>
+            <NoUserContainer>
+                <p>Log<b>in</b></p>
+                <Row
+                >
+                    <Form
+                        name="basic"
+                        onFinish={onFinish}
+                    >
+                        <Form.Item
+                            label="Email"
+                            name="email"
+                        >
+                            <Input />
+                        </Form.Item>
+                        <Form.Item
+                            label="Password"
+                            name="password">
+                            <Input.Password />
+                        </Form.Item>
+                        <Form.Item
+                            wrapperCol={{ offset: 16 }}>
+                            <Button type="primary" htmlType="submit">Sign in</Button>
+                        </Form.Item>
+                    </Form>
+                </Row>
+                <CreditDiv>Topaz TELLARUS - Todos os direitos reservados </CreditDiv>
+            </NoUserContainer>
+        </>
     )
 
 }
