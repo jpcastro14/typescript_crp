@@ -79,6 +79,9 @@ export const EventTitle = styled.div` //Contém o titulo e os action buttons
     }
     p:last-child{
         color: red;
+        border: 1px solid var(--primary-red);
+        border-radius: 4px;
+        padding: 0 10px;
     }
     
 `;

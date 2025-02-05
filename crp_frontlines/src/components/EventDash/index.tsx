@@ -37,6 +37,12 @@ function EventDash({ data }: EventDashProps) {
   let { eventCriticalityColor } = data
 
   const created = new Date(created_at)
+  const now = new Date()
+
+  const start = Math.floor(created.getTime() / (3600 * 24 * 1000));
+  const end = Math.floor(now.getTime() / (3600 * 24 * 1000));
+
+  const diff = Math.abs(start - end);
 
   switch (eventCriticality) {
     case 1:
@@ -64,7 +70,7 @@ function EventDash({ data }: EventDashProps) {
           <EventTitle>
             <span>{eventTitle}</span>
             <p>{created.toLocaleDateString('pt-BR', dateOptions)}</p>
-            <p>4 Dias</p>
+            <p>Idade do chamado: {diff} dias</p>
           </EventTitle>
           <EventAction>
             <button onClick={() => setOpen(!open)}>

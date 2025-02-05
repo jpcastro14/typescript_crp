@@ -37,7 +37,7 @@ function EventHub() {
   return <>
     <TopNav>
       <h6>{auth.email?.toLocaleUpperCase().trimStart()}</h6>
-      <Button onClick={auth.logout} danger >Deslogar</Button>
+      <Button onClick={auth.logout} danger >Logout</Button>
     </TopNav>
 
     {issueData.length > 0 && <FilterContainer>

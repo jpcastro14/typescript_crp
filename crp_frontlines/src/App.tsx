@@ -16,6 +16,7 @@ function App() {
       <AuthProvider>
         <BrowserRouter>
           <Routes>
+            <Route path="/" element={<ProtectedLayout children={<EventHub />} />} />
             <Route path="/issue" element={<ProtectedLayout children={<EventHub />} />} />
             <Route path="/newissue" element={<IssueForm />} />
             <Route path="/login" element={<Login />} />
