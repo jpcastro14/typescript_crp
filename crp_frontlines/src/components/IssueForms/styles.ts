@@ -16,6 +16,7 @@ export const Container = styled.div` //Container que abriga todas as divs
     display: flex;
     flex-direction: column;
     margin: 0 0 20px;
+    margin-top: 20px;
     button{
         background-color: var(--secondary-yellow);
         border: 1px solid #e4e4e4;
