@@ -32,16 +32,14 @@ function EventDash({ data }: EventDashProps) {
     eventDescription,
     eventPriority,
   } = data;
-
-  const [open, setOpen] = useState<boolean>(true);
   let { eventCriticalityColor } = data
 
   const created = new Date(created_at)
-  const now = new Date()
+  const [open, setOpen] = useState<boolean>(true);
 
+  const now = new Date()
   const start = Math.floor(created.getTime() / (3600 * 24 * 1000));
   const end = Math.floor(now.getTime() / (3600 * 24 * 1000));
-
   const diff = Math.abs(start - end);
 
   switch (eventCriticality) {
