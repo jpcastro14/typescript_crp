@@ -18,7 +18,7 @@ function App() {
           <Routes>
             <Route path="/" element={<ProtectedLayout children={<EventHub />} />} />
             <Route path="/issue" element={<ProtectedLayout children={<EventHub />} />} />
-            <Route path="/newissue" element={<IssueForm />} />
+            <Route path="/newissue" element={<ProtectedLayout children={<IssueForm />} />} />
             <Route path="/login" element={<Login />} />
           </Routes>
         </BrowserRouter>

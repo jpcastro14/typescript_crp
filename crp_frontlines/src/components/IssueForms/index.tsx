@@ -20,8 +20,8 @@ import { ReactNode, useState } from "react";
 import headset from "../assets/headset.svg";
 import AlertMessage from "../Messages/AlertMessage";
 import { useForm } from "react-hook-form";
-import { NewIssue, TopNav, UserFields } from "../EventHub/styles";
-import { Button } from "antd";
+import { NewIssue, OpenIssues, TopNav, UserFields } from "../EventHub/styles";
+import { Button, FloatButton } from "antd";
 import { useAuth } from "../../context/AuthProvider/useAuth";
 import { useNavigate } from "react-router";
 
@@ -50,6 +50,7 @@ function IssueForm() {
   const [open] = useState<boolean>(true);
   const [messageConfig, setMessageConfig] = useState<messageProps>({ trigger: false, alertText: "", variant: "" })
   const auth = useAuth()
+  const navigate = useNavigate()
 
 
   function handlePost(data: mainIssue) {
@@ -74,11 +75,12 @@ function IssueForm() {
   return (
     <>
       <TopNav>
+        <OpenIssues onClick={() => { navigate('/issue') }} variant="solid">Chamados abertos</OpenIssues>
         <UserFields>
           <h6>{auth.email?.toLocaleUpperCase().slice(0, 8)}</h6>
           <Button onClick={auth.logout} danger >Logout</Button>
         </UserFields>
-      </TopNav>
+      </TopNav >
 
       <AlertMessage variant={messageConfig.variant} alertText={messageConfig.alertText} trigger={messageConfig.trigger} onClose={() => setMessageConfig({ trigger: false })} />
       <Container>
