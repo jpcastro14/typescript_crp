@@ -7,7 +7,7 @@ import { NewIssue, TopNav, UserFields } from "./styles"
 import { useAuth } from "../../context/AuthProvider/useAuth"
 import { baseURL } from "../../services/api"
 import axios from "axios"
-import { Navigate, useNavigate } from "react-router"
+import { useNavigate } from "react-router"
 
 
 function EventHub() {

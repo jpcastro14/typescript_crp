@@ -20,8 +20,8 @@ import { ReactNode, useState } from "react";
 import headset from "../assets/headset.svg";
 import AlertMessage from "../Messages/AlertMessage";
 import { useForm } from "react-hook-form";
-import { NewIssue, OpenIssues, TopNav, UserFields } from "../EventHub/styles";
-import { Button, FloatButton } from "antd";
+import { OpenIssues, TopNav, UserFields } from "../EventHub/styles";
+import { Button } from "antd";
 import { useAuth } from "../../context/AuthProvider/useAuth";
 import { useNavigate } from "react-router";
 
