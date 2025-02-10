@@ -10,13 +10,12 @@ export const FilterContainer = styled.div`
     }
     div{
         display: flex;
-        gap: 20px;
+        gap:20px;
     }
-    button:last-child{
-        background-color: var(--primary-red);
-    }
+   
     button:nth(2)-child{
         background-color: blue;
     }
-
 `;
+
+

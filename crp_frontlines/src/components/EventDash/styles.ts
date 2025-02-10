@@ -74,7 +74,9 @@ export const EventTitle = styled.div` //Contém o titulo e os action buttons
     font-weight: 400;
     p{
         font-size: 20px;
-        margin: 0;
+        margin-top: -6px;
+        margin-bottom: 8px;
+        padding: 0;
         color: #9e9e9e;
     }
     p:last-child{

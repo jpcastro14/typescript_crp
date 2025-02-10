@@ -6,6 +6,7 @@ export const TopNav = styled.nav`
     display: flex;
     justify-content: space-between;
     border-bottom: 1px solid var(--primary-gray) ;
+    padding: 6px 0;
     h6{
         border: 1px solid var(--primary-gray);
         font-weight: 400;
@@ -16,7 +17,7 @@ export const TopNav = styled.nav`
 `;
 
 export const NewIssue = styled(Button)`
-    background-color: var(--primary-yellow);
+    
 `;
 
 export const OpenIssues = styled(Button)`
@@ -29,3 +30,34 @@ export const UserFields = styled.div`
     justify-content: end;
     width: 100%;
 `;
+
+export const TopInfo = styled.div`
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: 10px;
+    border-bottom: 25px solid var(--primary-blue);
+    border-top: 1px solid var(--primary-gray);
+    margin:0 0 2vh 0;
+    font-family: 'Assistant', sans-serif;
+`;
+
+export const FilterContainer = styled.div`
+    width: 100%;
+    margin-bottom: 10px;
+    display: flex;
+    flex-direction: column;
+    h3{
+        color: slategrey;
+    }
+    div{
+        display: flex;
+        gap:20px;
+    }
+   
+    button:nth(2)-child{
+        background-color: blue;
+    }
+`;
+

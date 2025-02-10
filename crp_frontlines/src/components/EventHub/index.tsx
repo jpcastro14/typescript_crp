@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react"
 import { gotData } from "./types"
-import { FilterContainer } from "../../styles"
+import { FilterContainer } from "./styles"
 import EventDash from "../EventDash"
 import { Button } from "antd"
-import { NewIssue, TopNav, UserFields } from "./styles"
+import { NewIssue, TopInfo, TopNav, UserFields } from "./styles"
 import { useAuth } from "../../context/AuthProvider/useAuth"
 import { baseURL } from "../../services/api"
 import axios from "axios"
@@ -36,23 +36,29 @@ function EventHub() {
   }, [])
 
   return <>
+    <TopInfo>
+      <h2>Tellarus Support</h2>
+      <Button onClick={auth.logout} danger >Logout</Button>
+    </TopInfo>
     <TopNav>
-      <NewIssue onClick={() => { navigate('/newissue') }} variant="solid">Novo Chamado</NewIssue>
+      <NewIssue onClick={() => { navigate('/newissue') }} color="volcano">Novo Chamado</NewIssue>
       <UserFields>
-        <h6>{auth.email?.toLocaleUpperCase().slice(0, 8)}</h6>
-        <Button onClick={auth.logout} danger >Logout</Button>
+
       </UserFields>
     </TopNav>
 
-    {issueData.length > 0 && <FilterContainer>
-
-      <div><h3>Filtros</h3></div>
-      <div>
-        <Button onClick={() => setFilter('requisicao')} >Solicitações</Button>
-        <Button onClick={() => setFilter('ocorrencia')} >Ocorrência</Button>
-        <Button onClick={() => resetFilter()}>Apagar filtro</Button>
-      </div>
-    </FilterContainer>}
+    {issueData.length > 0 &&
+      <FilterContainer>
+        <div>
+          <h3>Chamados em andamento</h3>
+        </div>
+        <div>
+          <Button onClick={() => setFilter('requisicao')} >Solicitações</Button>
+          <Button onClick={() => setFilter('ocorrencia')} >Ocorrência</Button>
+          <Button onClick={() => resetFilter()} danger >Apagar filtro</Button>
+          {filteredIssues.length > 0 && <p>{filteredIssues.length} Chamados encontrados</p>}
+        </div>
+      </FilterContainer>}
 
     {filteredIssues.length == 0 ? issueData.map((item) => (
       <EventDash key={Math.random()} data={item} />
