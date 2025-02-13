@@ -24,6 +24,8 @@ import { OpenIssues, TopNav, UserFields } from "../EventHub/styles";
 import { Button } from "antd";
 import { useAuth } from "../../context/AuthProvider/useAuth";
 import { useNavigate } from "react-router";
+import TopInfo from "../TopInfo";
+import TopTitle from "../TopInfo";
 
 type mainIssue = {
   id?: number;
@@ -55,7 +57,7 @@ function IssueForm() {
 
   function handlePost(data: mainIssue) {
 
-    fetch('http://172.16.239.44:8000/api/v1/chamados/', {
+    fetch('http://172.16.239.177:8000/api/v1/chamados/', {
       method: "POST",
       headers: {
         "Content-type": "application/json",
@@ -74,14 +76,7 @@ function IssueForm() {
 
   return (
     <>
-      <TopNav>
-        <OpenIssues onClick={() => { navigate('/issue') }} variant="solid">Chamados abertos</OpenIssues>
-        <UserFields>
-          <h6>{auth.email?.toLocaleUpperCase().slice(0, 8)}</h6>
-          <Button onClick={auth.logout} danger >Logout</Button>
-        </UserFields>
-      </TopNav >
-
+      <TopTitle title="Tellarus Support" children={<OpenIssues onClick={() => { navigate('/issue') }} variant="solid">Chamados abertos</OpenIssues>} />
       <AlertMessage variant={messageConfig.variant} alertText={messageConfig.alertText} trigger={messageConfig.trigger} onClose={() => setMessageConfig({ trigger: false })} />
       <Container>
         <HeaderInfo>
