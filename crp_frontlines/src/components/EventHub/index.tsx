@@ -38,7 +38,7 @@ function EventHub() {
   }, [])
 
   return <>
-    <TopTitle title="Tellarus Support" />
+    <TopTitle title="Tellarus Support" type="new" />
     {issueData.length > 0 &&
       <FilterContainer>
         <div>

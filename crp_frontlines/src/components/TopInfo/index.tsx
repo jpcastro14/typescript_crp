@@ -1,11 +1,11 @@
 import { Button } from "antd"
-import { NewIssue } from "../EventHub/styles"
+import { NewIssue, OpenIssues } from "../EventHub/styles"
 import { useAuth } from "../../context/AuthProvider/useAuth"
 import { useNavigate } from "react-router"
 import { TopInfoProps } from "./types"
 import { TopInfo } from "./styles"
 
-function TopTitle({ title, children }: TopInfoProps) {
+function TopTitle({ title, type }: TopInfoProps) {
 
     const auth = useAuth();
     const navigate = useNavigate()
@@ -17,7 +17,8 @@ function TopTitle({ title, children }: TopInfoProps) {
                     <h2>{title}</h2>
                 </div>
                 <div>
-                    <NewIssue onClick={() => { navigate('/newissue') }} color="geekblue" variant="outlined" >Novo Chamado</NewIssue>
+                    {type === 'forms' && <OpenIssues color="blue" variant="dashed" onClick={() => navigate('/issue')} >Chamados ativos</OpenIssues>}
+                    {type === 'new' && <NewIssue color="blue" variant="dashed" onClick={() => navigate('/newissue')} >Novo chamado</NewIssue>}
                     <Button onClick={auth.logout} danger >Logout</Button>
                 </div>
             </TopInfo>

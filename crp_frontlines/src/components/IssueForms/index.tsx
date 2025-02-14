@@ -20,7 +20,7 @@ import { ReactNode, useState } from "react";
 import headset from "../assets/headset.svg";
 import AlertMessage from "../Messages/AlertMessage";
 import { useForm } from "react-hook-form";
-import { OpenIssues, TopNav, UserFields } from "../EventHub/styles";
+import { NewIssue, OpenIssues, TopNav, UserFields } from "../EventHub/styles";
 import { Button } from "antd";
 import { useAuth } from "../../context/AuthProvider/useAuth";
 import { useNavigate } from "react-router";
@@ -76,7 +76,7 @@ function IssueForm() {
 
   return (
     <>
-      <TopTitle title="Tellarus Support" children={<OpenIssues onClick={() => { navigate('/issue') }} variant="solid">Chamados abertos</OpenIssues>} />
+      <TopTitle title="Tellarus Support" type="forms" />
       <AlertMessage variant={messageConfig.variant} alertText={messageConfig.alertText} trigger={messageConfig.trigger} onClose={() => setMessageConfig({ trigger: false })} />
       <Container>
         <HeaderInfo>
