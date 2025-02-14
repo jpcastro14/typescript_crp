@@ -63,18 +63,17 @@ export const EventActive = styled.span<ButtonProps>`
 export const EventTitle = styled.div` //Contém o titulo e os action buttons
     width: 100%;
     background-color: #f9f9f9;
-    padding: 20px 0 0 30px;
     display: flex;
     color: black;
+    padding-left: 3vh;
     flex-direction: column;
     align-items: start;
-    justify-content: flex-start;
+    justify-content: center;
     font-size: 35px;
     font-family: "Assistant", sans-serif;
     font-weight: 400;
     p{
         font-size: 20px;
-        margin-top: -6px;
         margin-bottom: 8px;
         padding: 0;
         color: #9e9e9e;

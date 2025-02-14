@@ -45,11 +45,15 @@ export const TopInfo = styled.div`
 
 export const FilterContainer = styled.div`
     width: 100%;
-    margin-bottom: 10px;
+    margin: 2vh 0 2vh 0;
     display: flex;
     flex-direction: column;
     h3{
-        color: slategrey;
+        color: dimgray;
+        padding: 1vh;
+        font-family: "Assistant", sans-serif;
+        font-weight: 500;
+        margin: 1vh 0 2vh 0;
     }
     div{
         display: flex;
