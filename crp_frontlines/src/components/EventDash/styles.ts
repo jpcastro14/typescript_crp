@@ -14,7 +14,6 @@ type DisplayProps = {
 
 export const Container = styled.div` //Container que abriga todas as divs
     width: 100%;
-    flex: 1 1;
     border: 2px solid #e4e4e4;
     border-radius: 6px;
     display: flex;

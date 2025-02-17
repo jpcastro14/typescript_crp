@@ -21,6 +21,9 @@ import {
 import expand from "../assets/expand.svg";
 import headset from "../assets/headset.svg";
 import { EventDashProps, dateOptions } from "./types";
+import axios from "axios";
+import { Modal, message } from "antd";
+import { useNavigate } from "react-router";
 
 function EventDash({ data }: EventDashProps) {
   const {
@@ -38,6 +41,10 @@ function EventDash({ data }: EventDashProps) {
 
   const created = new Date(created_at)
   const [open, setOpen] = useState<boolean>(true);
+
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+
+  const navigate = useNavigate();
 
   const now = new Date()
   const start = Math.floor(created.getTime() / (3600 * 24 * 1000));
@@ -58,9 +65,35 @@ function EventDash({ data }: EventDashProps) {
       break;
   }
 
+  function FinishIssue(id: number) {
+
+    try {
+      axios.delete(`http://172.16.239.177:8000/api/v1/chamados/${id}`)
+      message.info('Chamado finalizado!')
+      setIsModalOpen(!isModalOpen)
+    } catch (error) {
+      console.log(error);
+    }
+    finally {
+      setTimeout(() => {
+        navigate('/newissue')
+      }, 3000);
+    }
+  }
+
 
   return (
     <>
+      <Modal okText="Finalizar chamado"
+        okType="danger"
+        cancelText="Voltar"
+        open={isModalOpen}
+        title="Tellarus Support - CRP"
+        onCancel={() => setIsModalOpen(!isModalOpen)}
+        onOk={() => FinishIssue(id)}
+      >
+        <p>Deseja finalizar esse chamado?</p>
+      </Modal>
       <Container key={data.id}>
         <HeaderInfo>
           <EventCategory $levelcolor={eventCriticalityColor} />
@@ -118,7 +151,7 @@ function EventDash({ data }: EventDashProps) {
             </PointerContainer>
           </PointerField>
           <DescriptionField defaultValue={eventDescription} disabled />
-          <DeleteButton>Finalizar chamado</DeleteButton>
+          <DeleteButton onClick={() => setIsModalOpen(!isModalOpen)} >Finalizar chamado</DeleteButton>
         </BodyInfo>
       </Container>
     </>
