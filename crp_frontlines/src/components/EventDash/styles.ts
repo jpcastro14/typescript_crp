@@ -114,9 +114,10 @@ export const EventAction = styled.div` // Div dos botões de ação
 
 export const PointerField = styled.div` // Div que organizaos buttons e o description
     display: flex;
-    height: 40px;
-    padding: 70px;
-    max-width: 50vw;
+    margin-top: 2vh;
+    width: 100%;
+    justify-content: center;
+    gap: 12px;
 `;
 
 export const PointerPill = styled.div`
@@ -131,7 +132,7 @@ export const PointerContainer = styled.div` // Div que organiza cada action butt
     align-items: start;
     font-family: "Assistant", sans-serif;
     font-weight: 600;
-    width: 12vw;
+    margin: 0 0 2vh 0;
     label{
         color: black;
     }
@@ -149,7 +150,6 @@ export const AreaButton = styled.button` // Componente do botão de Area afetada
     border: 1px solid #eee;
     height: 40px;
     width: 10vw;
-
     background-color: white;
     color: black;
     
@@ -195,11 +195,11 @@ export const PriorityBox = styled.button<ButtonProps>`
 
 export const DescriptionField = styled.textarea` // Campo de texto para mostrar a descrição do chamado
     border: 1px solid #eee;
-    height: 12vh;
+    height: 20vh;
     font-family: Assistant, sans-serif;
     font-weight: 400;
     font-size: 16px;
-    margin: 60px;
+    margin: 0 0 2vh 0;
     padding: 20px 20px 0 20px;
     text-align: justify;
     border-radius: 8px;
@@ -210,9 +210,17 @@ export const DescriptionField = styled.textarea` // Campo de texto para mostrar 
 
 export const BodyInfo = styled.div<DisplayProps>` // Div Spare criada para setar o display do DescriptionField
     width: 100%;
-    transition: height 1000ms;
     display:${(props) => (props.open ? `none` : `auto`)};
 `
+export const DeleteButton = styled.button`
+    background: var(--primary-red);
+    justify-self: center;
+    width: 100%;
+    color:white;
+    font-family: "Assistant", sans-serif;
+    border-radius: 0 0 4px 4px;
+`
+
 export const ErrorP = styled.p`
     color: var(--primary-red);
 `;

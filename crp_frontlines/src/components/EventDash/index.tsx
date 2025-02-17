@@ -15,7 +15,8 @@ import {
   EventCategory,
   EventType,
   EventActive,
-  PointerPill
+  PointerPill,
+  DeleteButton
 } from "./styles";
 import expand from "../assets/expand.svg";
 import headset from "../assets/headset.svg";
@@ -23,6 +24,7 @@ import { EventDashProps, dateOptions } from "./types";
 
 function EventDash({ data }: EventDashProps) {
   const {
+    id,
     active,
     created_at,
     eventTitle,
@@ -44,7 +46,7 @@ function EventDash({ data }: EventDashProps) {
 
   switch (eventCriticality) {
     case 1:
-      eventCriticalityColor = 'var(--primary-blue)'
+      eventCriticalityColor = "var(--primary-blue)"
       break;
     case 2:
       eventCriticalityColor = "var(--primary-yellow)"
@@ -116,6 +118,7 @@ function EventDash({ data }: EventDashProps) {
             </PointerContainer>
           </PointerField>
           <DescriptionField defaultValue={eventDescription} disabled />
+          <DeleteButton>Finalizar chamado</DeleteButton>
         </BodyInfo>
       </Container>
     </>

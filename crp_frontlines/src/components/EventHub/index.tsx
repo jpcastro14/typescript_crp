@@ -3,12 +3,8 @@ import { gotData } from "./types"
 import { FilterContainer } from "./styles"
 import EventDash from "../EventDash"
 import { Button } from "antd"
-import { NewIssue, TopNav, UserFields } from "./styles"
-import { useAuth } from "../../context/AuthProvider/useAuth"
 import { baseURL } from "../../services/api"
 import axios from "axios"
-import { useNavigate } from "react-router"
-import TopInfo from "../TopInfo/index"
 import TopTitle from "../TopInfo/index"
 
 
@@ -16,9 +12,6 @@ function EventHub() {
   const [issueData, seIssueDate] = useState([])
 
   const [filteredIssues, setFilteredIssues] = useState([])
-
-  const auth = useAuth()
-  const navigate = useNavigate()
 
   const setFilter = (arg: string) => {
     const filtered = issueData.filter((item: gotData) => item.eventType === arg)
