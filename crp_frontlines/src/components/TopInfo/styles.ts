@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const TopInfo = styled.div`
-    width: 100%;
+    min-width: 100vh;
     display: flex;
     justify-content: space-between;
     align-items: baseline;

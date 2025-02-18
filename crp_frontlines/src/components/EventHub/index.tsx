@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react"
 import { gotData } from "./types"
-import { FilterContainer } from "./styles"
+import { FilterContainer, NoIssue } from "./styles"
 import EventDash from "../EventDash"
 import { Button } from "antd"
 import { baseURL } from "../../services/api"
@@ -44,6 +44,8 @@ function EventHub() {
           {filteredIssues.length > 0 && <p>{filteredIssues.length} Chamados encontrados</p>}
         </div>
       </FilterContainer>}
+
+    {issueData.length == 0 && <NoIssue>Sem chamados ativos!</NoIssue>}
 
     {filteredIssues.length == 0 ? issueData.map((item) => (
       <EventDash key={Math.random()} data={item} />

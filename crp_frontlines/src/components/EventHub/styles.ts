@@ -65,3 +65,13 @@ export const FilterContainer = styled.div`
     }
 `;
 
+export const NoIssue = styled.div`
+    width: 100%;
+    height: 10vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 16px;
+    font-size: 2vh;
+`;
+
