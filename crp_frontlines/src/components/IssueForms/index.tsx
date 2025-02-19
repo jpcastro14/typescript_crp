@@ -20,11 +20,6 @@ import { ReactNode, useState } from "react";
 import headset from "../assets/headset.svg";
 import AlertMessage from "../Messages/AlertMessage";
 import { useForm } from "react-hook-form";
-import { NewIssue, OpenIssues, TopNav, UserFields } from "../EventHub/styles";
-import { Button } from "antd";
-import { useAuth } from "../../context/AuthProvider/useAuth";
-import { useNavigate } from "react-router";
-import TopInfo from "../TopInfo";
 import TopTitle from "../TopInfo";
 
 type mainIssue = {
@@ -51,8 +46,6 @@ function IssueForm() {
   const { register, reset, handleSubmit, formState: { errors } } = useForm();
   const [open] = useState<boolean>(true);
   const [messageConfig, setMessageConfig] = useState<messageProps>({ trigger: false, alertText: "", variant: "" })
-  const auth = useAuth()
-  const navigate = useNavigate()
 
 
   function handlePost(data: mainIssue) {
