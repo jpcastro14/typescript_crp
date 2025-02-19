@@ -16,7 +16,8 @@ import {
   EventType,
   EventActive,
   PointerPill,
-  DeleteButton
+  DeleteButton,
+  CloseIssueDesc
 } from "./styles";
 import expand from "../assets/expand.svg";
 import headset from "../assets/headset.svg";
@@ -24,8 +25,11 @@ import { EventDashProps, dateOptions } from "./types";
 import axios from "axios";
 import { Modal, message } from "antd";
 import { useNavigate } from "react-router";
+import { Form, useForm } from "react-hook-form";
+import { mainIssue } from "../IssueForms/types";
 
 function EventDash({ data }: EventDashProps) {
+  const { register, getValues, handleSubmit } = useForm();
   const {
     id,
     active,
@@ -65,11 +69,18 @@ function EventDash({ data }: EventDashProps) {
       break;
   }
 
-  function FinishIssue(id: number) {
+  function FinishIssue() {
 
     try {
-      axios.delete(`http://172.16.239.177:8000/api/v1/chamados/${id}`)
-      message.info('Chamado finalizado!')
+      /* axios.put(`http://172.16.239.177:8000/api/v1/chamados/${id}`)
+      message.info('Chamado finalizado!') */
+
+      const values = getValues('closeDesc')
+      const putData = { ...data, eventCloseDesc: values };
+
+      console.log(putData);
+
+
       setIsModalOpen(!isModalOpen)
     } catch (error) {
       console.log(error);
@@ -81,7 +92,6 @@ function EventDash({ data }: EventDashProps) {
     }
   }
 
-
   return (
     <>
       <Modal okText="Finalizar chamado"
@@ -90,9 +100,11 @@ function EventDash({ data }: EventDashProps) {
         open={isModalOpen}
         title="Tellarus Support - CRP"
         onCancel={() => setIsModalOpen(!isModalOpen)}
-        onOk={() => FinishIssue(id)}
+        onOk={() => handleSubmit(FinishIssue)()}
       >
-        <p>Deseja finalizar esse chamado?</p>
+        <p>Nota de fechamento do chamado</p>
+        <CloseIssueDesc
+          {...register("closeDesc")} />
       </Modal>
       <Container key={data.id}>
         <HeaderInfo>

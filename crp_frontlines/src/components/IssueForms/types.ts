@@ -12,6 +12,7 @@ export interface mainIssue {
     eventDescription?: string;
     eventMoment?: string | ReactNode;
     eventTime?: Date | undefined;
+    eventCloseDesc?: string | undefined
 }
 
 export type messageProps = {

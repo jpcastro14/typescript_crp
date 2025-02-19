@@ -207,6 +207,14 @@ export const DescriptionField = styled.textarea` // Campo de texto para mostrar 
     background-color: white;
 `;
 
+export const CloseIssueDesc = styled.textarea`
+    width: 100%;
+    border: 1px solid var(--primary-gray);
+    border-radius: 8px;
+    min-height: 20vh;
+    padding: 2vh;
+`;
+
 export const BodyInfo = styled.div<DisplayProps>` // Div Spare criada para setar o display do DescriptionField
     width: 100%;
     display:${(props) => (props.open ? `none` : `auto`)};

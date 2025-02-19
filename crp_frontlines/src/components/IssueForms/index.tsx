@@ -16,31 +16,13 @@ import {
   ErrorP,
   TypeInput
 } from "./styles";
-import { ReactNode, useState } from "react";
+import { useState } from "react";
 import headset from "../assets/headset.svg";
 import AlertMessage from "../Messages/AlertMessage";
 import { useForm } from "react-hook-form";
 import TopTitle from "../TopInfo";
+import { mainIssue, messageProps } from "./types";
 
-type mainIssue = {
-  id?: number;
-  eventTitle?: string;
-  eventType?: string;
-  eventSector?: string;
-  eventArea?: string;
-  eventCriticality?: number | string;
-  eventCriticalityColor?: string;
-  eventPriority?: number;
-  eventDescription?: string;
-  eventMoment?: string | ReactNode;
-  eventTime?: Date | undefined;
-};
-
-type messageProps = {
-  trigger: boolean;
-  alertText?: string;
-  variant?: string;
-}
 
 function IssueForm() {
   const { register, reset, handleSubmit, formState: { errors } } = useForm();
