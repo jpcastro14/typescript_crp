@@ -13,6 +13,8 @@ function EventHub() {
 
   const [filteredIssues, setFilteredIssues] = useState([])
 
+  const [statusMessage, setStatusMessage] = useState<string>('')
+
   const setFilter = (arg: string) => {
     const filtered = issueData.filter((item: gotData) => item.eventType === arg)
     setFilteredIssues(filtered)
@@ -23,9 +25,11 @@ function EventHub() {
 
   useEffect(() => {
     const fetchData = async () => {
-      await axios.get(baseURL).then((response) => {
-        seIssueDate(response.data)
-      })
+      await axios.get(baseURL)
+        .then((response) => {
+          seIssueDate(response.data)
+        })
+        .catch((error) => { error.message === "Network Error" && setStatusMessage("Erro de conexão") })
     }
     fetchData()
   }, [])
@@ -45,7 +49,7 @@ function EventHub() {
         </div>
       </FilterContainer>}
 
-    {issueData.length == 0 && <NoIssue>Sem chamados ativos!</NoIssue>}
+    {issueData.length == 0 && <NoIssue>{statusMessage}</NoIssue>}
 
     {filteredIssues.length == 0 ? issueData.map((item) => (
       <EventDash key={Math.random()} data={item} />

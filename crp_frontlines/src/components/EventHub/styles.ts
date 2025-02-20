@@ -73,5 +73,7 @@ export const NoIssue = styled.div`
     align-items: center;
     border-radius: 16px;
     font-size: 2vh;
+    background-color: var(--primary-red);
+    color: white;
 `;
 

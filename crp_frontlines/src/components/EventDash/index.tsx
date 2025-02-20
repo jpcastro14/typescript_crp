@@ -22,11 +22,9 @@ import {
 import expand from "../assets/expand.svg";
 import headset from "../assets/headset.svg";
 import { EventDashProps, dateOptions } from "./types";
-import axios from "axios";
-import { Modal, message } from "antd";
+import { Modal } from "antd";
 import { useNavigate } from "react-router";
-import { Form, useForm } from "react-hook-form";
-import { mainIssue } from "../IssueForms/types";
+import { useForm } from "react-hook-form";
 
 function EventDash({ data }: EventDashProps) {
   const { register, getValues, handleSubmit } = useForm();
