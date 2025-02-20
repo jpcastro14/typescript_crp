@@ -21,13 +21,15 @@ import {
 } from "./styles";
 import expand from "../assets/expand.svg";
 import headset from "../assets/headset.svg";
-import { EventDashProps, dateOptions } from "./types";
-import { Modal } from "antd";
+import { EventDashProps, dateOptions, CloseFormInputs } from "./types";
+import { message, Modal } from "antd";
 import { useNavigate } from "react-router";
 import { useForm } from "react-hook-form";
+import { CloseIssueSelect } from "../EventHub/styles";
+import axios from "axios";
 
 function EventDash({ data }: EventDashProps) {
-  const { register, getValues, handleSubmit } = useForm();
+  const { register, getValues, handleSubmit } = useForm<CloseFormInputs>();
   const {
     id,
     active,
@@ -70,18 +72,20 @@ function EventDash({ data }: EventDashProps) {
   function FinishIssue() {
 
     try {
-      /* axios.put(`http://172.16.239.177:8000/api/v1/chamados/${id}`)
-      message.info('Chamado finalizado!') */
 
-      const values = getValues('closeDesc')
-      const putData = { ...data, eventCloseDesc: values };
+      const values = getValues()
+      const putData = { ...data, eventCloseDesc: values.closeDesc, eventFinalStatus: values.closeStatus };
 
       console.log(putData);
 
+      /* axios.put(`http://172.16.239.177:8000/api/v1/chamados/${id}`)
+      message.info('Chamado finalizado!') */
 
       setIsModalOpen(!isModalOpen)
     } catch (error) {
       console.log(error);
+      console.log(id);
+
     }
     finally {
       setTimeout(() => {
@@ -100,9 +104,18 @@ function EventDash({ data }: EventDashProps) {
         onCancel={() => setIsModalOpen(!isModalOpen)}
         onOk={() => handleSubmit(FinishIssue)()}
       >
-        <p>Nota de fechamento do chamado</p>
+
+        <label>Estado de encerramento</label>
+        <CloseIssueSelect {...register("closeStatus")} >
+          <option selected>...</option>
+          <option value={'true'}>Atendido</option>
+          <option value={'false'}>Não atendido</option>
+        </CloseIssueSelect>
+
+        <label>Motivação</label>
         <CloseIssueDesc
           {...register("closeDesc")} />
+
       </Modal>
       <Container key={data.id}>
         <HeaderInfo>

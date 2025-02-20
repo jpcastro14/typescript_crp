@@ -77,3 +77,10 @@ export const NoIssue = styled.div`
     color: white;
 `;
 
+export const CloseIssueSelect = styled.select`
+    width: 100%;
+    margin-bottom: 2vh;
+    border-radius: 8px;
+    height: 4vh;
+`;
+

@@ -25,3 +25,8 @@ export type IssueDataType = {
     eventType: string;
     filtered: string;
 }
+
+export type CloseFormInputs = {
+    closeDesc: string;
+    closeStatus: number;
+}
