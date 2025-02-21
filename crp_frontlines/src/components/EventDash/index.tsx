@@ -69,23 +69,29 @@ function EventDash({ data }: EventDashProps) {
       break;
   }
 
-  function FinishIssue() {
+  function finishIssue() {
+
+
+
+    const values = getValues()
+    const putData = { ...data, eventCloseDesc: values.closeDesc, eventFinalStatus: values.closeStatus };
 
     try {
-
-      const values = getValues()
-      const putData = { ...data, eventCloseDesc: values.closeDesc, eventFinalStatus: values.closeStatus };
-
-      console.log(putData);
-
-      /* axios.put(`http://172.16.239.177:8000/api/v1/chamados/${id}`)
-      message.info('Chamado finalizado!') */
-
+      fetch(`http://172.16.239.177:8000/api/v1/chamados/${id}`, {
+        method: 'PUT',
+        headers: {
+          "Content-type": "application/json",
+        },
+        body: JSON.stringify(putData)
+      })
+        .then((response) => {
+          response.ok
+            ? console.log('deu certo')
+            : console.log('deu errado');
+          ;
+        })
+      message.info('Chamado finalizado!')
       setIsModalOpen(!isModalOpen)
-    } catch (error) {
-      console.log(error);
-      console.log(id);
-
     }
     finally {
       setTimeout(() => {
@@ -102,12 +108,12 @@ function EventDash({ data }: EventDashProps) {
         open={isModalOpen}
         title="Tellarus Support - CRP"
         onCancel={() => setIsModalOpen(!isModalOpen)}
-        onOk={() => handleSubmit(FinishIssue)()}
+        onOk={() => handleSubmit(finishIssue)()}
       >
 
         <label>Estado de encerramento</label>
         <CloseIssueSelect {...register("closeStatus")} >
-          <option selected>...</option>
+          <option defaultValue={'...'}>...</option>
           <option value={'true'}>Atendido</option>
           <option value={'false'}>Não atendido</option>
         </CloseIssueSelect>
@@ -115,7 +121,6 @@ function EventDash({ data }: EventDashProps) {
         <label>Motivação</label>
         <CloseIssueDesc
           {...register("closeDesc")} />
-
       </Modal>
       <Container key={data.id}>
         <HeaderInfo>
