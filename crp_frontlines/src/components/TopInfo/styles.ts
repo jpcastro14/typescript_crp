@@ -16,6 +16,10 @@ export const TopInfo = styled.div`
         display: flex;
         gap: 2vh;
     }
+
+/*-----------------------------------Media query-----------------------------------*/
+
+
     @media (max-width:1000px) {
         min-width: 0;
         flex-direction: column;

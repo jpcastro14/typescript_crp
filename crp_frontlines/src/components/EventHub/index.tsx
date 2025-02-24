@@ -44,7 +44,7 @@ function EventHub() {
         <div>
           <Button onClick={() => setFilter('requisicao')} >Solicitações</Button>
           <Button onClick={() => setFilter('ocorrencia')} >Ocorrência</Button>
-          <Button onClick={() => resetFilter()} danger >Apagar filtro</Button>
+          <Button onClick={() => resetFilter()} danger variant="solid" color="red" >Apagar filtro</Button>
           {filteredIssues.length > 0 && <p>{filteredIssues.length} Chamados encontrados</p>}
         </div>
       </FilterContainer>}

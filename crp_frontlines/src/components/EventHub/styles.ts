@@ -63,7 +63,20 @@ export const FilterContainer = styled.div`
     button:nth(2)-child{
         background-color: blue;
     }
+/* --------------------------------------- Media queries filter container ---------------------- */
+    @media (max-width:1000px) {
+        div{
+            display: grid;
+            gap: 10px;
+            button{
+                height: 40px;
+            }
+        }
+    }
 `;
+/* --------------------------------------- Media queries --------------------------------------- */
+
+
 
 export const NoIssue = styled.div`
     width: 100%;
