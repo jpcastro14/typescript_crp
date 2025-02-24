@@ -24,7 +24,7 @@ export const HeaderInfo = styled.div` // Div mais superior do card, com informa�
     height: 16vh;
     background-color: #f9f9f9;
     display: flex;
-    border-radius: 6px 6px 0 0;
+    border-radius: 6px;
     justify-content: space-between;
     @media (max-width:1000px) {
         width: 100%;
@@ -50,6 +50,9 @@ export const EventCategory = styled.span<ButtonProps>`
         height: 100%;
         width: 25px;
         border-radius: 5px 0 0 5px ;
+        @media (max-width:1000px) {
+            width: 8px;
+        }
 `;
 
 export const EventActive = styled.span<ButtonProps>`
@@ -58,6 +61,9 @@ export const EventActive = styled.span<ButtonProps>`
         width: 8px;
         border-radius: 0 5px 5px 0;
         border: 1px solid #eee;
+        @media (max-width:1000px) {
+            width: 4px;
+        }
 `;
 
 
@@ -92,18 +98,22 @@ export const EventTitle = styled.div` //Contém o titulo e os action buttons
     @media (max-width:1000px) {
         width: 100%;
         padding: 0 0 0 10px;
+        display: flex;
+        align-items: self-start;
         p{
-            font-size:10px;
+            font-size:16px;
         }
         p:last-child{
             font-size: 16px;
         }
-        span{
+        span:last-child{
             font-size: 20px;
+            justify-self: center;
         }
     }
-    
+    /* ---------------------------- Media queries EventTitle ---------------------------- */
 `;
+
 
 export const EventAction = styled.div` // Div dos botões de ação
     display: flex;
@@ -127,24 +137,41 @@ export const EventAction = styled.div` // Div dos botões de ação
             width: 35px;
         }
     }
+    /* ---------------------------- Media queries EventAction ---------------------------- */
     @media (max-width:1000px) {
         display: none;
     }
+    /* ---------------------------- Media queries EventAction ---------------------------- */
     
 `
 
 export const PointerField = styled.div` // Div que organizaos buttons e o description
     display: flex;
     margin-top: 20px;
-    min-width: 700px;
     justify-content: center;
     gap: 12px;
+
+    /* ---------------------------- Media Queries PointerField ---------------------------- */
+    @media (max-width:1000px) {
+        width:100%;
+        display: flex;
+        flex-direction: column;
+        border: 1px solid black;
+    }
+        /* ---------------------------- Media Queries PointerField ---------------------------- */
+
 `;
 
 export const PointerPill = styled.div`
     display: flex;
     flex-direction: column;
     align-items: start;
+    @media (max-width:1000px ) {
+        width: 100%;
+        button{
+            width: 100%;
+        }
+    }
 `;
 
 export const PointerContainer = styled.div` // Div que organiza cada action button

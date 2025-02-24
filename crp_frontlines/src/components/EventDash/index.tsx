@@ -17,7 +17,7 @@ import {
   EventActive,
   PointerPill,
   DeleteButton,
-  CloseIssueDesc
+  CloseIssueDesc,
 } from "./styles";
 import expand from "../assets/expand.svg";
 import headset from "../assets/headset.svg";
@@ -126,7 +126,7 @@ function EventDash({ data }: EventDashProps) {
           <EventType>
             <img src={headset} />
           </EventType>
-          <EventTitle>
+          <EventTitle onClick={() => setOpen(!open)} >
             <span>{eventTitle}</span>
             <p>{created.toLocaleDateString('pt-BR', dateOptions)}</p>
             <p>Idade do chamado: {diff} dias</p>
