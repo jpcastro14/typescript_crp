@@ -13,7 +13,8 @@
   },
   "dependencies": {
     "@types/react-router-dom": "^5.3.3",
-    "antd": "^5.23.2",
+    "antd": "^5.24.1",
+    "axios": "^1.7.9",
     "bootstrap": "^5.3.3",
     "json-server": "^1.0.0-beta.3",
     "react": "^18.3.1",

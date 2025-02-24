@@ -70,14 +70,12 @@ function EventDash({ data }: EventDashProps) {
   }
 
   function finishIssue() {
-
-
-
     const values = getValues()
     const putData = { ...data, eventCloseDesc: values.closeDesc, eventFinalStatus: values.closeStatus };
+    const homeURL = `http://192.168.0.16:8000/${id}`
 
     try {
-      fetch(`http://172.16.239.177:8000/api/v1/chamados/${id}`, {
+      fetch(homeURL, {
         method: 'PUT',
         headers: {
           "Content-type": "application/json",

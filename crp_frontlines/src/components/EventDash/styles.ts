@@ -22,7 +22,7 @@ export const Container = styled.div` //Container que abriga todas as divs
 `;
 
 export const HeaderInfo = styled.div` // Div mais superior do card, com informações sobre titulo e hora do chamado
-    min-width: 50vw;
+    min-width: 1000px;
     height: 16vh;
     background-color: #f9f9f9;
     display: flex;
@@ -56,6 +56,8 @@ export const EventActive = styled.span<ButtonProps>`
         width: 8px;
         border-radius: 0 5px 5px 0;
         border: 1px solid #eee;
+        position: relative;
+        left: 150px;
 `;
 
 

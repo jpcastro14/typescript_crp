@@ -3,7 +3,7 @@ import { gotData } from "./types"
 import { FilterContainer, NoIssue } from "./styles"
 import EventDash from "../EventDash"
 import { Button } from "antd"
-import { baseURL } from "../../services/api"
+import { baseURL, homeURL } from "../../services/api"
 import axios from "axios"
 import TopTitle from "../TopInfo/index"
 
@@ -25,7 +25,7 @@ function EventHub() {
 
   useEffect(() => {
     const fetchData = async () => {
-      await axios.get(baseURL)
+      await axios.get(homeURL)
         .then((response) => {
           seIssueDate(response.data)
         })
