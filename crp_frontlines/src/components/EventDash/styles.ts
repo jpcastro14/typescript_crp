@@ -18,6 +18,7 @@ export const Container = styled.div` //Container que abriga todas as divs
     display: flex;
     flex-direction: column;
     margin: 0 0 20px 0;
+
 `;
 
 export const HeaderInfo = styled.div` // Div mais superior do card, com informações sobre titulo e hora do chamado
@@ -145,20 +146,20 @@ export const EventAction = styled.div` // Div dos botões de ação
     
 `
 
-export const PointerField = styled.div` // Div que organizaos buttons e o description
+export const PointerField = styled.div` // Div que organiza os buttons e o description
     display: flex;
     margin-top: 20px;
     justify-content: center;
     gap: 12px;
+    padding: 10px;
 
     /* ---------------------------- Media Queries PointerField ---------------------------- */
     @media (max-width:1000px) {
         width:100%;
         display: flex;
         flex-direction: column;
-        border: 1px solid black;
     }
-        /* ---------------------------- Media Queries PointerField ---------------------------- */
+    /* ---------------------------- Media Queries PointerField ---------------------------- */
 
 `;
 
@@ -176,7 +177,6 @@ export const PointerPill = styled.div`
 
 export const PointerContainer = styled.div` // Div que organiza cada action button
     display: flex;
-    flex: 0 0 190px;
     flex-direction: row;
     align-items: start;
     font-family: "Assistant", sans-serif;
@@ -186,6 +186,9 @@ export const PointerContainer = styled.div` // Div que organiza cada action butt
     label{
         color: black;
     }
+    @media (max-width:1000px) {
+        margin: 0;
+    }
 `;
 
 export const SectorButton = styled.button<ButtonProps>` //Componente do botão de Setor
@@ -194,6 +197,8 @@ export const SectorButton = styled.button<ButtonProps>` //Componente do botão d
     min-width: 180px;
     background-color: ${(props) => props.$levelcolor ? props.$levelcolor : 'white'};
     color: black;
+    @media (max-width:1000px) {
+    }
 `;
 
 
@@ -219,7 +224,6 @@ export const PriorityBox = styled.button<ButtonProps>`
 
 export const DescriptionField = styled.textarea` // Campo de texto para mostrar a descrição do chamado
     border: 1px solid #eee;
-    min-width: 800px;
     height: 20vh;
     font-family: Assistant, sans-serif;
     font-weight: 400;
@@ -230,6 +234,15 @@ export const DescriptionField = styled.textarea` // Campo de texto para mostrar 
     border-radius: 8px;
     color: black;
     background-color: white;
+    @media (max-width:1000px) {
+        width: 100%;
+        border: none;
+        background-color: whitesmoke;
+    }
+`;
+
+export const DescriptionContainer = styled.div`
+    margin: 10px;
 `;
 
 export const CloseIssueDesc = styled.textarea`

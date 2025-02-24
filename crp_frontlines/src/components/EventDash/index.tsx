@@ -15,6 +15,7 @@ import {
   PointerPill,
   DeleteButton,
   CloseIssueDesc,
+  DescriptionContainer,
 } from "./styles";
 import expand from "../assets/expand.svg";
 import headset from "../assets/headset.svg";
@@ -173,7 +174,10 @@ function EventDash({ data }: EventDashProps) {
               </PointerPill>
             </PointerContainer>
           </PointerField>
-          <DescriptionField defaultValue={eventDescription} disabled />
+          <DescriptionContainer>
+            <DescriptionField defaultValue={eventDescription} disabled />
+
+          </DescriptionContainer>
           <DeleteButton onClick={() => setIsModalOpen(!isModalOpen)} >Finalizar chamado</DeleteButton>
         </BodyInfo>
       </Container>
