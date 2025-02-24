@@ -21,15 +21,16 @@ export const Container = styled.div` //Container que abriga todas as divs
 `;
 
 export const HeaderInfo = styled.div` // Div mais superior do card, com informações sobre titulo e hora do chamado
-    min-width: 1000px;
     height: 16vh;
     background-color: #f9f9f9;
     display: flex;
     border-radius: 6px 6px 0 0;
     justify-content: space-between;
+    @media (max-width:1000px) {
+        width: 100%;
+    }
 `
-export const EventType = styled.span`
-         //  Quadrado cinza ao lado direito do quadrado azul acima
+export const EventType = styled.span`//  Quadrado cinza ao lado direito do quadrado azul acima
         background-color: #e4e4e4;
         min-width: 80px;
         height: 100%;
@@ -38,7 +39,9 @@ export const EventType = styled.span`
         align-items: center;
         img{
             height: 40px;
-            
+        }
+        @media (max-width:1000px) {
+            display: none;
         }
 `;
 
@@ -59,7 +62,7 @@ export const EventActive = styled.span<ButtonProps>`
 
 
 export const EventTitle = styled.div` //Contém o titulo e os action buttons
-    min-width: 800px;
+    width: 100%;
     background-color: #f9f9f9;
     display: flex;
     color: black;
@@ -85,6 +88,20 @@ export const EventTitle = styled.div` //Contém o titulo e os action buttons
     span{
         font-size: 4vh;
     }
+    /* ---------------------------- Media queries EventTitle ---------------------------- */
+    @media (max-width:1000px) {
+        width: 100%;
+        padding: 0 0 0 10px;
+        p{
+            font-size:10px;
+        }
+        p:last-child{
+            font-size: 16px;
+        }
+        span{
+            font-size: 20px;
+        }
+    }
     
 `;
 
@@ -109,6 +126,9 @@ export const EventAction = styled.div` // Div dos botões de ação
             height: 35px;
             width: 35px;
         }
+    }
+    @media (max-width:1000px) {
+        display: none;
     }
     
 `
