@@ -7,9 +7,6 @@ import {
   PointerField,
   SectorButton,
   PointerContainer,
-  CriticButton,
-  AreaButton,
-  PrioritySelect,
   DescriptionField,
   BodyInfo,
   EventCategory,
@@ -152,27 +149,27 @@ function EventDash({ data }: EventDashProps) {
             <PointerContainer>
               <PointerPill>
                 <label>Area Afetada</label>
-                <AreaButton>{eventArea}</AreaButton>
+                <SectorButton>{eventArea}</SectorButton>
               </PointerPill>
             </PointerContainer>
             {/* ------------------Criticality------------------ */}
             <PointerContainer>
               <PointerPill>
                 <label>Criticalidade</label>
-                <CriticButton $levelcolor={eventCriticalityColor}>
+                <SectorButton $levelcolor={eventCriticalityColor}>
                   {eventCriticality}
-                </CriticButton>
+                </SectorButton>
               </PointerPill>
             </PointerContainer>
             {/* ------------------Priority--------------------- */}
             <PointerContainer>
               <PointerPill>
                 <label>Prioridade</label>
-                <PrioritySelect
+                <SectorButton
                   $levelcolor={eventCriticalityColor}
                 >
                   {eventPriority}
-                </PrioritySelect>
+                </SectorButton>
               </PointerPill>
             </PointerContainer>
           </PointerField>

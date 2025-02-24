@@ -189,39 +189,13 @@ export const PointerContainer = styled.div` // Div que organiza cada action butt
 `;
 
 export const SectorButton = styled.button<ButtonProps>` //Componente do botão de Setor
-    background-color: white; 
-    border: 1px solid #eee;
-    height: 40px;
-    min-width: 180px;
-    color: black;
-`;
-
-export const AreaButton = styled.button` // Componente do botão de Area afetada
-    border: 1px solid #eee;
-    height: 40px;
-    min-width: 180px;
-    background-color: white;
-    color: black;
-    
-`;
-
-export const CriticButton = styled.button<ButtonProps>` // Componente do botão de criticalidade
     border: 1px solid #eee;
     height: 40px;
     min-width: 180px;
     background-color: ${(props) => props.$levelcolor ? props.$levelcolor : 'white'};
     color: black;
-   
 `;
 
-export const PrioritySelect = styled.button<ButtonProps>` // Componente do botão de prioridade
-    border: 1px solid #eee;
-    height: 40px;
-    min-width: 180px;
-    border-radius: 8px;
-    background-color: ${(props) => props.$levelcolor ? props.$levelcolor : "white"};
-    color: black;
-`;
 
 export const PriorityContainer = styled.div<ButtonProps>`
     background-color: white;
