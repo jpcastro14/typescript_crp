@@ -13,7 +13,6 @@ type DisplayProps = {
 }
 
 export const Container = styled.div` //Container que abriga todas as divs
-    width: 100%;
     border: 2px solid #e4e4e4;
     border-radius: 6px;
     display: flex;
@@ -27,7 +26,7 @@ export const HeaderInfo = styled.div` // Div mais superior do card, com informa√
     background-color: #f9f9f9;
     display: flex;
     border-radius: 6px 6px 0 0;
-    
+    justify-content: space-between;
 `
 export const EventType = styled.span`
          //  Quadrado cinza ao lado direito do quadrado azul acima
@@ -56,8 +55,6 @@ export const EventActive = styled.span<ButtonProps>`
         width: 8px;
         border-radius: 0 5px 5px 0;
         border: 1px solid #eee;
-        position: relative;
-        left: 150px;
 `;
 
 
@@ -66,14 +63,13 @@ export const EventTitle = styled.div` //Cont√©m o titulo e os action buttons
     background-color: #f9f9f9;
     display: flex;
     color: black;
-    padding-left: 3vh;
+    padding-left: 20px;
     flex-direction: column;
     align-items: start;
     justify-content: center;
     font-size: 35px;
     font-family: "Assistant", sans-serif;
     font-weight: 400;
-    min-height: 100px;
     p{
         font-size: 2vh;
         margin-bottom: 8px;
