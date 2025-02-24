@@ -25,7 +25,7 @@ function EventHub() {
 
   useEffect(() => {
     const fetchData = async () => {
-      await axios.get(homeURL)
+      await axios.get(baseURL)
         .then((response) => {
           seIssueDate(response.data)
         })

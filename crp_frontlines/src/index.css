@@ -28,6 +28,11 @@
   --primary-gray: #e4e4e4;
   --secondary-gray: #808080;
 }
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
 
 a {
   font-weight: 500;
