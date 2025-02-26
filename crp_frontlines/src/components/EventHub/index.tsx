@@ -16,7 +16,7 @@ function EventHub() {
   const [statusMessage, setStatusMessage] = useState<string>('')
 
   const setFilter = (arg: string) => {
-    const filtered = issueData.filter((item: gotData) => item.eventType === arg)
+    const filtered = issueData.filter((item: gotData) => item.eventType == arg)
     setFilteredIssues(filtered)
   }
   const resetFilter = () => {

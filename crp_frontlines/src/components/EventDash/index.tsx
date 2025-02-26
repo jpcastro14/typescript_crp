@@ -69,11 +69,12 @@ function EventDash({ data }: EventDashProps) {
 
   function finishIssue() {
     const values = getValues()
-    const putData = { ...data, eventCloseDesc: values.closeDesc, eventFinalStatus: values.closeStatus };
+    const putData = { ...data, eventCloseDesc: values.closeDesc, eventFinalStatus: values.closeStatus, active:false };
     const homeURL = `http://192.168.0.16:8000/${id}`
+    const baseURL = `http://172.16.239.177:8000/api/v1/chamados/${id}`
 
     try {
-      fetch(homeURL, {
+      fetch(baseURL, {
         method: 'PUT',
         headers: {
           "Content-type": "application/json",
@@ -82,8 +83,8 @@ function EventDash({ data }: EventDashProps) {
       })
         .then((response) => {
           response.ok
-            ? console.log('deu certo')
-            : console.log('deu errado');
+            ? console.log('deu certo' )
+            : console.log('deu errado', response.statusText);
           ;
         })
       message.info('Chamado finalizado!')
@@ -118,6 +119,7 @@ function EventDash({ data }: EventDashProps) {
         <CloseIssueDesc
           {...register("closeDesc")} />
       </Modal>
+
       <Container key={data.id}>
         <HeaderInfo>
           <EventCategory $levelcolor={eventCriticalityColor} />
