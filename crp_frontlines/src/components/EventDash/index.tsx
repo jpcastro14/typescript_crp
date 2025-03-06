@@ -97,6 +97,7 @@ function EventDash({ data }: EventDashProps) {
     }
   }
 
+
   return (
     <>
       <Modal okText="Finalizar chamado"

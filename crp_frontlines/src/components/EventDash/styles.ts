@@ -141,6 +141,7 @@ export const EventAction = styled.div` // Div dos botões de ação
     /* ---------------------------- Media queries EventAction ---------------------------- */
     @media (max-width:1000px) {
         display: none;
+        
     }
     /* ---------------------------- Media queries EventAction ---------------------------- */
     
@@ -233,6 +234,7 @@ export const DescriptionField = styled.textarea` // Campo de texto para mostrar 
     text-align: justify;
     border-radius: 8px;
     color: black;
+    width: 100%;
     background-color: white;
     @media (max-width:1000px) {
         width: 100%;

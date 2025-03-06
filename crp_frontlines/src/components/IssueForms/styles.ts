@@ -13,8 +13,7 @@ type DisplayProps = {
 export const Container = styled.div` //Container que abriga todas as divs
     border: 2px solid #e4e4e4;
     border-radius: 6px;
-    display: flex;
-    flex-direction: column;
+    display: grid;
     margin: 0 0 20px;
     margin-top: 20px;
     button{
@@ -99,21 +98,22 @@ export const EventAction = styled.div` // Div dos botões de ação
     
 `
 
-export const PointerField = styled.div` // Div que organizaos buttons e o description
-    display: flex;
+export const InputField = styled.div` 
+    display: grid;
+    grid-template-columns: 25% 25%;
     height: 40px;
-    min-width: 720px;
     gap: 20px;
     padding:50px 0 50px 100px;
-    flex-shrink: 1;
 `;
 
-export const PointerContainer = styled.div` // Div que organiza cada action button
+export const InputContainer = styled.div` // Div que organiza o label e o input
     display: flex;
     flex-direction: column;
+    margin: 10px;
     align-items: start;
     font-family: "Assistant", sans-serif;
     font-weight: 600;
+    background-color: #eee;
     label{
         color: black;
     }
@@ -121,8 +121,6 @@ export const PointerContainer = styled.div` // Div que organiza cada action butt
 
 export const TitleInput = styled.input`
     border: 1px solid #eee;
-    height: 40px;
-    width: 420px;
     background-color: white;
     color: black;
 `;
@@ -130,15 +128,11 @@ export const TitleInput = styled.input`
 export const SectorInput = styled.input<ButtonProps>` //Componente do botão de Setor
     background-color: white; 
     border: 1px solid #eee;
-    height: 100px;
-    width: 200px;
     color: black;
 `;
 
 export const AreaInput = styled.input` // Componente do botão de Area afetada
     border: 1px solid #eee;
-    height: 40px;
-    width: 200px;
     background-color: white;
     color: black;
     
@@ -187,11 +181,9 @@ export const PriorityBox = styled.button<ButtonProps>`
 
 export const TypeInput = styled.select`
     border: 1px solid #eee;
-    min-width: 420px;
     padding: 4px;
     border-radius: 8px;
     color: black;
-
 `;
 
 export const DescriptionField = styled.textarea` // Campo de texto para mostrar a descrição do chamado
@@ -216,7 +208,6 @@ export const BodyInfo = styled.div<DisplayProps>` // Div Spare criada para setar
     transition:height 0px;
     width: 100%;
 `;
-
 
 export const ErrorP = styled.p`
     color: var(--primary-red);

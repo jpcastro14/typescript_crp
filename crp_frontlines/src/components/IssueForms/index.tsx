@@ -2,9 +2,9 @@ import {
   Container,
   HeaderInfo,
   EventTitle,
-  PointerField,
+  InputField,
   SectorInput,
-  PointerContainer,
+  InputContainer,
   CriticSelect,
   AreaInput,
   PrioritySelect,
@@ -22,6 +22,7 @@ import AlertMessage from "../Messages/AlertMessage";
 import { useForm } from "react-hook-form";
 import TopTitle from "../TopInfo";
 import { mainIssue, messageProps } from "./types";
+import { PointerField, PointerContainer } from "../EventDash/styles";
 
 
 function IssueForm() {
@@ -55,6 +56,8 @@ function IssueForm() {
     <>
       <TopTitle title="Tellarus Support" type="forms" />
       <AlertMessage variant={messageConfig.variant} alertText={messageConfig.alertText} trigger={messageConfig.trigger} onClose={() => setMessageConfig({ trigger: false })} />
+
+
       <Container>
         <HeaderInfo>
           <EventCategory
@@ -68,8 +71,11 @@ function IssueForm() {
           </EventTitle>
         </HeaderInfo>
         <BodyInfo open={open}>
-          <PointerField>
-            <PointerContainer>
+
+{/* ------------------------------------------------------------------------------------------------------ */}
+
+          <InputField>
+          <InputContainer>
               <label>Título da ocorrência</label>
               <TitleInput
                 {...register("eventTitle", {
@@ -79,8 +85,8 @@ function IssueForm() {
               {errors?.eventTitle?.type === 'required' && (
                 <ErrorP>Este campo deve ser preenchido</ErrorP>
               )}
-            </PointerContainer>
-            <PointerContainer>
+            </InputContainer>
+            <InputContainer>
               <label>Tipo de chamado</label>
               <TypeInput
                 {...register("eventType", {
@@ -97,13 +103,12 @@ function IssueForm() {
               {errors?.eventType?.type === 'validate' && (
                 <ErrorP>Você não pode selecionar esse campo</ErrorP>
               )}
-            </PointerContainer>
-          </PointerField>
-          <PointerField>
-
+            </InputContainer>
+            </InputField>
+ {/* ------------------------------------------------------------------------------------------------------ */}           
             {/* Div que organiza os inputs exceto tipo e título*/}
             {/* ------------------Setor----------------------*/}
-            <PointerContainer>
+            <InputContainer>
               <label>Setor</label>
               <SectorInput
                 {...register("eventSector", { required: true })}
@@ -111,17 +116,17 @@ function IssueForm() {
               {errors?.eventSector?.type === 'required' && (
                 <ErrorP>Este campo deve ser preenchido</ErrorP>
               )}
-            </PointerContainer>
             {/* ------------------Area--------------------------*/}
-            <PointerContainer>
+            
               <label>Area Afetada</label>
               <AreaInput
                 {...register("eventArea", { required: true })}
-              />
+                />
               {errors?.eventArea?.type === 'required' && (
                 <ErrorP>Este campo deve ser preenchido</ErrorP>
               )}
-            </PointerContainer>
+            
+              </InputContainer>
             {/* ------------------Criticalidade------------------ */}
             <PointerContainer>
               <label>Criticalidade</label>
@@ -152,7 +157,7 @@ function IssueForm() {
                 <ErrorP>Um número deve ser selecionado</ErrorP>
               )}
             </PointerContainer>
-          </PointerField>
+          
           <DescriptionField
             {...register("eventDescription", { required: true })}
           />
@@ -162,6 +167,7 @@ function IssueForm() {
         </BodyInfo>
         <button onClick={() => handleSubmit(handlePost)()} >Criar chamado</button>
       </Container>
+      
     </>
   );
 }
