@@ -22,7 +22,6 @@ import AlertMessage from "../Messages/AlertMessage";
 import { useForm } from "react-hook-form";
 import TopTitle from "../TopInfo";
 import { mainIssue, messageProps } from "./types";
-import { PointerField, PointerContainer } from "../EventDash/styles";
 
 
 function IssueForm() {
@@ -108,6 +107,7 @@ function IssueForm() {
  {/* ------------------------------------------------------------------------------------------------------ */}           
             {/* Div que organiza os inputs exceto tipo e título*/}
             {/* ------------------Setor----------------------*/}
+            <InputField>
             <InputContainer>
               <label>Setor</label>
               <SectorInput
@@ -116,19 +116,10 @@ function IssueForm() {
               {errors?.eventSector?.type === 'required' && (
                 <ErrorP>Este campo deve ser preenchido</ErrorP>
               )}
-            {/* ------------------Area--------------------------*/}
-            
-              <label>Area Afetada</label>
-              <AreaInput
-                {...register("eventArea", { required: true })}
-                />
-              {errors?.eventArea?.type === 'required' && (
-                <ErrorP>Este campo deve ser preenchido</ErrorP>
-              )}
-            
               </InputContainer>
-            {/* ------------------Criticalidade------------------ */}
-            <PointerContainer>
+            {/* ------------------Area--------------------------*/}
+              
+              <InputContainer>
               <label>Criticalidade</label>
               <CriticSelect
                 {...register("eventCriticality", { required: true })}
@@ -141,9 +132,23 @@ function IssueForm() {
               {errors?.eventCriticality?.type === 'required' && (
                 <ErrorP>Um número deve ser selecionado</ErrorP>
               )}
-            </PointerContainer>
+            </InputContainer>
+              </InputField>
+            {/* ------------------Criticalidade------------------ */}
+            <InputField>
+            <InputContainer>
+            
+              <label>Area Afetada</label>
+              <AreaInput
+                {...register("eventArea", { required: true })}
+                />
+              {errors?.eventArea?.type === 'required' && (
+                <ErrorP>Este campo deve ser preenchido</ErrorP>
+              )}
+              </InputContainer>
+            
             {/* ------------------Prioridade--------------------- */}
-            <PointerContainer>
+            <InputContainer>
               <label>Prioridade</label>
               <PrioritySelect
                 {...register("eventPriority", { required: true })}
@@ -156,7 +161,8 @@ function IssueForm() {
               {errors?.eventPriority?.type === 'required' && (
                 <ErrorP>Um número deve ser selecionado</ErrorP>
               )}
-            </PointerContainer>
+            </InputContainer>
+            </InputField>
           
           <DescriptionField
             {...register("eventDescription", { required: true })}

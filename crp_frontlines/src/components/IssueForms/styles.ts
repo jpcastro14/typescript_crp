@@ -14,8 +14,7 @@ export const Container = styled.div` //Container que abriga todas as divs
     border: 2px solid #e4e4e4;
     border-radius: 6px;
     display: grid;
-    margin: 0 0 20px;
-    margin-top: 20px;
+    
     button{
         background-color: var(--secondary-yellow);
         border: 1px solid #e4e4e4;
@@ -31,6 +30,7 @@ export const HeaderInfo = styled.div` // Div mais superior do card, com informa�
     display: flex;
     flex-shrink: 1;
     border-radius: 6px 6px 0 0;
+    margin-bottom: 30px;
 
 `
 export const EventType = styled.span`
@@ -73,90 +73,79 @@ export const EventTitle = styled.div` //Contém o titulo e os action buttons
     }
 `;
 
-export const EventAction = styled.div` // Div dos botões de ação
-    display: flex;
-    height: 100%;
-    align-items: center;
-    justify-content: space-evenly;
-    gap: 50px;
-    padding-right: 30px;
-    font-family: "Assistant", sans-serif;
-    button{
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: 40px;
-        height: 40px;
-        border-radius: 4px;
-        border: 2px solid #006fe6;
-        background-color: white;
-        img{
-            height: 35px;
-            width: 35px;
-        }
-    }
-    
-`
 
-export const InputField = styled.div` 
+export const InputField = styled.div` // DIv que agrupa os inputs da "InputContainer"
     display: grid;
-    grid-template-columns: 25% 25%;
-    height: 40px;
-    gap: 20px;
-    padding:50px 0 50px 100px;
+    grid-template-columns: 70% 30%;
 `;
 
 export const InputContainer = styled.div` // Div que organiza o label e o input
     display: flex;
     flex-direction: column;
-    margin: 10px;
+    margin: 0 10px;
+    padding: 10px;
     align-items: start;
     font-family: "Assistant", sans-serif;
     font-weight: 600;
-    background-color: #eee;
     label{
         color: black;
     }
+    input,select{
+        width: 100%;
+        height: 40px;
+    };
 `;
 
 export const TitleInput = styled.input`
     border: 1px solid #eee;
     background-color: white;
     color: black;
+    width: 80%;
 `;
 
 export const SectorInput = styled.input<ButtonProps>` //Componente do botão de Setor
     background-color: white; 
     border: 1px solid #eee;
     color: black;
+    width: 80%;
 `;
 
 export const AreaInput = styled.input` // Componente do botão de Area afetada
     border: 1px solid #eee;
     background-color: white;
     color: black;
-    
+    width: 80%;
 `;
 
 export const CriticSelect = styled.select<ButtonProps>` // Componente do botão de criticalidade
     border: 1px solid #eee;
-    width: 200px;
+    width: 100%;
     padding: 4px;
     border-radius: 8px;
     background-color: ${(props) => props.$levelcolor ? props.$levelcolor : "white"};
     color: black;
+    width: 80%;
    
 `;
 
 export const PrioritySelect = styled.select<ButtonProps>` // Componente do botão de prioridade
     border: 1px solid #eee;
-    width: 200px;
+    width: 100%;
     padding: 4px;
     border-radius: 8px;
     background-color: ${(props) => props.$levelcolor ? props.$levelcolor : "white"};
     color: black;
+    width: 80%;
 `;
 
+export const TypeInput = styled.select`
+    border: 1px solid #eee;
+    width: 100%;
+    padding: 4px;
+    border-radius: 8px;
+    color: black;
+    width: 80%;
+`;
 
 export const PriorityContainer = styled.div<ButtonProps>`
     background-color: white;
@@ -179,12 +168,6 @@ export const PriorityBox = styled.button<ButtonProps>`
     align-items:center;
 `;
 
-export const TypeInput = styled.select`
-    border: 1px solid #eee;
-    padding: 4px;
-    border-radius: 8px;
-    color: black;
-`;
 
 export const DescriptionField = styled.textarea` // Campo de texto para mostrar a descrição do chamado
     border: 1px solid #eee;
@@ -209,8 +192,7 @@ export const BodyInfo = styled.div<DisplayProps>` // Div Spare criada para setar
     width: 100%;
 `;
 
-export const ErrorP = styled.p`
+export const ErrorP = styled.h6`
     color: var(--primary-red);
     font-size: 12px;
-    margin-bottom: 20px;
 `;
