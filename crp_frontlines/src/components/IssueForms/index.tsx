@@ -39,7 +39,7 @@ function IssueForm() {
   });
 
   function handlePost(data: mainIssue) {
-    fetch("http://172.16.239.177:8000/api/v1/chamados/", {
+    fetch("http://172.16.239.233:8000/api/v1/chamados/", {
       method: "POST",
       headers: {
         "Content-type": "application/json",
