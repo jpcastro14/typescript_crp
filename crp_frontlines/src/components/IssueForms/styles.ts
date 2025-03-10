@@ -85,7 +85,8 @@ export const InputField = styled.div` // DIv que agrupa os inputs da "InputConta
     grid-template-columns: 40% 40%;
     justify-content: center;
     @media (max-width:1000px) {
-        grid-template-columns: 50% 50%;
+        display: flex;
+        flex-direction: column;
     }
 `;
 

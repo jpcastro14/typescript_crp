@@ -101,6 +101,9 @@ export const EventTitle = styled.div` //Contém o titulo e os action buttons
         padding: 0 0 0 10px;
         display: flex;
         align-items: self-start;
+        span{
+            font-size: 30px;
+        }
         p{
             font-size:16px;
         }
