@@ -14,12 +14,13 @@ export const Container = styled.div` //Container que abriga todas as divs
     border: 2px solid #e4e4e4;
     border-radius: 6px;
     display: grid;
-    
     button{
         background-color: var(--secondary-yellow);
         border: 1px solid #e4e4e4;
         color: black;
         border-radius: 0 0 4px 4px;
+    }
+    @media (max-width:1000px) {
     }
 `;
 
@@ -31,7 +32,12 @@ export const HeaderInfo = styled.div` // Div mais superior do card, com informa�
     flex-shrink: 1;
     border-radius: 6px 6px 0 0;
     margin-bottom: 30px;
-
+    @media (max-width:1000px) {
+        span{
+            font-size: 22px;
+            line-height: 2.5;
+        }
+    }
 `
 export const EventType = styled.span`
          //  Quadrado cinza ao lado direito do quadrado azul acima
@@ -76,7 +82,20 @@ export const EventTitle = styled.div` //Contém o titulo e os action buttons
 
 export const InputField = styled.div` // DIv que agrupa os inputs da "InputContainer"
     display: grid;
-    grid-template-columns: 70% 30%;
+    grid-template-columns: 40% 40%;
+    justify-content: center;
+    @media (max-width:1000px) {
+        grid-template-columns: 50% 50%;
+    }
+`;
+
+export const DescriptionArea = styled.div`
+    display: grid;
+    grid-template-columns: 80%;
+    justify-content: center;
+    @media (max-width:1000px) {
+        grid-template-columns: 100%;
+    }
 `;
 
 export const InputContainer = styled.div` // Div que organiza o label e o input
@@ -92,29 +111,30 @@ export const InputContainer = styled.div` // Div que organiza o label e o input
     }
     input,select{
         width: 100%;
+
         height: 40px;
     };
+    textarea{
+        width: 100%;
+    }
 `;
 
 export const TitleInput = styled.input`
     border: 1px solid #eee;
     background-color: white;
     color: black;
-    width: 80%;
 `;
 
 export const SectorInput = styled.input<ButtonProps>` //Componente do botão de Setor
     background-color: white; 
     border: 1px solid #eee;
     color: black;
-    width: 80%;
 `;
 
 export const AreaInput = styled.input` // Componente do botão de Area afetada
     border: 1px solid #eee;
     background-color: white;
     color: black;
-    width: 80%;
 `;
 
 export const CriticSelect = styled.select<ButtonProps>` // Componente do botão de criticalidade
@@ -124,7 +144,6 @@ export const CriticSelect = styled.select<ButtonProps>` // Componente do botão 
     border-radius: 8px;
     background-color: ${(props) => props.$levelcolor ? props.$levelcolor : "white"};
     color: black;
-    width: 80%;
    
 `;
 
@@ -135,7 +154,6 @@ export const PrioritySelect = styled.select<ButtonProps>` // Componente do botã
     border-radius: 8px;
     background-color: ${(props) => props.$levelcolor ? props.$levelcolor : "white"};
     color: black;
-    width: 80%;
 `;
 
 export const TypeInput = styled.select`
@@ -144,7 +162,6 @@ export const TypeInput = styled.select`
     padding: 4px;
     border-radius: 8px;
     color: black;
-    width: 80%;
 `;
 
 export const PriorityContainer = styled.div<ButtonProps>`
@@ -175,12 +192,8 @@ export const DescriptionField = styled.textarea` // Campo de texto para mostrar 
     font-family: Assistant, sans-serif;
     font-weight: 400;
     font-size: 16px;
-    margin: 40px 150px 0 100px ;
-    padding: 20px 20px 0 20px;
     text-align: justify;
     border-radius: 8px;
-    min-width: 820px;
-    max-width: 820px;
     color: black;
     background-color: white;
 `;
