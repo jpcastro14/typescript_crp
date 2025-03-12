@@ -25,7 +25,6 @@ import { message, Modal } from "antd";
 import { useNavigate } from "react-router";
 import { useForm } from "react-hook-form";
 import { CloseIssueSelect } from "../EventHub/styles";
-import axios from "axios";
 
 function EventDash({ data }: EventDashProps) {
   const {
