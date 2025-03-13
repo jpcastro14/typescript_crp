@@ -65,7 +65,7 @@ function EventHub() {
           </div>
         </FilterContainer>
       )}
-      <DashBoard></DashBoard>
+      <DashBoard />
       {issueData.length == 0 && <NoIssue>{statusMessage}</NoIssue>}
 
       {filteredIssues.length == 0
