@@ -112,7 +112,6 @@ export const InputContainer = styled.div` // Div que organiza o label e o input
     }
     input,select{
         width: 100%;
-
         height: 40px;
     };
     textarea{

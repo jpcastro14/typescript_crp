@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { ReactNode, useState } from "react";
 import {
   Container,
   HeaderInfo,
@@ -20,13 +20,34 @@ import {
 } from "./styles";
 import expand from "../assets/expand.svg";
 import headset from "../assets/headset.svg";
-import { EventDashProps, dateOptions, CloseFormInputs } from "./types";
+import { dateOptions, CloseFormInputs } from "./types";
 import { message, Modal } from "antd";
 import { useNavigate } from "react-router";
 import { useForm } from "react-hook-form";
 import { CloseIssueSelect } from "../EventHub/styles";
+import { mainIssue } from "../IssueForms/types";
 
-function EventDash({ data }: EventDashProps) {
+export type EventDashProps = {
+  propData: {
+    id?: number;
+    created_at?: any;
+    active?: boolean;
+    eventTitle?: string;
+    eventType?: string;
+    eventSector?: string;
+    eventArea?: string;
+    eventCriticality?: number | string;
+    eventCriticalityColor?: string;
+    eventPriority?: number;
+    eventDescription?: string;
+    eventMoment?: string | ReactNode;
+    eventTime?: Date | undefined;
+    eventCloseDesc?: string | undefined;
+    eventFinalStatus?: boolean;
+  };
+};
+
+function EventDash({ propData }: EventDashProps) {
   const {
     register,
     getValues,
@@ -43,8 +64,9 @@ function EventDash({ data }: EventDashProps) {
     eventCriticality,
     eventDescription,
     eventPriority,
-  } = data;
-  let { eventCriticalityColor } = data;
+  } = propData;
+
+  let { eventCriticalityColor } = propData;
 
   const created = new Date(created_at);
   const [open, setOpen] = useState<boolean>(true);
@@ -75,7 +97,7 @@ function EventDash({ data }: EventDashProps) {
   function finishIssue() {
     const values = getValues();
     const putData = {
-      ...data,
+      ...propData,
       eventCloseDesc: values.closeDesc,
       eventFinalStatus: values.closeStatus,
       active: false,
@@ -134,7 +156,7 @@ function EventDash({ data }: EventDashProps) {
         )}
       </Modal>
 
-      <Container key={data.id}>
+      <Container key={propData.id}>
         <HeaderInfo>
           <EventCategory $levelcolor={eventCriticalityColor} />
           <EventType>

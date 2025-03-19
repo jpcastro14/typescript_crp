@@ -1,17 +1,21 @@
-export interface EventDashProps {
-    data: {
-        id: number;
-        active: boolean;
-        created_at: string;
-        eventType: string;
-        eventTitle: string;
-        eventSector: string;
-        eventArea: string;
-        eventCriticality: number;
-        eventCriticalityColor: string | undefined;
-        eventPriority: string;
-        eventDescription: string;
-    }
+import { ReactNode } from "react";
+
+export type EventDashProps = {
+    id?: number;
+    created_at?: string;
+    active?: boolean;
+    eventTitle?: string;
+    eventType?: string;
+    eventSector?: string;
+    eventArea?: string;
+    eventCriticality?: number | string;
+    eventCriticalityColor?: string;
+    eventPriority?: number;
+    eventDescription?: string;
+    eventMoment?: string | ReactNode;
+    eventTime?: Date | undefined;
+    eventCloseDesc?: string | undefined;
+    eventFinalStatus?: boolean;
 };
 
 export const dateOptions: any = {

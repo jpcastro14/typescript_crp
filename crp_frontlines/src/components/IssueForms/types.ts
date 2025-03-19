@@ -1,7 +1,9 @@
 import { ReactNode } from "react";
 
-export interface mainIssue {
+export type mainIssue = {
     id?: number;
+    created_at?: string;
+    active?: boolean;
     eventTitle?: string;
     eventType?: string;
     eventSector?: string;
@@ -12,8 +14,10 @@ export interface mainIssue {
     eventDescription?: string;
     eventMoment?: string | ReactNode;
     eventTime?: Date | undefined;
-    eventCloseDesc?: string | undefined
+    eventCloseDesc?: string | undefined;
+    eventFinalStatus?: boolean;
 }
+
 
 export type messageProps = {
     trigger: boolean;

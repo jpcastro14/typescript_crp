@@ -1,27 +1,15 @@
 import { useState, useEffect } from "react";
-import { gotData } from "./types";
-import { FilterContainer, NoIssue } from "./styles";
+import { NoIssue } from "./styles";
 import EventDash from "../EventDash";
-import { Button } from "antd";
 import { baseURL, homeURL } from "../../services/api";
 import axios from "axios";
 import TopTitle from "../TopInfo/index";
 import DashBoard from "../DashBoard";
+import { EventDashProps } from "../EventDash/types";
 
 function EventHub() {
-  const [issueData, seIssueDate] = useState([]);
-
-  const [filteredIssues, setFilteredIssues] = useState([]);
-
+  const [issueData, seIssueDate] = useState<EventDashProps[]>([]);
   const [statusMessage, setStatusMessage] = useState<string>("");
-
-  const setFilter = (arg: string) => {
-    const filtered = issueData.filter((item: gotData) => item.eventType == arg);
-    setFilteredIssues(filtered);
-  };
-  const resetFilter = () => {
-    setFilteredIssues([]);
-  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -38,41 +26,30 @@ function EventHub() {
     fetchData();
   }, []);
 
+  const activeIssues = issueData.length;
+
+  const requestIssues = issueData.filter(
+    (issue) => issue.eventType == "requisicao"
+  );
+
+  const incidentIssued = issueData.filter(
+    (issue) => issue.eventType == "ocorrencia"
+  );
+
+  console.log(issueData);
+
   return (
     <>
       <TopTitle title="Tellarus Support" type="new" />
-      {issueData.length > 0 && (
-        <FilterContainer>
-          <div>
-            <h3>Chamados em andamento</h3>
-          </div>
-          <div>
-            <Button onClick={() => setFilter("requisicao")}>
-              Solicitações
-            </Button>
-            <Button onClick={() => setFilter("ocorrencia")}>Ocorrência</Button>
-            <Button
-              onClick={() => resetFilter()}
-              danger
-              variant="solid"
-              color="red"
-            >
-              Apagar filtro
-            </Button>
-            {filteredIssues.length > 0 && (
-              <p>{filteredIssues.length} Chamados encontrados</p>
-            )}
-          </div>
-        </FilterContainer>
-      )}
-      <DashBoard />
+      <DashBoard
+        dashMeta={activeIssues}
+        req={requestIssues.length}
+        inc={incidentIssued.length}
+      />
       {issueData.length == 0 && <NoIssue>{statusMessage}</NoIssue>}
-
-      {filteredIssues.length == 0
-        ? issueData.map((item) => <EventDash key={Math.random()} data={item} />)
-        : filteredIssues.map((item) => (
-            <EventDash key={Math.random()} data={item} />
-          ))}
+      {issueData.map((item) => (
+        <EventDash propData={item} />
+      ))}
     </>
   );
 }
