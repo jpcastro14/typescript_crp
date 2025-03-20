@@ -237,7 +237,6 @@ export const DescriptionField = styled.textarea` // Campo de texto para mostrar 
     text-align: justify;
     border-radius: 8px;
     color: black;
-    width: 100%;
     background-color: white;
     @media (max-width:1000px) {
         width: 100%;
@@ -248,6 +247,14 @@ export const DescriptionField = styled.textarea` // Campo de texto para mostrar 
 
 export const DescriptionContainer = styled.div`
     margin: 10px;
+    display: grid;
+    grid-template-columns: 90%;
+    justify-content: center;
+    grid-template-rows: 30px 180px;
+    label{
+        font-weight: 500;
+        font-family: "Assistant" , sans-serif;
+    }
 `;
 
 export const CloseIssueDesc = styled.textarea`

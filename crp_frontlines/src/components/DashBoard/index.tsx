@@ -18,14 +18,11 @@ function DashBoard({ dashMeta, req, inc }: DashBoardProps) {
       await axios
         .get("http://172.16.239.233:8000/api/v1/closed/")
         .then((response) => {
-          console.log(response.data);
           SetClosedIssues(response.data);
         });
     };
     fetchData();
   }, []);
-
-  console.log("Aqui estão os chamados abertos:", dashMeta);
 
   const attendedIssues = closedIssues.filter(
     (issue) => issue.eventFinalStatus == true

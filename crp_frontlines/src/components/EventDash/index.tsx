@@ -211,6 +211,7 @@ function EventDash({ propData }: EventDashProps) {
             </PointerContainer>
           </PointerField>
           <DescriptionContainer>
+            <label>Descrição do Chamado</label>
             <DescriptionField defaultValue={eventDescription} disabled />
           </DescriptionContainer>
           <DeleteButton onClick={() => setIsModalOpen(!isModalOpen)}>

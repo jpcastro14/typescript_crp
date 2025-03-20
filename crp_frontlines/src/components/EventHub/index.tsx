@@ -19,8 +19,7 @@ function EventHub() {
           seIssueDate(response.data);
         })
         .catch((error) => {
-          error.message === "Network Error" &&
-            setStatusMessage("Erro de conexão");
+          console.log(error.message);
         });
     };
     fetchData();
@@ -36,8 +35,6 @@ function EventHub() {
     (issue) => issue.eventType == "ocorrencia"
   );
 
-  console.log(issueData);
-
   return (
     <>
       <TopTitle title="Tellarus Support" type="new" />
@@ -46,10 +43,11 @@ function EventHub() {
         req={requestIssues.length}
         inc={incidentIssued.length}
       />
-      {issueData.length == 0 && <NoIssue>{statusMessage}</NoIssue>}
-      {issueData.map((item) => (
-        <EventDash propData={item} />
-      ))}
+      {issueData.length == 0 ? (
+        <NoIssue>Sem chamados ativos</NoIssue>
+      ) : (
+        issueData.map((item) => <EventDash propData={item} key={item.id} />)
+      )}
     </>
   );
 }
