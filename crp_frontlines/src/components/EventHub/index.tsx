@@ -14,7 +14,7 @@ function EventHub() {
   useEffect(() => {
     const fetchData = async () => {
       await axios
-        .get(baseURL)
+        .get("http://172.28.248.82:8000/api/v1/tickets/")
         .then((response) => {
           seIssueDate(response.data);
         })

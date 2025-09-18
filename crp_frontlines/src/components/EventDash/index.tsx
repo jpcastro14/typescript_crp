@@ -32,14 +32,14 @@ export type EventDashProps = {
     id?: number;
     created_at?: any;
     active?: boolean;
-    eventTitle?: string;
-    eventType?: string;
-    eventSector?: string;
-    eventArea?: string;
-    eventCriticality?: number | string;
+    title?: string;
+    type?: string;
+    sector?: string;
+    area?: string;
+    criticality?: number | string;
     eventCriticalityColor?: string;
     eventPriority?: number;
-    eventDescription?: string;
+    description?: string;
     eventMoment?: string | ReactNode;
     eventTime?: Date | undefined;
     eventCloseDesc?: string | undefined;
@@ -58,29 +58,29 @@ function EventDash({ propData }: EventDashProps) {
     id,
     active,
     created_at,
-    eventTitle,
-    eventSector,
-    eventArea,
-    eventCriticality,
-    eventDescription,
+    title,
+    sector,
+    area,
+    criticality,
+    description,
     eventPriority,
   } = propData;
 
   let { eventCriticalityColor } = propData;
 
-  const created = new Date(created_at);
   const [open, setOpen] = useState<boolean>(true);
 
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
   const navigate = useNavigate();
 
+  const created = new Date(created_at);
   const now = new Date();
   const start = Math.floor(created.getTime() / (3600 * 24 * 1000));
   const end = Math.floor(now.getTime() / (3600 * 24 * 1000));
   const diff = Math.abs(start - end);
 
-  switch (eventCriticality) {
+  switch (criticality) {
     case 1:
       eventCriticalityColor = "var(--primary-blue)";
       break;
@@ -163,7 +163,7 @@ function EventDash({ propData }: EventDashProps) {
             <img src={headset} />
           </EventType>
           <EventTitle onClick={() => setOpen(!open)}>
-            <span>{eventTitle}</span>
+            <span>{title}</span>
             <p>{created.toLocaleDateString("pt-BR", dateOptions)}</p>
             <p>Idade do chamado: {diff} dias</p>
           </EventTitle>
@@ -181,14 +181,14 @@ function EventDash({ propData }: EventDashProps) {
             <PointerContainer>
               <PointerPill>
                 <label>Setor</label>
-                <SectorButton>{eventSector}</SectorButton>
+                <SectorButton>{sector}</SectorButton>
               </PointerPill>
             </PointerContainer>
             {/* ------------------Area--------------------------*/}
             <PointerContainer>
               <PointerPill>
                 <label>Area Afetada</label>
-                <SectorButton>{eventArea}</SectorButton>
+                <SectorButton>{area}</SectorButton>
               </PointerPill>
             </PointerContainer>
             {/* ------------------Criticality------------------ */}
@@ -196,7 +196,7 @@ function EventDash({ propData }: EventDashProps) {
               <PointerPill>
                 <label>Criticalidade</label>
                 <SectorButton $levelcolor={eventCriticalityColor}>
-                  {eventCriticality}
+                  {criticality}
                 </SectorButton>
               </PointerPill>
             </PointerContainer>
@@ -212,7 +212,7 @@ function EventDash({ propData }: EventDashProps) {
           </PointerField>
           <DescriptionContainer>
             <label>Descrição do Chamado</label>
-            <DescriptionField defaultValue={eventDescription} disabled />
+            <DescriptionField defaultValue={description} disabled />
           </DescriptionContainer>
           <DeleteButton onClick={() => setIsModalOpen(!isModalOpen)}>
             Finalizar chamado

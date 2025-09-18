@@ -23,6 +23,7 @@ import AlertMessage from "../Messages/AlertMessage";
 import { useForm } from "react-hook-form";
 import TopTitle from "../TopInfo";
 import { mainIssue, messageProps } from "./types";
+import axios from "axios";
 
 function IssueForm() {
   const {
@@ -39,7 +40,37 @@ function IssueForm() {
   });
 
   function handlePost(data: mainIssue) {
-    fetch("http://172.16.239.233:8000/api/v1/chamados/", {
+    console.log(data);
+
+    axios
+      .post("http://172.28.248.82:8000/api/v1/tickets/", data)
+      .then((response) => {
+        response.status == 201
+          ? setMessageConfig({
+              trigger: true,
+              alertText: "Chamado criado com sucesso",
+              variant: "success",
+            })
+          : setMessageConfig({
+              trigger: true,
+              alertText: "Ocorreu um erro em sua solicitação",
+              variant: "danger",
+            });
+        reset({
+          eventTitle: "",
+          EventCategory: "",
+          eventType: "",
+          eventSector: "",
+          eventArea: "",
+          eventCriticality: "",
+          eventDescription: "",
+          eventPriority: "",
+        });
+      })
+      .catch((err) => console.log(err));
+
+    /* 
+    fetch("http://172.28.248.82:8000/api/v1/tickets/", {
       method: "POST",
       headers: {
         "Content-type": "application/json",
@@ -69,7 +100,7 @@ function IssueForm() {
           eventPriority: "",
         });
       })
-      .catch((err) => console.log(err));
+      .catch((err) => console.log(err)); */
   }
 
   return (
@@ -99,12 +130,12 @@ function IssueForm() {
             <InputContainer>
               <label>Título da ocorrência</label>
               <TitleInput
-                {...register("eventTitle", { required: true, maxLength: 30 })}
+                {...register("title", { required: true, maxLength: 30 })}
               />
-              {errors?.eventTitle?.type === "required" && (
+              {errors?.title?.type === "required" && (
                 <ErrorP>Este campo deve ser preenchido</ErrorP>
               )}
-              {errors?.eventTitle?.type === "maxLength" && (
+              {errors?.title?.type === "maxLength" && (
                 <ErrorP>
                   Este campo não pode possuir mais do que 30 caracteres
                 </ErrorP>
@@ -113,7 +144,7 @@ function IssueForm() {
             <InputContainer>
               <label>Tipo de chamado</label>
               <TypeInput
-                {...register("eventType", {
+                {...register("type", {
                   required: true,
                 })}
               >
@@ -121,10 +152,10 @@ function IssueForm() {
                 <option value="requisicao">Requisição</option>
                 <option value="ocorrencia">Ocorrência</option>
               </TypeInput>
-              {errors?.eventType?.type === "required" && (
+              {errors?.type?.type === "required" && (
                 <ErrorP>Este campo deve ser preenchido</ErrorP>
               )}
-              {errors?.eventType?.type === "validate" && (
+              {errors?.type?.type === "validate" && (
                 <ErrorP>Você não pode selecionar esse campo</ErrorP>
               )}
             </InputContainer>
@@ -135,8 +166,8 @@ function IssueForm() {
           <InputField>
             <InputContainer>
               <label>Setor</label>
-              <SectorInput {...register("eventSector", { required: true })} />
-              {errors?.eventSector?.type === "required" && (
+              <SectorInput {...register("sector", { required: true })} />
+              {errors?.sector?.type === "required" && (
                 <ErrorP>Este campo deve ser preenchido</ErrorP>
               )}
             </InputContainer>
@@ -144,15 +175,13 @@ function IssueForm() {
 
             <InputContainer>
               <label>Criticalidade</label>
-              <CriticSelect
-                {...register("eventCriticality", { required: true })}
-              >
+              <CriticSelect {...register("criticality", { required: true })}>
                 <option></option>
                 <option value="1">1</option>
                 <option value="2">2</option>
                 <option value="3">3</option>
               </CriticSelect>
-              {errors?.eventCriticality?.type === "required" && (
+              {errors?.criticality?.type === "required" && (
                 <ErrorP>Um número deve ser selecionado</ErrorP>
               )}
             </InputContainer>
@@ -161,8 +190,8 @@ function IssueForm() {
           <InputField>
             <InputContainer>
               <label>Area Afetada</label>
-              <AreaInput {...register("eventArea", { required: true })} />
-              {errors?.eventArea?.type === "required" && (
+              <AreaInput {...register("area", { required: true })} />
+              {errors?.area?.type === "required" && (
                 <ErrorP>Este campo deve ser preenchido</ErrorP>
               )}
             </InputContainer>
@@ -170,15 +199,13 @@ function IssueForm() {
             {/* ------------------Prioridade--------------------- */}
             <InputContainer>
               <label>Prioridade</label>
-              <PrioritySelect
-                {...register("eventPriority", { required: true })}
-              >
+              <PrioritySelect {...register("priority", { required: true })}>
                 <option></option>
                 <option value="1">1</option>
                 <option value="2">2</option>
                 <option value="3">3</option>
               </PrioritySelect>
-              {errors?.eventPriority?.type === "required" && (
+              {errors?.priority?.type === "required" && (
                 <ErrorP>Um número deve ser selecionado</ErrorP>
               )}
             </InputContainer>
@@ -187,12 +214,12 @@ function IssueForm() {
             <InputContainer>
               <label>Descrição da ocorrência</label>
               <DescriptionField
-                {...register("eventDescription", { required: true })}
+                {...register("description", { required: true })}
               />
             </InputContainer>
           </DescriptionArea>
 
-          {errors?.eventDescription?.type === "required" && (
+          {errors?.description?.type === "required" && (
             <ErrorP>O chamado precisa conter uma descrição</ErrorP>
           )}
         </BodyInfo>

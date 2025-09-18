@@ -159,6 +159,7 @@ export const PrioritySelect = styled.select<ButtonProps>` // Componente do botã
 export const TypeInput = styled.select`
     border: 1px solid #eee;
     width: 100%;
+    background-color: white;
     padding: 4px;
     border-radius: 8px;
     color: black;

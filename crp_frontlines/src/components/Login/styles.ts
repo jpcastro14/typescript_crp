@@ -1,10 +1,11 @@
 import styled from "styled-components";
 
 export const NoUserContainer = styled.div`
-    width: 100%;
+    width: 500px;
     display: grid;
     grid-template-columns: 100%;
     align-items: center;
+    justify-content: stretch;
     border: 1px solid var(--primary-gray);
     border-radius: 10px 10px 8px 8px;
     flex-direction: column;

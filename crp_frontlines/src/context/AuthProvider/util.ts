@@ -20,7 +20,7 @@ export function getUserLocalStorage() {
 export async function LoginRequest(email: string, password: string) {
 
     try {
-        const request = await Api.post('login', { email, password });
+        const request = await Api.post('login', { email, password }, { headers: { 'x-api-key': 'reqres-free-v1' } });
         return request.data;
     } catch (error) {
         return null

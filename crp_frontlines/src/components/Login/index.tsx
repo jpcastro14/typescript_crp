@@ -15,23 +15,27 @@ export const Login = () => {
   return (
     <>
       <NoUserContainer>
-        <p>
-          Log<b>in</b>
-        </p>
         <Row>
-          <Form name="basic" onFinish={onFinish}>
-            <Form.Item label="Email" name="email">
-              <Input />
-            </Form.Item>
-            <Form.Item label="Password" name="password">
-              <Input.Password />
-            </Form.Item>
-            <Form.Item>
-              <Button variant="filled" color="primary" htmlType="submit">
-                Sign in
-              </Button>
-            </Form.Item>
-          </Form>
+          <p>
+            Log<b>in</b>
+          </p>
+        </Row>
+        <Row>
+          <Col span={24}>
+            <Form name="basic" onFinish={onFinish}>
+              <Form.Item label="Email" name="email">
+                <Input />
+              </Form.Item>
+              <Form.Item label="Password" name="password">
+                <Input.Password />
+              </Form.Item>
+              <Form.Item>
+                <Button variant="filled" color="primary" htmlType="submit">
+                  Sign in
+                </Button>
+              </Form.Item>
+            </Form>
+          </Col>
         </Row>
         <CreditDiv>Topaz TELLARUS - Todos os direitos reservados </CreditDiv>
       </NoUserContainer>
