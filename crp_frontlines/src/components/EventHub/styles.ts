@@ -95,5 +95,7 @@ export const CloseIssueSelect = styled.select`
     margin-bottom: 2vh;
     border-radius: 8px;
     height: 4vh;
+    background-color: white;
+    color: black;
 `;
 

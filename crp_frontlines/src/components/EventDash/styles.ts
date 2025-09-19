@@ -263,6 +263,8 @@ export const CloseIssueDesc = styled.textarea`
     border-radius: 8px;
     min-height: 20vh;
     padding: 2vh;
+    background-color: white;
+    color: black;
 `;
 
 export const BodyInfo = styled.div<DisplayProps>` // Div Spare criada para setar o display do DescriptionField
@@ -277,6 +279,20 @@ export const DeleteButton = styled.button`
     font-family: "Assistant", sans-serif;
     border-radius: 0 0 4px 4px;
 `
+export const Actions = styled.div`
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    padding: 10px;
+    button{
+        border-radius: 6px;
+        &:last-of-type{
+            background-color: var(--primary-yellow);
+            color: black;
+        }
+    }
+`;
 
 export const ErrorP = styled.p`
     color: var(--primary-red);

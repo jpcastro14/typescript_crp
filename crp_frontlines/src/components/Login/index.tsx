@@ -31,13 +31,13 @@ export const Login = () => {
               </Form.Item>
               <Form.Item>
                 <Button variant="filled" color="primary" htmlType="submit">
-                  Sign in
+                  Entrar
                 </Button>
               </Form.Item>
             </Form>
           </Col>
         </Row>
-        <CreditDiv>Topaz TELLARUS - Todos os direitos reservados </CreditDiv>
+        <CreditDiv>João Castro - Front End Dev</CreditDiv>
       </NoUserContainer>
     </>
   );

@@ -17,18 +17,17 @@ import {
   CloseIssueDesc,
   DescriptionContainer,
   ErrorP,
+  Actions,
 } from "./styles";
 import expand from "../assets/expand.svg";
 import headset from "../assets/headset.svg";
 import { dateOptions, CloseFormInputs } from "./types";
 import { message, Modal } from "antd";
-import { useNavigate } from "react-router";
 import { useForm } from "react-hook-form";
 import { CloseIssueSelect } from "../EventHub/styles";
-import { mainIssue } from "../IssueForms/types";
 
 export type EventDashProps = {
-  propData: {
+  tickets: {
     id?: number;
     created_at?: any;
     active?: boolean;
@@ -37,17 +36,17 @@ export type EventDashProps = {
     sector?: string;
     area?: string;
     criticality?: number | string;
-    eventCriticalityColor?: string;
-    eventPriority?: number;
+    criticalityColor?: string;
+    priority?: number;
     description?: string;
     eventMoment?: string | ReactNode;
     eventTime?: Date | undefined;
-    eventCloseDesc?: string | undefined;
-    eventFinalStatus?: boolean;
+    closeDesc?: string | undefined;
+    finalStatus?: boolean;
   };
 };
 
-function EventDash({ propData }: EventDashProps) {
+function EventDash({ tickets }: EventDashProps) {
   const {
     register,
     getValues,
@@ -63,17 +62,14 @@ function EventDash({ propData }: EventDashProps) {
     area,
     criticality,
     description,
-    eventPriority,
-  } = propData;
+    priority,
+  } = tickets;
 
-  let { eventCriticalityColor } = propData;
+  let { criticalityColor } = tickets;
 
   const [open, setOpen] = useState<boolean>(true);
 
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
-
-  const navigate = useNavigate();
-
   const created = new Date(created_at);
   const now = new Date();
   const start = Math.floor(created.getTime() / (3600 * 24 * 1000));
@@ -82,13 +78,13 @@ function EventDash({ propData }: EventDashProps) {
 
   switch (criticality) {
     case 1:
-      eventCriticalityColor = "var(--primary-blue)";
+      criticalityColor = "var(--primary-blue)";
       break;
     case 2:
-      eventCriticalityColor = "var(--primary-yellow)";
+      criticalityColor = "var(--primary-yellow)";
       break;
     case 3:
-      eventCriticalityColor = "var(--primary-red)";
+      criticalityColor = "var(--primary-red)";
       break;
     default:
       break;
@@ -97,13 +93,12 @@ function EventDash({ propData }: EventDashProps) {
   function finishIssue() {
     const values = getValues();
     const putData = {
-      ...propData,
-      eventCloseDesc: values.closeDesc,
-      eventFinalStatus: values.closeStatus,
+      ...tickets,
+      closeDesc: values.closeDesc,
+      finalStatus: values.closeStatus,
       active: false,
     };
-    const homeURL = `http://192.168.0.16:8000/${id}`;
-    const baseURL = `http://172.16.239.233:8000/api/v1/chamados/${id}`;
+    const baseURL = `http://172.28.248.82:8000/api/v1/tickets/${id}`;
 
     try {
       fetch(baseURL, {
@@ -120,9 +115,9 @@ function EventDash({ propData }: EventDashProps) {
       message.info("Chamado finalizado!");
       setIsModalOpen(!isModalOpen);
     } finally {
-      setTimeout(() => {
+      /* setTimeout(() => {
         navigate("/newissue");
-      }, 3000);
+      }, 3000); */
     }
   }
 
@@ -156,9 +151,9 @@ function EventDash({ propData }: EventDashProps) {
         )}
       </Modal>
 
-      <Container key={propData.id}>
+      <Container key={tickets.id}>
         <HeaderInfo>
-          <EventCategory $levelcolor={eventCriticalityColor} />
+          <EventCategory $levelcolor={criticalityColor} />
           <EventType>
             <img src={headset} />
           </EventType>
@@ -195,7 +190,7 @@ function EventDash({ propData }: EventDashProps) {
             <PointerContainer>
               <PointerPill>
                 <label>Criticalidade</label>
-                <SectorButton $levelcolor={eventCriticalityColor}>
+                <SectorButton $levelcolor={criticalityColor}>
                   {criticality}
                 </SectorButton>
               </PointerPill>
@@ -204,9 +199,7 @@ function EventDash({ propData }: EventDashProps) {
             <PointerContainer>
               <PointerPill>
                 <label>Prioridade</label>
-                <SectorButton $levelcolor={eventCriticalityColor}>
-                  {eventPriority}
-                </SectorButton>
+                <SectorButton>{priority}</SectorButton>
               </PointerPill>
             </PointerContainer>
           </PointerField>
@@ -214,9 +207,18 @@ function EventDash({ propData }: EventDashProps) {
             <label>Descrição do Chamado</label>
             <DescriptionField defaultValue={description} disabled />
           </DescriptionContainer>
-          <DeleteButton onClick={() => setIsModalOpen(!isModalOpen)}>
-            Finalizar chamado
-          </DeleteButton>
+          <Actions>
+            {active && (
+              <>
+                <DeleteButton onClick={() => setIsModalOpen(!isModalOpen)}>
+                  Finalizar chamado
+                </DeleteButton>
+                <DeleteButton onClick={() => setIsModalOpen(!isModalOpen)}>
+                  Atualizar estado
+                </DeleteButton>{" "}
+              </>
+            )}
+          </Actions>
         </BodyInfo>
       </Container>
     </>
