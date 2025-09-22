@@ -17,21 +17,23 @@ import {
   TypeInput,
   DescriptionArea,
 } from "./styles";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import headset from "../assets/headset.svg";
 import AlertMessage from "../Messages/AlertMessage";
 import { useForm } from "react-hook-form";
 import TopTitle from "../TopInfo";
 import { mainIssue, messageProps } from "./types";
 import axios from "axios";
+import { ISector } from "./types";
+import { baseURL, sectorURL } from "../../services/api";
 
 function IssueForm() {
   const {
-    register,
     reset,
+    register,
     handleSubmit,
     formState: { errors },
-  } = useForm();
+  } = useForm<mainIssue>();
   const [open] = useState<boolean>(true);
   const [messageConfig, setMessageConfig] = useState<messageProps>({
     trigger: false,
@@ -39,11 +41,22 @@ function IssueForm() {
     variant: "",
   });
 
-  function handlePost(data: mainIssue) {
-    console.log(data);
+  const [sectorData, setSectorData] = useState<ISector[]>([]);
 
+  useEffect(() => {
+    const fetchsector = async () => {
+      axios
+        .get(sectorURL)
+        .then((response) => setSectorData(response.data))
+        .catch((err) => console.log(err));
+    };
+    fetchsector();
+  }, []);
+
+  function handlePost(data: mainIssue | undefined): void {
+    console.log(data);
     axios
-      .post("http://172.28.248.82:8000/api/v1/tickets/", data)
+      .post(`${baseURL}tickets`, data)
       .then((response) => {
         response.status == 201
           ? setMessageConfig({
@@ -57,50 +70,16 @@ function IssueForm() {
               variant: "danger",
             });
         reset({
-          eventTitle: "",
-          EventCategory: "",
-          eventType: "",
-          eventSector: "",
-          eventArea: "",
-          eventCriticality: "",
-          eventDescription: "",
-          eventPriority: "",
+          title: "",
+          type: "",
+          sector: "",
+          area: "",
+          criticality: undefined,
+          description: "",
+          priority: undefined,
         });
       })
       .catch((err) => console.log(err));
-
-    /* 
-    fetch("http://172.28.248.82:8000/api/v1/tickets/", {
-      method: "POST",
-      headers: {
-        "Content-type": "application/json",
-      },
-      body: JSON.stringify(data),
-    })
-      .then((response) => {
-        response.ok
-          ? setMessageConfig({
-              trigger: true,
-              alertText: "Chamado criado com sucesso",
-              variant: "success",
-            })
-          : setMessageConfig({
-              trigger: true,
-              alertText: "Ocorreu um erro em sua solicitação",
-              variant: "danger",
-            });
-        reset({
-          eventTitle: "",
-          EventCategory: "",
-          eventType: "",
-          eventSector: "",
-          eventArea: "",
-          eventCriticality: "",
-          eventDescription: "",
-          eventPriority: "",
-        });
-      })
-      .catch((err) => console.log(err)); */
   }
 
   return (
@@ -166,7 +145,14 @@ function IssueForm() {
           <InputField>
             <InputContainer>
               <label>Setor</label>
-              <SectorInput {...register("sector", { required: true })} />
+              <SectorInput {...register("sector", { required: true })}>
+                <option>...</option>
+                {sectorData.map((sector) => (
+                  <option key={sector.code} value={sector.name}>
+                    {sector.name}
+                  </option>
+                ))}
+              </SectorInput>
               {errors?.sector?.type === "required" && (
                 <ErrorP>Este campo deve ser preenchido</ErrorP>
               )}

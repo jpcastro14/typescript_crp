@@ -125,7 +125,7 @@ export const TitleInput = styled.input`
     color: black;
 `;
 
-export const SectorInput = styled.input<ButtonProps>` //Componente do botão de Setor
+export const SectorInput = styled.select<ButtonProps>` //Componente do botão de Setor
     background-color: white; 
     border: 1px solid #eee;
     color: black;

@@ -5,6 +5,7 @@ import axios from "axios";
 import TopTitle from "../TopInfo/index";
 import DashBoard from "../DashBoard";
 import { EventDashProps } from "../EventDash/types";
+import { baseURL } from "../../services/api";
 
 function EventHub() {
   const [issueData, seIssueDate] = useState<EventDashProps[]>([]);
@@ -12,7 +13,7 @@ function EventHub() {
   useEffect(() => {
     const fetchData = async () => {
       await axios
-        .get("http://172.28.248.82:8000/api/v1/tickets/")
+        .get(`${baseURL}/tickets/closed`)
         .then((response) => {
           seIssueDate(response.data);
         })
