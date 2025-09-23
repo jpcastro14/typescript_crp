@@ -13,7 +13,7 @@ function EventHub() {
   useEffect(() => {
     const fetchData = async () => {
       await axios
-        .get(`${baseURL}/tickets/closed`)
+        .get(`${baseURL}tickets/`)
         .then((response) => {
           seIssueDate(response.data);
         })
@@ -45,7 +45,7 @@ function EventHub() {
       {issueData.length == 0 ? (
         <NoIssue>Sem chamados ativos</NoIssue>
       ) : (
-        issueData.map((item) => <EventDash tickets={item} key={item.id} />)
+        issueData.map((item) => <EventDash ticket={item} key={item.id} />)
       )}
     </>
   );

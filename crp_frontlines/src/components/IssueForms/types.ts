@@ -6,7 +6,7 @@ export type mainIssue = {
     active?: boolean;
     title: string;
     type: string;
-    sector: string;
+    sector: number;
     area: string;
     criticality?: 1 | 2 | 3;
     priority?: 1 | 2 | 3;
@@ -24,6 +24,7 @@ export type messageProps = {
 }
 
 export interface ISector {
+    id: number
     name: string
     code: number
     description: string

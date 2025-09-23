@@ -56,7 +56,7 @@ function IssueForm() {
   function handlePost(data: mainIssue | undefined): void {
     console.log(data);
     axios
-      .post(`${baseURL}tickets`, data)
+      .post(`${baseURL}tickets/`, data)
       .then((response) => {
         response.status == 201
           ? setMessageConfig({
@@ -72,7 +72,7 @@ function IssueForm() {
         reset({
           title: "",
           type: "",
-          sector: "",
+          sector: 1,
           area: "",
           criticality: undefined,
           description: "",

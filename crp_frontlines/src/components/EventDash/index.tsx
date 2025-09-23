@@ -1,4 +1,4 @@
-import { ReactNode, useState } from "react";
+import { ReactNode, useReducer, useState } from "react";
 import {
   Container,
   HeaderInfo,
@@ -27,7 +27,7 @@ import { useForm } from "react-hook-form";
 import { CloseIssueSelect } from "../EventHub/styles";
 
 export type EventDashProps = {
-  tickets: {
+  ticket: {
     id?: number;
     created_at?: any;
     active?: boolean;
@@ -46,7 +46,42 @@ export type EventDashProps = {
   };
 };
 
-function EventDash({ tickets }: EventDashProps) {
+/* type State = {
+  ticket: {
+    id?: number;
+    created_at?: any;
+    active?: boolean;
+    title?: string;
+    type?: string;
+    sector?: string;
+    area?: string;
+    criticality?: number | string;
+    criticalityColor?: string;
+    priority?: number;
+    description?: string;
+    eventMoment?: string | ReactNode;
+    eventTime?: Date | undefined;
+    closeDesc?: string | undefined;
+    finalStatus?: boolean;
+  };
+};
+
+type Action = { type: "priority1" } | { type: "priority2" };
+
+function Reducer(state: State, action: Action) {
+  switch (action.type) {
+    case "priority1":
+      return { ...state, priority: 1 };
+    case "priority2":
+      return { ...state, priority: 2 };
+    default:
+      break;
+  }
+} */
+
+function EventDash({ ticket }: EventDashProps) {
+  //const [state, dispatch] = useReducer(Reducer, { ticket });
+
   const {
     register,
     getValues,
@@ -63,9 +98,9 @@ function EventDash({ tickets }: EventDashProps) {
     criticality,
     description,
     priority,
-  } = tickets;
+  } = ticket;
 
-  let { criticalityColor } = tickets;
+  let { criticalityColor } = ticket;
 
   const [open, setOpen] = useState<boolean>(true);
 
@@ -93,7 +128,7 @@ function EventDash({ tickets }: EventDashProps) {
   function finishIssue() {
     const values = getValues();
     const putData = {
-      ...tickets,
+      ...ticket,
       closeDesc: values.closeDesc,
       finalStatus: values.closeStatus,
       active: false,
@@ -151,7 +186,7 @@ function EventDash({ tickets }: EventDashProps) {
         )}
       </Modal>
 
-      <Container key={tickets.id}>
+      <Container key={ticket.id}>
         <HeaderInfo>
           <EventCategory $levelcolor={criticalityColor} />
           <EventType>
@@ -167,7 +202,7 @@ function EventDash({ tickets }: EventDashProps) {
               <img src={expand} />
             </button>
           </EventAction>
-          <EventActive $activeIssue={active} />
+          <EventActive $activeIssue={!active} />
         </HeaderInfo>
         <BodyInfo open={open}>
           <PointerField>
