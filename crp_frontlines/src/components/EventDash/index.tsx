@@ -80,8 +80,6 @@ function Reducer(state: State, action: Action) {
 } */
 
 function EventDash({ ticket }: EventDashProps) {
-  //const [state, dispatch] = useReducer(Reducer, { ticket });
-
   const {
     register,
     getValues,
@@ -195,14 +193,16 @@ function EventDash({ ticket }: EventDashProps) {
           <EventTitle onClick={() => setOpen(!open)}>
             <span>{title}</span>
             <p>{created.toLocaleDateString("pt-BR", dateOptions)}</p>
-            <p>Idade do chamado: {diff} dias</p>
+            <p>
+              Idade do chamado: {diff} {diff > 1 ? "dias" : "dia"}
+            </p>
           </EventTitle>
           <EventAction>
             <button onClick={() => setOpen(!open)}>
               <img src={expand} />
             </button>
           </EventAction>
-          <EventActive $activeIssue={!active} />
+          <EventActive $activeIssue={active} />
         </HeaderInfo>
         <BodyInfo open={open}>
           <PointerField>

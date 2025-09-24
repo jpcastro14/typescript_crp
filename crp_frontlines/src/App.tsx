@@ -6,20 +6,28 @@ import { ProtectedLayout } from "./components/ProtectedLayout";
 import Login from "./components/Login";
 import EventHub from "./components/EventHub";
 import IssueForm from "./components/IssueForms";
+import ReducerComponent from "./components/ReducerComponent";
 
 function App() {
-
   return (
     <>
-
-
       <AuthProvider>
         <BrowserRouter>
           <Routes>
-            <Route path="/" element={<ProtectedLayout children={<EventHub />} />} />
-            <Route path="/issue" element={<ProtectedLayout children={<EventHub />} />} />
-            <Route path="/newissue" element={<ProtectedLayout children={<IssueForm />} />} />
+            <Route
+              path="/"
+              element={<ProtectedLayout children={<EventHub />} />}
+            />
+            <Route
+              path="/issue"
+              element={<ProtectedLayout children={<EventHub />} />}
+            />
+            <Route
+              path="/newissue"
+              element={<ProtectedLayout children={<IssueForm />} />}
+            />
             <Route path="/login" element={<Login />} />
+            <Route path="/reducer" element={<ReducerComponent />} />
           </Routes>
         </BrowserRouter>
       </AuthProvider>

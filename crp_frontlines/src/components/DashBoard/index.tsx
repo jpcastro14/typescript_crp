@@ -16,7 +16,7 @@ function DashBoard({ dashMeta, req, inc }: DashBoardProps) {
   useEffect(() => {
     const fetchData = async () => {
       await axios
-        .get("http://172.16.239.233:8000/api/v1/closed/")
+        .get("http://172.28.248.82:8000/api/v1/tickets/closed")
         .then((response) => {
           SetClosedIssues(response.data);
         });

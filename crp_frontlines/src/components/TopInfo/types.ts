@@ -2,6 +2,6 @@ import { ReactNode } from "react"
 
 export type TopInfoProps = {
     title?: string
-    children?: JSX.Element[] | HTMLElement[] | JSX.Element
+    children?: JSX.Element
     type: string;
 }
