@@ -21,8 +21,8 @@ import {
 } from "./styles";
 import expand from "../assets/expand.svg";
 import headset from "../assets/headset.svg";
-import { dateOptions, CloseFormInputs } from "./types";
-import { message, Modal } from "antd";
+import { dateOptions, CloseFormInputs, baseURL } from "./types";
+import { Button, Col, Flex, message, Modal, Row } from "antd";
 import { useForm } from "react-hook-form";
 import { CloseIssueSelect } from "../EventHub/styles";
 
@@ -46,40 +46,57 @@ export type EventDashProps = {
   };
 };
 
-/* type State = {
-  ticket: {
-    id?: number;
-    created_at?: any;
-    active?: boolean;
-    title?: string;
-    type?: string;
-    sector?: string;
-    area?: string;
-    criticality?: number | string;
-    criticalityColor?: string;
-    priority?: number;
-    description?: string;
-    eventMoment?: string | ReactNode;
-    eventTime?: Date | undefined;
-    closeDesc?: string | undefined;
-    finalStatus?: boolean;
-  };
+type State = {
+  id?: number;
+  created_at?: any;
+  active?: boolean;
+  title?: string;
+  type?: string;
+  sector?: string;
+  area?: string;
+  criticality?: number | string;
+  criticalityColor?: string;
+  priority?: number;
+  description?: string;
+  eventMoment?: string | ReactNode;
+  eventTime?: Date | undefined;
+  closeDesc?: string | undefined;
+  finalStatus?: boolean;
 };
 
-type Action = { type: "priority1" } | { type: "priority2" };
+type Action =
+  | { type: "criticality1" }
+  | { type: "criticality2" }
+  | { type: "criticality3" };
 
 function Reducer(state: State, action: Action) {
   switch (action.type) {
-    case "priority1":
-      return { ...state, priority: 1 };
-    case "priority2":
-      return { ...state, priority: 2 };
+    case "criticality1":
+      return {
+        ...state,
+        criticality: 1,
+        priority: 1,
+      };
+    case "criticality2":
+      return {
+        ...state,
+        criticality: 2,
+        priority: 2,
+      };
+    case "criticality3":
+      return {
+        ...state,
+        criticality: 3,
+        priority: 3,
+      };
     default:
-      break;
+      return state;
   }
-} */
+}
 
 function EventDash({ ticket }: EventDashProps) {
+  const [state, dispatch] = useReducer(Reducer, ticket);
+
   const {
     register,
     getValues,
@@ -103,13 +120,14 @@ function EventDash({ ticket }: EventDashProps) {
   const [open, setOpen] = useState<boolean>(true);
 
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+  const [isEditModalOpen, setIsEditModalOpen] = useState<boolean>(false);
   const created = new Date(created_at);
   const now = new Date();
   const start = Math.floor(created.getTime() / (3600 * 24 * 1000));
   const end = Math.floor(now.getTime() / (3600 * 24 * 1000));
   const diff = Math.abs(start - end);
 
-  switch (criticality) {
+  switch (state.criticality) {
     case 1:
       criticalityColor = "var(--primary-blue)";
       break;
@@ -131,10 +149,9 @@ function EventDash({ ticket }: EventDashProps) {
       finalStatus: values.closeStatus,
       active: false,
     };
-    const baseURL = `http://172.28.248.82:8000/api/v1/tickets/${id}`;
 
     try {
-      fetch(baseURL, {
+      fetch(`http://172.28.248.82:8000/api/v1/tickets/update/${state.id}`, {
         method: "PUT",
         headers: {
           "Content-type": "application/json",
@@ -148,43 +165,102 @@ function EventDash({ ticket }: EventDashProps) {
       message.info("Chamado finalizado!");
       setIsModalOpen(!isModalOpen);
     } finally {
-      /* setTimeout(() => {
-        navigate("/newissue");
-      }, 3000); */
+      setTimeout(() => {
+        window.location.reload();
+      }, 3000);
     }
   }
 
+  function updateIssue() {
+    console.log("chegou");
+
+    const putData = {
+      ...state,
+      criticality: state.criticality,
+    };
+    try {
+      fetch(`http://172.28.248.82:8000/api/v1/tickets/update/${state.id}`, {
+        method: "PUT",
+        headers: {
+          "Content-type": "application/json",
+        },
+        body: JSON.stringify(putData),
+      }).then((response) => {});
+      message.info(`Criticalidade alterada`);
+      setIsModalOpen(!isEditModalOpen);
+    } finally {
+      setTimeout(() => {
+        window.location.reload();
+      }, 3000);
+    }
+    console.log(putData);
+  }
   return (
     <>
+      <div>
+        <Modal
+          okText="Finalizar chamado"
+          okType="danger"
+          cancelText="Voltar"
+          open={isModalOpen}
+          title="Tellarus Support - CRP"
+          onCancel={() => setIsModalOpen(!isModalOpen)}
+          onOk={() => handleSubmit(finishIssue)()}
+        >
+          <label>Estado de encerramento</label>
+          <CloseIssueSelect {...register("closeStatus", { required: true })}>
+            <option value={""}></option>
+            <option value={"true"}>Atendido</option>
+            <option value={"false"}>Não atendido</option>
+          </CloseIssueSelect>
+
+          <label>Motivação</label>
+          <CloseIssueDesc {...register("closeDesc", { required: true })} />
+          {errors?.closeDesc?.type === "required" && (
+            <ErrorP>O chamado deve possuir uma nota de fechamento !</ErrorP>
+          )}
+          {errors?.closeStatus?.type === "required" && (
+            <ErrorP>
+              Você deve definir um status de fechamento de chamado !
+            </ErrorP>
+          )}
+        </Modal>
+      </div>
+
       <Modal
-        okText="Finalizar chamado"
-        okType="danger"
+        okText="Alterar estado"
+        okType="default"
         cancelText="Voltar"
-        open={isModalOpen}
+        open={isEditModalOpen}
         title="Tellarus Support - CRP"
-        onCancel={() => setIsModalOpen(!isModalOpen)}
-        onOk={() => handleSubmit(finishIssue)()}
+        onCancel={() => setIsEditModalOpen(!isEditModalOpen)}
+        onOk={() => updateIssue()}
       >
-        <label>Estado de encerramento</label>
-        <CloseIssueSelect {...register("closeStatus", { required: true })}>
-          <option value={""}></option>
-          <option value={"true"}>Atendido</option>
-          <option value={"false"}>Não atendido</option>
-        </CloseIssueSelect>
+        <Button
+          variant="solid"
+          color="primary"
+          onClick={() => dispatch({ type: "criticality1" })}
+        >
+          Criticalidade 1
+        </Button>
 
-        <label>Motivação</label>
-        <CloseIssueDesc {...register("closeDesc", { required: true })} />
-        {errors?.closeDesc?.type === "required" && (
-          <ErrorP>O chamado deve possuir uma nota de fechamento !</ErrorP>
-        )}
-        {errors?.closeStatus?.type === "required" && (
-          <ErrorP>
-            Você deve definir um status de fechamento de chamado !
-          </ErrorP>
-        )}
+        <Button
+          variant="solid"
+          color="yellow"
+          onClick={() => dispatch({ type: "criticality2" })}
+        >
+          Criticalidade 2
+        </Button>
+
+        <Button
+          variant="solid"
+          color="red"
+          onClick={() => dispatch({ type: "criticality3" })}
+        >
+          Criticalidade 3
+        </Button>
       </Modal>
-
-      <Container key={ticket.id}>
+      <Container>
         <HeaderInfo>
           <EventCategory $levelcolor={criticalityColor} />
           <EventType>
@@ -242,13 +318,21 @@ function EventDash({ ticket }: EventDashProps) {
             <label>Descrição do Chamado</label>
             <DescriptionField defaultValue={description} disabled />
           </DescriptionContainer>
+          {!active && (
+            <DescriptionContainer>
+              <label>Descrição de fechamento</label>
+              <DescriptionField defaultValue={state.closeDesc} disabled />
+            </DescriptionContainer>
+          )}
           <Actions>
             {active && (
               <>
                 <DeleteButton onClick={() => setIsModalOpen(!isModalOpen)}>
                   Finalizar chamado
                 </DeleteButton>
-                <DeleteButton onClick={() => setIsModalOpen(!isModalOpen)}>
+                <DeleteButton
+                  onClick={() => setIsEditModalOpen(!isEditModalOpen)}
+                >
                   Atualizar estado
                 </DeleteButton>{" "}
               </>

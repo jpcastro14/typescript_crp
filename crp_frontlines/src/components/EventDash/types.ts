@@ -4,8 +4,8 @@ export type EventDashProps = {
     id?: number;
     created_at?: string;
     active?: boolean;
-    eventTitle?: string;
-    eventType?: string;
+    title?: string;
+    type?: string;
     eventSector?: string;
     eventArea?: string;
     eventCriticality?: number | string;
@@ -34,3 +34,6 @@ export type CloseFormInputs = {
     closeDesc: string;
     closeStatus: number;
 }
+
+export const baseURL = `http://172.28.248.82:8000/api/v1/tickets/`;
+export const baseUpdateURL = `http://172.28.248.82:8000/api/v1/tickets/update/`;

@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { Container, OpenIssuePointerDiv, PointerDiv } from "./styles";
 import { mainIssue } from "../IssueForms/types";
 import axios from "axios";
-import { CloseIssueDesc } from "../EventDash/styles";
 
 type DashBoardProps = {
   dashMeta: number;
@@ -16,7 +15,7 @@ function DashBoard({ dashMeta, req, inc }: DashBoardProps) {
   useEffect(() => {
     const fetchData = async () => {
       await axios
-        .get("http://172.28.248.82:8000/api/v1/tickets/closed")
+        .get("http://172.28.248.82:8000/api/v1/tickets/")
         .then((response) => {
           SetClosedIssues(response.data);
         });
@@ -25,18 +24,18 @@ function DashBoard({ dashMeta, req, inc }: DashBoardProps) {
   }, []);
 
   const attendedIssues = closedIssues.filter(
-    (issue) => issue.eventFinalStatus == true
+    (issue) => issue.finalStatus == true
   );
 
   const unattendedIssues = closedIssues.filter(
-    (issue) => issue.eventFinalStatus == false
+    (issue) => issue.finalStatus == false
   );
 
   return (
     <>
       <Container>
         <OpenIssuePointerDiv $fieldcolor="var(--primary-yellow)">
-          <header>Chamados em aberto</header>
+          <header>Total de chamados</header>
           <div>
             <span>{dashMeta}</span>
           </div>

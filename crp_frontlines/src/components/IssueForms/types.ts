@@ -14,7 +14,7 @@ export type mainIssue = {
     eventMoment: string | ReactNode;
     eventTime: Date | undefined;
     closeDesc: string | undefined;
-    eventFinalStatus: boolean;
+    finalStatus: boolean;
 }
 
 export type messageProps = {

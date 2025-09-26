@@ -26,12 +26,10 @@ function EventHub() {
 
   const activeIssues = issueData.length;
 
-  const requestIssues = issueData.filter(
-    (issue) => issue.eventType == "requisicao"
-  );
+  const requestIssues = issueData.filter((issue) => issue.type == "requisicao");
 
   const incidentIssued = issueData.filter(
-    (issue) => issue.eventType == "ocorrencia"
+    (issue) => issue.type == "ocorrencia"
   );
 
   return (
