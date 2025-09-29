@@ -6,6 +6,7 @@ type ButtonProps = {
     $expanded?: boolean;
     $priorityColor?: string;
     $activeIssue?: boolean;
+    $finalStatus?: boolean;
 }
 
 type DisplayProps = {
@@ -22,7 +23,7 @@ export const Container = styled.div` //Container que abriga todas as divs
 `;
 
 export const HeaderInfo = styled.div` // Div mais superior do card, com informações sobre titulo e hora do chamado
-    height: 16vh;
+    height: auto;
     background-color: #f9f9f9;
     display: flex;
     border-radius: 6px;
@@ -34,7 +35,6 @@ export const HeaderInfo = styled.div` // Div mais superior do card, com informa�
 export const EventType = styled.span`//  Quadrado cinza ao lado direito do quadrado azul acima
         background-color: #e4e4e4;
         min-width: 80px;
-        height: 100%;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -44,17 +44,16 @@ export const EventType = styled.span`//  Quadrado cinza ao lado direito do quadr
         @media (max-width:1000px) {
             display: none;
         }
-`;
+        `;
 
 export const EventCategory = styled.span<ButtonProps>`
         background-color: ${(props) => (props.$levelcolor ? props.$levelcolor : 'white')};
-        height: 100%;
         width: 25px;
         border-radius: 5px 0 0 5px ;
         @media (max-width:1000px) {
             width: 8px;
         }
-`;
+        `;
 
 export const EventActive = styled.span<ButtonProps>`
         background-color: ${(props) => (props.$activeIssue ? 'var(--primary-green)' : 'var(--primary-red)')};
@@ -65,9 +64,15 @@ export const EventActive = styled.span<ButtonProps>`
         @media (max-width:1000px) {
             width: 4px;
         }
-`;
+        `;
 
 
+export const FinalstatusPill = styled.p<ButtonProps>`
+        background-color: ${(props) => (props.$finalStatus ? 'var(--primary-green)' : 'var(--primary-red)')};
+        color: ${(props) => (props.$finalStatus && 'black')};
+        border-radius: 4px;
+        padding: 0 10px;
+`
 export const EventTitle = styled.div` //Contém o titulo e os action buttons
     width: 100%;
     background-color: #f9f9f9;
@@ -80,17 +85,20 @@ export const EventTitle = styled.div` //Contém o titulo e os action buttons
     font-size: 35px;
     font-family: "Assistant", sans-serif;
     font-weight: 400;
+    h2{
+        font-family: "Assistant", sans-serif;
+        font-weight: 400;
+        margin-bottom: 0;
+    }
     p{
         font-size: 2vh;
         margin-bottom: 8px;
-        padding: 0;
-        color: #9e9e9e;
+        padding: 2px;
     }
     p:last-child{
         color: red;
         border: 1px solid var(--primary-red);
         border-radius: 4px;
-        padding: 0 10px;
     }
     span{
         font-size: 4vh;
@@ -121,7 +129,6 @@ export const EventTitle = styled.div` //Contém o titulo e os action buttons
 
 export const EventAction = styled.div` // Div dos botões de ação
     display: flex;
-    height: 100%;
     align-items: center;
     justify-content: space-evenly;
     gap: 50px;

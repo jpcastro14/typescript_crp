@@ -4,12 +4,12 @@ import { mainIssue } from "../IssueForms/types";
 import axios from "axios";
 
 type DashBoardProps = {
-  dashMeta: number;
-  req: number;
-  inc: number;
+  activeTickets: number;
+  requisitions: number;
+  incidents: number;
 };
 
-function DashBoard({ dashMeta, req, inc }: DashBoardProps) {
+function DashBoard({ activeTickets, requisitions, incidents }: DashBoardProps) {
   const [closedIssues, SetClosedIssues] = useState<mainIssue[]>([]);
 
   useEffect(() => {
@@ -37,15 +37,15 @@ function DashBoard({ dashMeta, req, inc }: DashBoardProps) {
         <OpenIssuePointerDiv $fieldcolor="var(--primary-yellow)">
           <header>Total de chamados</header>
           <div>
-            <span>{dashMeta}</span>
+            <span>{activeTickets}</span>
           </div>
           <div>
             <section>
-              {req}
+              {requisitions}
               <span>Requisições</span>
             </section>
             <section>
-              {inc}
+              {incidents}
               <span>Ocorrências</span>
             </section>
           </div>

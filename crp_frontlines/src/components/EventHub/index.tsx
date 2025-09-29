@@ -25,9 +25,7 @@ function EventHub() {
   }, []);
 
   const activeIssues = issueData.length;
-
   const requestIssues = issueData.filter((issue) => issue.type == "requisicao");
-
   const incidentIssued = issueData.filter(
     (issue) => issue.type == "ocorrencia"
   );
@@ -36,9 +34,9 @@ function EventHub() {
     <>
       <TopTitle title="Tellarus Support" type="new" />
       <DashBoard
-        dashMeta={activeIssues}
-        req={requestIssues.length}
-        inc={incidentIssued.length}
+        activeTickets={activeIssues}
+        requisitions={requestIssues.length}
+        incidents={incidentIssued.length}
       />
       {issueData.length == 0 ? (
         <NoIssue>Sem chamados ativos</NoIssue>

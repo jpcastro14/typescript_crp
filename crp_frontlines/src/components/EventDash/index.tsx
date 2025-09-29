@@ -18,6 +18,7 @@ import {
   DescriptionContainer,
   ErrorP,
   Actions,
+  FinalstatusPill,
 } from "./styles";
 import expand from "../assets/expand.svg";
 import headset from "../assets/headset.svg";
@@ -117,10 +118,10 @@ function EventDash({ ticket }: EventDashProps) {
 
   let { criticalityColor } = ticket;
 
-  const [open, setOpen] = useState<boolean>(true);
+  const [open, setOpen] = useState(true);
 
-  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
-  const [isEditModalOpen, setIsEditModalOpen] = useState<boolean>(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const created = new Date(created_at);
   const now = new Date();
   const start = Math.floor(created.getTime() / (3600 * 24 * 1000));
@@ -266,13 +267,22 @@ function EventDash({ ticket }: EventDashProps) {
           <EventType>
             <img src={headset} />
           </EventType>
+
           <EventTitle onClick={() => setOpen(!open)}>
-            <span>{title}</span>
+            <h2>{title}</h2>
             <p>{created.toLocaleDateString("pt-BR", dateOptions)}</p>
+            {state.finalStatus == true ? (
+              <FinalstatusPill $finalStatus={state.finalStatus}>
+                Atendido
+              </FinalstatusPill>
+            ) : (
+              <FinalstatusPill>Não atendido</FinalstatusPill>
+            )}
             <p>
               Idade do chamado: {diff} {diff > 1 ? "dias" : "dia"}
             </p>
           </EventTitle>
+
           <EventAction>
             <button onClick={() => setOpen(!open)}>
               <img src={expand} />
@@ -280,6 +290,8 @@ function EventDash({ ticket }: EventDashProps) {
           </EventAction>
           <EventActive $activeIssue={active} />
         </HeaderInfo>
+
+        {/* ------------------ Header ----------------------*/}
         <BodyInfo open={open}>
           <PointerField>
             {/* Div que organiza os botões indicadores */}
