@@ -23,7 +23,6 @@ export const Container = styled.div` //Container que abriga todas as divs
 `;
 
 export const HeaderInfo = styled.div` // Div mais superior do card, com informações sobre titulo e hora do chamado
-    height: auto;
     background-color: #f9f9f9;
     display: flex;
     border-radius: 6px;
@@ -57,7 +56,6 @@ export const EventCategory = styled.span<ButtonProps>`
 
 export const EventActive = styled.span<ButtonProps>`
         background-color: ${(props) => (props.$activeIssue ? 'var(--primary-green)' : 'var(--primary-red)')};
-        height: 100%;
         width: 8px;
         border-radius: 0 5px 5px 0;
         border: 1px solid #eee;
@@ -66,18 +64,19 @@ export const EventActive = styled.span<ButtonProps>`
         }
         `;
 
-
 export const FinalstatusPill = styled.p<ButtonProps>`
-        background-color: ${(props) => (props.$finalStatus ? 'var(--primary-green)' : 'var(--primary-red)')};
-        color: ${(props) => (props.$finalStatus && 'black')};
+        background-color: ${(props) => (props.$finalStatus ? 'var(--secondary-green)' : 'var(--secondary-red)')};
+        color: black;
         border-radius: 4px;
         padding: 0 10px;
 `
+
 export const EventTitle = styled.div` //Contém o titulo e os action buttons
     width: 100%;
     background-color: #f9f9f9;
     display: flex;
     color: black;
+    padding-top: 10px;
     padding-left: 20px;
     flex-direction: column;
     align-items: start;
@@ -85,20 +84,11 @@ export const EventTitle = styled.div` //Contém o titulo e os action buttons
     font-size: 35px;
     font-family: "Assistant", sans-serif;
     font-weight: 400;
+    font-size: 20px;
     h2{
         font-family: "Assistant", sans-serif;
         font-weight: 400;
         margin-bottom: 0;
-    }
-    p{
-        font-size: 2vh;
-        margin-bottom: 8px;
-        padding: 2px;
-    }
-    p:last-child{
-        color: red;
-        border: 1px solid var(--primary-red);
-        border-radius: 4px;
     }
     span{
         font-size: 4vh;
@@ -109,22 +99,15 @@ export const EventTitle = styled.div` //Contém o titulo e os action buttons
         padding: 0 0 0 10px;
         display: flex;
         align-items: self-start;
-        span{
-            font-size: 30px;
-        }
-        p{
-            font-size:16px;
-        }
-        p:last-child{
-            font-size: 16px;
-        }
-        span:last-child{
-            font-size: 20px;
-            justify-self: center;
-        }
     }
     /* ---------------------------- Media queries EventTitle ---------------------------- */
-`;
+    `;
+export const EventAge = styled.p`
+            color: black;
+            border-radius: 4px;
+            padding: 0 10px;
+            background-color: var(--secondary-red) ;
+    `
 
 
 export const EventAction = styled.div` // Div dos botões de ação

@@ -2,12 +2,7 @@ import { useEffect, useState } from "react";
 import { Container, OpenIssuePointerDiv, PointerDiv } from "./styles";
 import { mainIssue } from "../IssueForms/types";
 import axios from "axios";
-
-type DashBoardProps = {
-  activeTickets: number;
-  requisitions: number;
-  incidents: number;
-};
+import { DashBoardProps } from "./types";
 
 function DashBoard({ activeTickets, requisitions, incidents }: DashBoardProps) {
   const [closedIssues, SetClosedIssues] = useState<mainIssue[]>([]);

@@ -19,6 +19,7 @@ import {
   ErrorP,
   Actions,
   FinalstatusPill,
+  EventAge,
 } from "./styles";
 import expand from "../assets/expand.svg";
 import headset from "../assets/headset.svg";
@@ -118,15 +119,22 @@ function EventDash({ ticket }: EventDashProps) {
 
   let { criticalityColor } = ticket;
 
-  const [open, setOpen] = useState(true);
-
+  const [isCardOpen, setIsCardOpen] = useState(true);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+
   const created = new Date(created_at);
   const now = new Date();
   const start = Math.floor(created.getTime() / (3600 * 24 * 1000));
   const end = Math.floor(now.getTime() / (3600 * 24 * 1000));
   const diff = Math.abs(start - end);
+
+  const data = new Date(created_at).getTime();
+  const final = Date.now();
+  const elapsed = final - data;
+  const elapsediff = Math.floor(elapsed / (1000 * 60));
+
+  console.log(elapsediff);
 
   switch (state.criticality) {
     case 1:
@@ -173,8 +181,6 @@ function EventDash({ ticket }: EventDashProps) {
   }
 
   function updateIssue() {
-    console.log("chegou");
-
     const putData = {
       ...state,
       criticality: state.criticality,
@@ -268,7 +274,7 @@ function EventDash({ ticket }: EventDashProps) {
             <img src={headset} />
           </EventType>
 
-          <EventTitle onClick={() => setOpen(!open)}>
+          <EventTitle onClick={() => setIsCardOpen(!isCardOpen)}>
             <h2>{title}</h2>
             <p>{created.toLocaleDateString("pt-BR", dateOptions)}</p>
             {state.finalStatus == true ? (
@@ -278,21 +284,25 @@ function EventDash({ ticket }: EventDashProps) {
             ) : (
               <FinalstatusPill>Não atendido</FinalstatusPill>
             )}
-            <p>
-              Idade do chamado: {diff} {diff > 1 ? "dias" : "dia"}
-            </p>
+            {active && (
+              <EventAge>
+                {elapsediff < 50
+                  ? `Idade do chamado: ${elapsediff} minutos`
+                  : `Chamado em descumprimento`}
+              </EventAge>
+            )}
           </EventTitle>
 
           <EventAction>
-            <button onClick={() => setOpen(!open)}>
+            <button onClick={() => setIsCardOpen(!isCardOpen)}>
               <img src={expand} />
             </button>
           </EventAction>
-          <EventActive $activeIssue={active} />
+          <EventActive $activeIssue={state.active} />
         </HeaderInfo>
 
         {/* ------------------ Header ----------------------*/}
-        <BodyInfo open={open}>
+        <BodyInfo open={isCardOpen}>
           <PointerField>
             {/* Div que organiza os botões indicadores */}
             {/* ------------------Setor----------------------*/}
