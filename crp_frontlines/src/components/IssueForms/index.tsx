@@ -17,23 +17,21 @@ import {
   TypeInput,
   DescriptionArea,
 } from "./styles";
-import { useEffect, useState } from "react";
-import headset from "../assets/headset.svg";
+import { useState, useContext } from "react";
+import { IssueContext, IssueProps } from "../../context/IssueProvider/";
 import AlertMessage from "../Messages/AlertMessage";
 import { useForm } from "react-hook-form";
 import TopTitle from "../TopInfo";
-import { mainIssue, messageProps } from "./types";
-import axios from "axios";
-import { ISector } from "./types";
-import { baseURL, sectorURL } from "../../services/api";
+import { messageProps } from "./types";
 
 function IssueForm() {
+  const { sector, createIssue } = useContext(IssueContext);
   const {
     reset,
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<mainIssue>();
+  } = useForm<IssueProps>();
   const [open] = useState<boolean>(true);
   const [messageConfig, setMessageConfig] = useState<messageProps>({
     trigger: false,
@@ -41,45 +39,8 @@ function IssueForm() {
     variant: "",
   });
 
-  const [sectorData, setSectorData] = useState<ISector[]>([]);
-
-  useEffect(() => {
-    const fetchsector = async () => {
-      axios
-        .get(sectorURL)
-        .then((response) => setSectorData(response.data))
-        .catch((err) => console.log(err));
-    };
-    fetchsector();
-  }, []);
-
-  function handlePost(data: mainIssue | undefined): void {
-    console.log(data);
-    axios
-      .post(`${baseURL}tickets/`, data)
-      .then((response) => {
-        response.status == 201
-          ? setMessageConfig({
-              trigger: true,
-              alertText: "Chamado criado com sucesso",
-              variant: "success",
-            })
-          : setMessageConfig({
-              trigger: true,
-              alertText: "Ocorreu um erro em sua solicitação",
-              variant: "danger",
-            });
-        reset({
-          title: "",
-          type: "",
-          sector: 1,
-          area: "",
-          criticality: undefined,
-          description: "",
-          priority: undefined,
-        });
-      })
-      .catch((err) => console.log(err));
+  function handlePost(data: IssueProps) {
+    createIssue(data);
   }
 
   return (
@@ -96,7 +57,7 @@ function IssueForm() {
         <HeaderInfo>
           <EventCategory $levelcolor={"var(--secondary-gray)"} />
           <EventType>
-            <img src={headset} />
+            <img />
           </EventType>
           <EventTitle>
             <span>Abertura de chamado</span>
@@ -147,7 +108,7 @@ function IssueForm() {
               <label>Setor</label>
               <SectorInput {...register("sector", { required: true })}>
                 <option>...</option>
-                {sectorData.map((sector) => (
+                {sector.map((sector) => (
                   <option key={sector.code} value={sector.name}>
                     {sector.name}
                   </option>

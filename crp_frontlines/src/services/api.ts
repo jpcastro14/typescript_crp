@@ -4,6 +4,10 @@ export const Api = axios.create({
     baseURL: "https://reqres.in/api/"
 });
 
+export const IssueApi = axios.create({
+    baseURL: 'http://172.28.239.228:8000/api/v1'
+})
+
 export const baseURL = 'http://172.28.248.82:8000/api/v1/';
 export const sectorURL = `http://172.28.248.82:8000/api/v1/sector`;
 

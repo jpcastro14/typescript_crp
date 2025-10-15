@@ -21,8 +21,8 @@ import {
   FinalstatusPill,
   EventAge,
 } from "./styles";
-import expand from "../assets/expand.svg";
-import headset from "../assets/headset.svg";
+//import expand from "../../assets/expand.svg";
+//import headset from "../assets/headset.svg";
 import { dateOptions, CloseFormInputs, baseURL } from "./types";
 import { Button, Col, Flex, message, Modal, Row } from "antd";
 import { useForm } from "react-hook-form";
@@ -133,8 +133,6 @@ function EventDash({ ticket }: EventDashProps) {
   const final = Date.now();
   const elapsed = final - data;
   const elapsediff = Math.floor(elapsed / (1000 * 60));
-
-  console.log(elapsediff);
 
   switch (state.criticality) {
     case 1:
@@ -271,7 +269,7 @@ function EventDash({ ticket }: EventDashProps) {
         <HeaderInfo>
           <EventCategory $levelcolor={criticalityColor} />
           <EventType>
-            <img src={headset} />
+            <img alt="headset image" />
           </EventType>
 
           <EventTitle onClick={() => setIsCardOpen(!isCardOpen)}>
@@ -295,7 +293,7 @@ function EventDash({ ticket }: EventDashProps) {
 
           <EventAction>
             <button onClick={() => setIsCardOpen(!isCardOpen)}>
-              <img src={expand} />
+              <img alt="expand image" />
             </button>
           </EventAction>
           <EventActive $activeIssue={state.active} />

@@ -6,13 +6,11 @@ export type mainIssue = {
     active?: boolean;
     title: string;
     type: string;
-    sector: number;
+    sector: string;
     area: string;
     criticality?: 1 | 2 | 3;
     priority?: 1 | 2 | 3;
     description: string;
-    eventMoment: string | ReactNode;
-    eventTime: Date | undefined;
     closeDesc: string | undefined;
     finalStatus: boolean;
 }

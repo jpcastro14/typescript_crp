@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { NoIssue } from "./styles";
 import EventDash from "../EventDash";
 import axios from "axios";
@@ -6,29 +6,14 @@ import TopTitle from "../TopInfo/index";
 import DashBoard from "../DashBoard";
 import { EventDashProps } from "../EventDash/types";
 import { baseURL } from "../../services/api";
+import { IssueContext } from "../../context/IssueProvider";
 
 function EventHub() {
-  const [issueData, seIssueDate] = useState<EventDashProps[]>([]);
+  const { issue, sector } = useContext(IssueContext);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      await axios
-        .get(`${baseURL}tickets/`)
-        .then((response) => {
-          seIssueDate(response.data);
-        })
-        .catch((error) => {
-          console.log(error.message);
-        });
-    };
-    fetchData();
-  }, []);
-
-  const activeIssues = issueData.length;
-  const requestIssues = issueData.filter((issue) => issue.type == "requisicao");
-  const incidentIssued = issueData.filter(
-    (issue) => issue.type == "ocorrencia"
-  );
+  const activeIssues = issue.length;
+  const requestIssues = issue.filter((issue) => issue.type == "requisicao");
+  const incidentIssued = issue.filter((issue) => issue.type == "ocorrencia");
 
   return (
     <>
@@ -38,10 +23,10 @@ function EventHub() {
         requisitions={requestIssues.length}
         incidents={incidentIssued.length}
       />
-      {issueData.length == 0 ? (
+      {issue.length == 0 ? (
         <NoIssue>Sem chamados ativos</NoIssue>
       ) : (
-        issueData.map((item) => <EventDash ticket={item} key={item.id} />)
+        issue.map((item) => <EventDash ticket={item} key={item.id} />)
       )}
     </>
   );

@@ -1,22 +1,13 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Container, OpenIssuePointerDiv, PointerDiv } from "./styles";
 import { mainIssue } from "../IssueForms/types";
 import axios from "axios";
 import { DashBoardProps } from "./types";
+import { IssueContext } from "../../context/IssueProvider";
 
 function DashBoard({ activeTickets, requisitions, incidents }: DashBoardProps) {
   const [closedIssues, SetClosedIssues] = useState<mainIssue[]>([]);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      await axios
-        .get("http://172.28.248.82:8000/api/v1/tickets/")
-        .then((response) => {
-          SetClosedIssues(response.data);
-        });
-    };
-    fetchData();
-  }, []);
+  const { issue } = useContext(IssueContext);
 
   const attendedIssues = closedIssues.filter(
     (issue) => issue.finalStatus == true
