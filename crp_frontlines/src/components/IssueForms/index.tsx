@@ -18,20 +18,31 @@ import {
   DescriptionArea,
 } from "./styles";
 import { useState, useContext } from "react";
-import { IssueContext, IssueProps } from "../../context/IssueProvider/";
+import { CreateIssueProps, IssueContext } from "../../context/IssueProvider/";
 import AlertMessage from "../Messages/AlertMessage";
 import { useForm } from "react-hook-form";
 import TopTitle from "../TopInfo";
 import { messageProps } from "./types";
 
+type FormProps = {
+  title: string;
+  type: string;
+  sector: string;
+  area: string;
+  criticality: number;
+  priority: number;
+  description: string;
+};
+
 function IssueForm() {
   const { sector, createIssue } = useContext(IssueContext);
   const {
     reset,
+    getValues,
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<IssueProps>();
+  } = useForm<FormProps>();
   const [open] = useState<boolean>(true);
   const [messageConfig, setMessageConfig] = useState<messageProps>({
     trigger: false,
@@ -39,7 +50,7 @@ function IssueForm() {
     variant: "",
   });
 
-  function handlePost(data: IssueProps) {
+  function handlePost(data: CreateIssueProps) {
     createIssue(data);
   }
 

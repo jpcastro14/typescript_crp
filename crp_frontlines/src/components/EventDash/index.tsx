@@ -1,4 +1,4 @@
-import { ReactNode, useReducer, useState } from "react";
+import { ReactNode, useContext, useReducer, useState } from "react";
 import {
   Container,
   HeaderInfo,
@@ -27,6 +27,9 @@ import { dateOptions, CloseFormInputs, baseURL } from "./types";
 import { Button, Col, Flex, message, Modal, Row } from "antd";
 import { useForm } from "react-hook-form";
 import { CloseIssueSelect } from "../EventHub/styles";
+import { IssueApi } from "../../services/api";
+import { LoginRequest } from "../../context/AuthProvider/util";
+import { IssueContext } from "../../context/IssueProvider";
 
 export type EventDashProps = {
   ticket: {
@@ -98,6 +101,7 @@ function Reducer(state: State, action: Action) {
 
 function EventDash({ ticket }: EventDashProps) {
   const [state, dispatch] = useReducer(Reducer, ticket);
+  const { updateIssue } = useContext(IssueContext);
 
   const {
     register,
@@ -156,34 +160,37 @@ function EventDash({ ticket }: EventDashProps) {
       finalStatus: values.closeStatus,
       active: false,
     };
-
-    try {
-      fetch(`http://172.28.248.82:8000/api/v1/tickets/update/${state.id}`, {
-        method: "PUT",
-        headers: {
-          "Content-type": "application/json",
-        },
-        body: JSON.stringify(putData),
-      }).then((response) => {
-        response.ok
-          ? console.log("deu certo")
-          : console.log("deu errado", response.statusText);
-      });
-      message.info("Chamado finalizado!");
-      setIsModalOpen(!isModalOpen);
-    } finally {
-      setTimeout(() => {
-        window.location.reload();
-      }, 3000);
-    }
+    IssueApi.put(`/tickets/update/${state.id}`, putData)
+      .then((response) => {
+        response.statusText == "OK" && setIsModalOpen(!isModalOpen);
+        message.info("Chamado finalizado!");
+        setTimeout(() => {
+          window.location.reload();
+        }, 3000);
+      })
+      .catch(() => [
+        setIsModalOpen(false),
+        message.info(
+          "Ocorreu um erro ao finalizar o chamado, tente novamente mais tarde"
+        ),
+      ]);
   }
 
-  function updateIssue() {
+  function attIssue() {
     const putData = {
       ...state,
       criticality: state.criticality,
     };
-    try {
+
+    updateIssue(putData);
+
+    /*     IssueApi.put(`/tickets/update/${state.id}`, putData)
+    .then(()=> 
+      message.info('Criticalidade Alterada!')
+      
+  ) */
+
+    /*     try {
       fetch(`http://172.28.248.82:8000/api/v1/tickets/update/${state.id}`, {
         method: "PUT",
         headers: {
@@ -198,7 +205,7 @@ function EventDash({ ticket }: EventDashProps) {
         window.location.reload();
       }, 3000);
     }
-    console.log(putData);
+    console.log(putData); */
   }
   return (
     <>
@@ -238,8 +245,8 @@ function EventDash({ ticket }: EventDashProps) {
         cancelText="Voltar"
         open={isEditModalOpen}
         title="Tellarus Support - CRP"
-        onCancel={() => setIsEditModalOpen(!isEditModalOpen)}
-        onOk={() => updateIssue()}
+        onCancel={() => [setIsEditModalOpen(!isEditModalOpen)]}
+        onOk={() => attIssue()}
       >
         <Button
           variant="solid"
